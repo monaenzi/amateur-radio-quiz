@@ -29,13 +29,13 @@ export default function LoginPage() {
           <input
             type="email"
             placeholder="E-Mail"
-            className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA]"
+            className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA] text-gray-600"
           />
 
           <input
             type="password"
             placeholder="Passwort"
-            className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA]"
+            className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA] text-gray-600"
           />
 
           <button
