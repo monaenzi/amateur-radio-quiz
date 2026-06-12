@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Footer from '@/components/Footer'
-import Link from "next/link";
+import Link from 'next/link'
+import AppButton from '@/components/AppButton'
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
           />
         </div>
 
-        <section className="flex flex-col items-center px-10 pt-[12vh] text-center md:pt-[13vh]">
+        <section className="flex flex-col items-center px-10 pt-[22vh] text-center md:pt-[13vh]">
           <h1 className="mb-6 text-4xl font-bold leading-tight text-gray-500 md:text-5xl">
             <span className="md:hidden">
               Willkommen
@@ -40,13 +41,13 @@ export default function Home() {
             Bereite dich hier auf die Prüfung vor
           </p>
 
-          <div className="flex w-full max-w-xs flex-col gap-3 md:max-w-none md:flex-row md:justify-center">
-            <Link href="/login" className="rounded-md bg-[#008CEA] px-10 py-4 font-medium text-white transition hover:opacity-90">
-              Mitglied anmelden
+          <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center">
+            <Link href="/login" className="w-full">
+              <AppButton>Mitglied anmelden</AppButton>
             </Link>
 
-            <Link href="/dashboard" className="rounded-md border border-[#008CEA] px-10 py-4 font-medium text-[#008CEA] transition hover:bg-[#008CEA]/10">
-              Als Gast fortfahren →
+            <Link href="/dashboard" className="w-full">
+              <AppButton>Als Gast fortfahren →</AppButton>
             </Link>
           </div>
         </section>
