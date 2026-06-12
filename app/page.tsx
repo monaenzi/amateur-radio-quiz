@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Footer from '@/components/Footer'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -40,13 +41,13 @@ export default function Home() {
           </p>
 
           <div className="flex w-full max-w-xs flex-col gap-3 md:max-w-none md:flex-row md:justify-center">
-            <button className="rounded-md bg-[#008CEA] px-10 py-4 font-medium text-white transition hover:opacity-90">
+            <Link href="/login" className="rounded-md bg-[#008CEA] px-10 py-4 font-medium text-white transition hover:opacity-90">
               Mitglied anmelden
-            </button>
+            </Link>
 
-            <button className="rounded-md border border-[#008CEA] px-10 py-4 font-medium text-[#008CEA] transition hover:bg-[#008CEA]/10">
+            <Link href="/quiz" className="rounded-md border border-[#008CEA] px-10 py-4 font-medium text-[#008CEA] transition hover:bg-[#008CEA]/10">
               Als Gast fortfahren →
-            </button>
+            </Link>
           </div>
         </section>
       </div>
