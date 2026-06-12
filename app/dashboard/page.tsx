@@ -1,7 +1,63 @@
-export default function DashboardPage() {
+import Image from 'next/image'
+import AppButton from '@/components/AppButton'
+
+export default function Home() {
   return (
-    <main>
-      <h1>Hallo, Gast</h1>
+    <main className="min-h-screen bg-white">
+      <div className="w-full bg-white">
+        {/* Header */}
+        <div className="relative bg-[#0A8BE8] px-4 py-5 text-white">
+          <div className="flex items-center justify-between">
+            <button className="text-2xl">‹</button>
+
+            <div className="text-center">
+              <h1 className="text-2xl font-bold">Lernkurs</h1>
+              <p className="text-sm opacity-90">ÖVSV Lernkurs</p>
+            </div>
+
+            <Image src="/LogoWhite.png" alt="ÖVSV Logo" width={40} height={40} />
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <p className="mb-6 text-center text-sm text-gray-500">
+            Fortschritt wird <span className="text-red-500">NICHT</span> gespeichert
+          </p>
+
+          <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, Gast</h2>
+
+          <div className="mt-6">
+            <label className="mb-2 block font-semibold text-gray-700">BEWILLIGUNGSKLASSE</label>
+
+            <select className="w-full rounded-lg bg-gray-200 p-3">
+              <option>Klasse 1</option>
+            </select>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="mb-3 font-semibold text-gray-700">GESAMTFORTSCHRITT</h3>
+
+            <div className="rounded-xl bg-blue-100 p-4">
+              <p className="mb-2 text-3xl font-bold text-[#0A8BE8]">63%</p>
+
+              <div className="h-2 w-full rounded-full bg-gray-300">
+                <div className="h-2 w-[63%] rounded-full bg-[#0A8BE8]" />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-50 flex justify-center">
+            <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center">
+              <AppButton>Lernen</AppButton>
+              <AppButton>Prüfung simulieren</AppButton>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Nav */}
+        {/* TBD */}
+      </div>
     </main>
-  );
+  )
 }
