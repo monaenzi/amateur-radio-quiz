@@ -3,12 +3,12 @@ import AppButton from '@/components/AppButton'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
-      <div className="w-full bg-white">
+    <main className="min-h-screen bg-white md:p-8">
+      <div className="w-full bg-white md:mx-auto md:max-w-7xl">
         {/* Header */}
         <div className="relative bg-[#0A8BE8] px-4 py-5 text-white">
           <div className="flex items-center justify-between">
-            <button className="text-2xl">‹</button>
+            <button className="text-2xl md:hidden">‹</button>
 
             <div className="text-center">
               <h1 className="text-2xl font-bold">Lernkurs</h1>
@@ -30,7 +30,7 @@ export default function Home() {
           <div className="mt-6">
             <label className="mb-2 block font-semibold text-gray-700">BEWILLIGUNGSKLASSE</label>
 
-            <select className="w-full rounded-lg bg-gray-200 p-3">
+            <select className="w-full rounded-lg bg-gray-200 p-3 text-gray-800">
               <option>Klasse 1</option>
             </select>
           </div>
@@ -48,7 +48,7 @@ export default function Home() {
           </div>
 
           <div className="mt-50 flex justify-center">
-            <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center">
+            <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center  md:hidden">
               <AppButton>Lernen</AppButton>
               <AppButton>Prüfung simulieren</AppButton>
             </div>
