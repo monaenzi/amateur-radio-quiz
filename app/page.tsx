@@ -45,7 +45,7 @@ export default function Home() {
               Mitglied anmelden
             </Link>
 
-            <Link href="/quiz" className="rounded-md border border-[#008CEA] px-10 py-4 font-medium text-[#008CEA] transition hover:bg-[#008CEA]/10">
+            <Link href="/dashboard" className="rounded-md border border-[#008CEA] px-10 py-4 font-medium text-[#008CEA] transition hover:bg-[#008CEA]/10">
               Als Gast fortfahren →
             </Link>
           </div>
