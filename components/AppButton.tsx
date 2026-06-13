@@ -1,11 +1,18 @@
 type AppButtonProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+  onClick?: () => void
+}
 
-export default function AppButton({ children }: AppButtonProps) {
+export default function AppButton({
+  children,
+  onClick,
+}: AppButtonProps) {
   return (
-    <button className="w-full rounded-full bg-[#008CEA] py-4 font-bold text-white transition hover:opacity-90">
+    <button
+      onClick={onClick}
+      className="h-14 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+    >
       {children}
     </button>
-  );
+  )
 }
