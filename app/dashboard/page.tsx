@@ -28,7 +28,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, Gast</h2>
 
           <div className="mt-6">
-            <label className="mb-2 block font-semibold text-gray-700">BEWILLIGUNGSKLASSE</label>
+            <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKATEGORIE</label>
 
             <select className="w-full rounded-lg bg-gray-200 p-3 text-gray-800">
               <option>Klasse 1</option>
