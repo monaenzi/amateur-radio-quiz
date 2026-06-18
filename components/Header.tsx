@@ -2,10 +2,96 @@ import Image from "next/image";
 import Link from "next/link";
 
 type HeaderProps = {
-    variant?: "home" | "welcome" | "default" | "auth";
+    variant?: "home" | "welcome" | "default" | "auth" | "admin" | "authAdmin";
 };
 
 export default function Header({ variant = "home" }: HeaderProps) {
+
+
+    if (variant === "authAdmin") {
+        return (
+            <header className="relative bg-[#008CEA] px-6 py-4">
+                <div className="flex items-center justify-between">
+                    <div className="flex-1" />
+
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-2xl font-bold text-white">
+                            Lernkurs
+                        </h1>
+
+                        <p className="text-sm text-white/80">
+                            ÖVSV Lernkurs
+                        </p>
+                    </div>
+
+                    <div className="flex flex-1 items-center justify-end gap-6">
+                        <nav className="hidden md:flex items-center gap-6 text-white">
+                            <Link href="/admin">
+                                Dashboard
+                            </Link>
+
+                            <Link href="/admin/fragen">
+                                Fragen
+                            </Link>
+                        </nav>
+
+                        <Link href="/">
+                            <Image
+                                src="/logoWhite.png"
+                                alt="ÖVSV Lernkurs Logo"
+                                width={30}
+                                height={30}
+                                priority
+                            />
+                        </Link>
+                    </div>
+                </div>
+            </header>
+        );
+    }
+
+
+    if (variant === "admin") {
+        return (
+            <header className="relative bg-[#008CEA] px-6 py-4">
+                <div className="flex items-center justify-between">
+                    <div className="flex-1" />
+
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-2xl font-bold text-white">
+                            Admin
+                        </h1>
+
+                        <p className="text-sm text-white/80">
+                            ÖVSV Lernkurs
+                        </p>
+                    </div>
+
+                    <div className="flex flex-1 items-center justify-end gap-6">
+                        <nav className="hidden md:flex items-center gap-6 text-white">
+                            <Link href="/admin">
+                                Dashboard
+                            </Link>
+
+                            <Link href="/admin/fragen">
+                                Fragen
+                            </Link>
+                        </nav>
+
+                        <Link href="/">
+                            <Image
+                                src="/logoWhite.png"
+                                alt="ÖVSV Lernkurs Logo"
+                                width={30}
+                                height={30}
+                                priority
+                            />
+                        </Link>
+                    </div>
+                </div>
+            </header>
+        );
+    }
 
 
     if (variant === "auth") {
