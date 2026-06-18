@@ -4,6 +4,7 @@ import { useState } from 'react'
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
+import Footer from '@/components/Footer'
 
 export default function KarteikartenPage() {
   const [showAnswer, setShowAnswer] = useState(false)
@@ -48,6 +49,7 @@ export default function KarteikartenPage() {
           </div>
         </section>
       </div>
+      <Footer />
       <FooterNav />
     </main>
   )
