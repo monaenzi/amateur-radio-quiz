@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useLogin } from './useLogin'
 import AppButton from '@/components/AppButton'
+import Header from '@/components/Header'
 
 export default function LoginPage() {
   const { email, setEmail, password, setPassword, error, loading, handleLogin } = useLogin()
@@ -10,16 +11,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="mx-auto h-full bg-white md:max-w-7xl">
-        <div className="bg-gradient-to-l from-[#cfefff] via-white to-white">
-          <Image
-            src="/logo.png"
-            alt="ÖVSV Lernkurs Logo"
-            width={800}
-            height={240}
-            className="w-[97%] md:w-[430px]"
-            priority
-          />
-        </div>
+        <Header variant="welcome" />
 
         <div className="mt-2 text-center">
           <h1 className="text-2xl font-bold text-gray-600">Anmelden</h1>

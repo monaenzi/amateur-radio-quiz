@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import AppButton from '@/components/AppButton'
+import Header from '@/components/Header'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="w-full bg-white md:mx-auto md:max-w-7xl">
         {/* Header */}
-        <div className="relative bg-[#0A8BE8] px-4 py-5 text-white">
+        {/* <div className="relative bg-[#0A8BE8] px-4 py-5 text-white">
           <div className="flex items-center justify-between">
             <button className="text-2xl md:hidden">‹</button>
 
@@ -17,7 +18,8 @@ export default function Home() {
 
             <Image src="/LogoWhite.png" alt="ÖVSV Logo" width={40} height={40} />
           </div>
-        </div>
+        </div> */}
+        <Header variant="default" />
 
         {/* Content */}
         <div className="p-6">
