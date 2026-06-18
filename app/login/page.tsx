@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useLogin } from './useLogin'
+import AppButton from '@/components/AppButton'
 
 export default function LoginPage() {
   const { email, setEmail, password, setPassword, error, loading, handleLogin } = useLogin()
@@ -47,14 +48,12 @@ export default function LoginPage() {
             <p className="text-sm text-red-500 text-center">{error}</p>
           )}
 
-          <button
-            type="button"
+          <AppButton
             onClick={handleLogin}
             disabled={loading}
-            className="rounded-md bg-[#008CEA] px-6 py-3 font-bold text-white hover:bg-blue-600 disabled:opacity-50"
           >
             {loading ? 'Laden...' : 'Einloggen'}
-          </button>
+          </AppButton>
         </div>
       </div>
     </main>
