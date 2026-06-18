@@ -7,19 +7,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="w-full bg-white md:mx-auto md:max-w-7xl">
-        {/* Header */}
-        {/* <div className="relative bg-[#0A8BE8] px-4 py-5 text-white">
-          <div className="flex items-center justify-between">
-            <button className="text-2xl md:hidden">‹</button>
-
-            <div className="text-center">
-              <h1 className="text-2xl font-bold">Lernkurs</h1>
-              <p className="text-sm opacity-90">ÖVSV Lernkurs</p>
-            </div>
-
-            <Image src="/LogoWhite.png" alt="ÖVSV Logo" width={40} height={40} />
-          </div>
-        </div> */}
         <Header variant="default" />
 
         {/* Content */}

@@ -3,7 +3,7 @@ import { Home, BookOpen, ClipboardList, ChartColumn } from "lucide-react";
 
 export default function FooterNav() {
     return (
-        <nav className="fixed bottom-0 left-0 right-0 border-t border-[#008CEA] bg-white">
+        <nav className="fixed bottom-0 left-0 right-0 border-t border-[#008CEA] bg-white md:hidden">
             <div className="grid grid-cols-4">
                 <Link
                     href="/"
