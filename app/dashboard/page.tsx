@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
+import FooterNav from '@/components/FooterNav'
 
 export default function Home() {
   return (
@@ -57,8 +58,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Bottom Nav */}
-        {/* TBD */}
+        <FooterNav/>
+        
       </div>
     </main>
   )
