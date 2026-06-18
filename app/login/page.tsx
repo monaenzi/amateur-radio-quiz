@@ -1,3 +1,4 @@
+import AppButton from '@/components/AppButton'
 import Image from 'next/image'
 
 export default function LoginPage() {
@@ -16,13 +17,9 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-2 text-center">
-          <h1 className="text-2xl font-bold text-gray-600">
-            Anmelden
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-600">Anmelden</h1>
 
-          <p className="mt-3 text-sm text-gray-400">
-            Melde dich mit deinem Konto an.
-          </p>
+          <p className="mt-3 text-sm text-gray-400">Melde dich mit deinem Konto an.</p>
         </div>
 
         <form className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-4 px-4">
@@ -38,12 +35,7 @@ export default function LoginPage() {
             className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA] text-gray-600"
           />
 
-          <button
-            type="button"
-            className="rounded-md bg-[#008CEA] px-6 py-3 font-bold text-white hover:bg-blue-600"
-          >
-            Einloggen
-          </button>
+          <AppButton>Einloggen</AppButton>
         </form>
       </div>
     </main>
