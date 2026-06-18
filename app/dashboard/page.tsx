@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'

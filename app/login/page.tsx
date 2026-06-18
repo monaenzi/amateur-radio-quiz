@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useLogin } from './useLogin'
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
@@ -11,7 +10,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="mx-auto h-full bg-white md:max-w-7xl">
-        <Header variant="authAdmin" />
+        <Header variant="auth" />
 
         <div className="mt-2 text-center">
           <h1 className="text-2xl font-bold text-gray-600">Anmelden</h1>
