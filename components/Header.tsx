@@ -8,23 +8,24 @@ type HeaderProps = {
 export default function Header({ variant = "home" }: HeaderProps) {
     if (variant === "welcome") {
         return (
-            <header className="bg-[#008CEA] px-6 py-4">
-                <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-bold text-white">
-                        Willkommen zurück
-                    </h1>
+            <header className="relative bg-[#008CEA] px-6 py-4">
+                <h1 className="text-center text-2xl font-bold text-white">
+                    Willkommen zurück
+                </h1>
+                <h2 className="text-center">
+                    ÖVSV Lernkurs
+                    </h2>
 
-                    <Link href="/">
-                        <Image
-                            src="/logo.png"
-                            alt="ÖVSV Lernkurs Logo"
-                            width={120}
-                            height={40}
-                            className="w-24"
-                            priority
-                        />
-                    </Link>
-                </div>
+                <Link href="/">
+                    <Image
+                        src="/logoWhite.png"
+                        alt="ÖVSV Lernkurs Logo"
+                        width={32}
+                        height={32}
+                        className="absolute right-6 top-1/2 h-10 w-6 -translate-y-1/2"
+                        priority
+                    />
+                </Link>
             </header>
         );
     }
