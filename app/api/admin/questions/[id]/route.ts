@@ -4,15 +4,22 @@ import { auth } from '@/auth'
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth()
   if (!session || session.user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  const { id: idParam } = await params
+  const id = parseInt(idParam)
+
+  if (isNaN(id)) {
+    return NextResponse.json({ error: 'Ungültige ID' }, { status: 400 })
+  }
+
   const question = await prisma.question.findUnique({
-    where: { id: parseInt(params.id) },
+    where: { id },
     include: { answers: true },
   })
 
@@ -25,17 +32,19 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth()
   if (!session || session.user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  const { id: idParam } = await params
+  const id = parseInt(idParam)
   const body = await request.json()
 
   await prisma.question.update({
-    where: { id: parseInt(params.id) },
+    where: { id },
     data: {
       text: body.text,
       explanation: body.explanation,
