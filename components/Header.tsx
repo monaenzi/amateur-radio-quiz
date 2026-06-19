@@ -30,7 +30,7 @@ export default function Header({ variant = "home" }: HeaderProps) {
                                 Dashboard
                             </Link>
 
-                            <Link href="/admin/fragen">
+                            <Link href="/admin/questions">
                                 Fragen
                             </Link>
                         </nav>
@@ -73,7 +73,7 @@ export default function Header({ variant = "home" }: HeaderProps) {
                                 Dashboard
                             </Link>
 
-                            <Link href="/admin/fragen">
+                            <Link href="/admin/questions">
                                 Fragen
                             </Link>
                         </nav>
