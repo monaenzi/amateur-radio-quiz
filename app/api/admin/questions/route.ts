@@ -47,3 +47,27 @@ export async function DELETE(request: Request) {
 
   return NextResponse.json({ success: true })
 }
+
+export async function POST(request: Request) {
+  const session = await auth()
+  if (!session || session.user.role !== 'ADMIN') {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  const body = await request.json()
+
+  const question = await prisma.question.create({
+    data: {
+      text: body.text,
+      explanation: body.explanation,
+      class: body.class,
+      subject: body.subject,
+      code: body.code,
+      answers: {
+        create: body.answers,
+      },
+    },
+  })
+
+  return NextResponse.json(question)
+}

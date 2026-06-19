@@ -56,7 +56,7 @@ export default function QuestionList() {
         </div>
 
         <button
-          onClick={() => router.push('/admin/fragen/neu')}
+          onClick={() => router.push('/admin/questions/new')}
           className="rounded-md bg-[#008CEA] px-6 py-3 font-bold text-white hover:bg-blue-600"
         >
           + Frage hinzufügen
