@@ -19,6 +19,26 @@ export default function StatistikPage() {
                             <div className="h-2 w-[63%] rounded-full bg-[#008CEA]" />
                         </div>
                     </div>
+                    <h2 className="mb-3 mt-8 text-sm font-bold tracking-wide text-gray-700">
+                        FRAGEN
+                    </h2>
+
+                    <div className="grid grid-cols-3 gap-3">
+                        <div className="rounded-xl bg-[#E6F4FD] py-4 text-center">
+                            <p className="text-2xl font-bold text-[#008CEA]">34</p>
+                            <p className="text-sm text-gray-600">gelernt</p>
+                        </div>
+
+                        <div className="rounded-xl bg-[#E6F4FD] py-4 text-center">
+                            <p className="text-2xl font-bold text-[#008CEA]">58</p>
+                            <p className="text-sm text-gray-600">unsicher</p>
+                        </div>
+
+                        <div className="rounded-xl bg-[#E6F4FD] py-4 text-center">
+                            <p className="text-2xl font-bold text-[#008CEA]">128</p>
+                            <p className="text-sm text-gray-600">offen</p>
+                        </div>
+                    </div>
                 </div>
 
                 <FooterNav />
