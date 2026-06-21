@@ -30,7 +30,7 @@ model Question {
   class       Int      // 1, 3, oder 4
   subject     String   // z.B. "Recht", "Technik", "Betrieb"
   code        String?  // z.B. "R-047"
-  attachment  String?  // URL zu Foto/Audio/Link
+  attachments Attachment[]
   answers     Answer[]
   progress    UserQuestionProgress[]
   createdAt   DateTime @default(now())
@@ -47,6 +47,16 @@ model Answer {
   question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
   @@map("answers")
+}
+
+model Attachment {
+  id         Int      @id @default(autoincrement())
+  url        String
+  type       String   // "image", "audio", "link"
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@map("attachments")
 }
 
 model UserQuestionProgress {

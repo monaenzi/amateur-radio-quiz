@@ -20,7 +20,7 @@ export async function GET(
 
   const question = await prisma.question.findUnique({
     where: { id },
-    include: { answers: true },
+    include: { answers: true, attachments: true },
   })
 
   if (!question) {
@@ -54,6 +54,10 @@ export async function PUT(
       answers: {
         deleteMany: {},
         create: body.answers,
+      },
+      attachments: {
+        deleteMany: {},
+        create: body.attachment ?? [],
       },
     },
   })

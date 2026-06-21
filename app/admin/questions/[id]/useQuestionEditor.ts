@@ -8,12 +8,18 @@ export type Answer = {
   isCorrect: boolean
 }
 
+export type Attachment = {
+  url: string
+  type: 'image' | 'audio' | 'link'
+}
+
 export type QuestionForm = {
   text: string
   explanation: string
   class: number
   subject: string
   code: string
+  attachments: Attachment[]
   answers: Answer[]
 }
 
@@ -23,8 +29,9 @@ const defaultForm: QuestionForm = {
   class: 1,
   subject: 'Recht',
   code: '',
+  attachments: [],
   answers: [
-    { text: '', isCorrect: true },
+    { text: '', isCorrect: false },
     { text: '', isCorrect: false },
   ],
 }
@@ -41,12 +48,14 @@ export function useQuestionEditor(id: string) {
       fetch(`/api/admin/questions/${id}`)
         .then((res) => res.json())
         .then((data) => {
+          if (!data || data.error) return
           setForm({
             text: data.text,
             explanation: data.explanation ?? '',
             class: data.class,
             subject: data.subject,
             code: data.code ?? '',
+            attachments: data.attachments ?? [],
             answers: data.answers.map((a: Answer) => ({
               text: a.text,
               isCorrect: a.isCorrect,
@@ -70,16 +79,38 @@ export function useQuestionEditor(id: string) {
   }
 
   function removeAnswer(index: number) {
-    const updated = form.answers.filter((_, i) => i !== index)
+    setForm({
+      ...form,
+      answers: form.answers.filter((_, i) => i !== index),
+    })
+  }
+
+  function toggleCorrectAnswer(index: number) {
+    const updated = form.answers.map((a, i) =>
+      i === index ? { ...a, isCorrect: !a.isCorrect } : a
+    )
     setForm({ ...form, answers: updated })
   }
 
-    function toggleCorrectAnswer(index: number) {
-    const updated = form.answers.map((a, i) =>
-        i === index ? { ...a, isCorrect: !a.isCorrect } : a
-    )
-    setForm({ ...form, answers: updated })
-    }
+  function addAttachment() {
+    setForm({
+      ...form,
+      attachments: [...form.attachments, { url: '', type: 'link' }],
+    })
+  }
+
+  function removeAttachment(index: number) {
+    setForm({
+      ...form,
+      attachments: form.attachments.filter((_, i) => i !== index),
+    })
+  }
+
+  function updateAttachment(index: number, field: keyof Attachment, value: string) {
+    const updated = [...form.attachments]
+    updated[index] = { ...updated[index], [field]: value }
+    setForm({ ...form, attachments: updated })
+  }
 
   async function handleSubmit() {
     setLoading(true)
@@ -114,6 +145,9 @@ export function useQuestionEditor(id: string) {
     addAnswer,
     removeAnswer,
     toggleCorrectAnswer,
+    addAttachment,
+    removeAttachment,
+    updateAttachment,
     handleSubmit,
   }
 }

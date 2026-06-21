@@ -21,6 +21,9 @@ export default function QuestionEditor({
     addAnswer,
     removeAnswer,
     toggleCorrectAnswer,
+    addAttachment,
+    removeAttachment,
+    updateAttachment,
     handleSubmit,
   } = useQuestionEditor(id)
 
@@ -54,6 +57,45 @@ export default function QuestionEditor({
           rows={3}
           className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA] text-gray-600 resize-none"
         />
+
+        <div className="flex flex-col gap-2">
+            <p className="text-sm font-bold text-gray-600">Anhänge</p>
+
+            {form.attachments.map((attachment, index) => (
+                <div key={index} className="flex items-center gap-2">
+                <select
+                    value={attachment.type}
+                    onChange={(e) => updateAttachment(index, 'type', e.target.value)}
+                    className="rounded-md border border-gray-300 px-3 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
+                >
+                    <option value="link">Link</option>
+                    <option value="image">Bild</option>
+                </select>
+
+                <input
+                    type="url"
+                    placeholder="URL"
+                    value={attachment.url}
+                    onChange={(e) => updateAttachment(index, 'url', e.target.value)}
+                    className="flex-1 rounded-md border border-gray-300 px-4 py-2 outline-none focus:border-[#008CEA] text-gray-600"
+                />
+
+                <button
+                    onClick={() => removeAttachment(index)}
+                    className="text-red-400 hover:text-red-600 px-2"
+                >
+                    <Trash2 size={18} />
+                </button>
+                </div>
+            ))}
+
+            <button
+                onClick={addAttachment}
+                className="mt-1 text-sm text-[#008CEA] hover:underline self-start"
+            >
+                + Anhang hinzufügen
+            </button>
+            </div>
 
         <div className="flex gap-2">
           <select

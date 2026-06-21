@@ -92,7 +92,7 @@ export default function QuestionList() {
 
             <div className="flex gap-2">
               <button
-                onClick={() => router.push(`/admin/fragen/${q.id}`)}
+                onClick={() => router.push(`/admin/questions/${q.id}`)}
                 className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50"
               >
                 <Pen />

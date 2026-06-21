@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 
   const questions = await prisma.question.findMany({
     where,
-    include: { answers: true },
+    include: { answers: true, attachments: true },
     orderBy: { createdAt: 'desc' },
   })
 
@@ -65,6 +65,9 @@ export async function POST(request: Request) {
       code: body.code,
       answers: {
         create: body.answers,
+      },
+      attachments: {
+        create: body.attachment ?? [],
       },
     },
   })
