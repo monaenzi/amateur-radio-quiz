@@ -5,13 +5,14 @@ import FooterNav from "@/components/FooterNav";
 
 export default function ExamGuestPage() {
     return (
-        <div className="flex min-h-screen flex-col bg-white">
-            <Header variant="default" />
+        <main className="min-h-screen bg-white md:p-8">
+            <div className="w-full bg-white md:mx-auto md:max-w-7xl">
+                <Header variant="default" />
 
-            <main className="flex flex-1 flex-col items-center justify-center px-6 pb-24 text-center">
-                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#E6F4FD]">
-                    <Lock size={32} className="text-[#008CEA]" />
-                </div>
+                <div className="flex flex-col items-center px-6 pb-24 pt-16 text-center">
+                    <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#E6F4FD]">
+                        <Lock size={32} className="text-[#008CEA]" />
+                    </div>
 
                 <h1 className="mb-2 text-2xl font-bold text-gray-900">
                     Prüfungssimulation
@@ -29,16 +30,17 @@ export default function ExamGuestPage() {
                         Anmelden
                     </Link>
 
-                    <Link
-                        href="/register"
-                        className="rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white"
-                    >
-                        Mitglied werden
-                    </Link>
+                        <Link
+                            href="/register"
+                            className="rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white"
+                        >
+                            Mitglied werden
+                        </Link>
+                    </div>
                 </div>
-            </main>
 
-            <FooterNav />
-        </div>
+                <FooterNav />
+            </div>
+        </main>
     );
 }
