@@ -45,7 +45,7 @@ export default function StatistikPage() {
                         FACHGEBIETE
                     </h2>
 
-                    <div className="rounded-xl border border-gray-200 p-4">
+                    <div className="max-h-48 overflow-y-auto rounded-xl border border-gray-200 p-4 sm:max-h-72">
                         <div className="flex items-center gap-4 pb-4">
                             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#E6F4FD]">
                                 <Scale size={22} className="text-[#008CEA]" />
