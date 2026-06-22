@@ -18,11 +18,67 @@ model User {
   password  String
   role      Role     @default(USER)
   createdAt DateTime @default(now())
+  progress  UserQuestionProgress[]
 
   @@map("users")
+}
+
+model Question {
+  id          Int      @id @default(autoincrement())
+  text        String   @db.Text
+  explanation String?  @db.Text
+  class       Int      // 1, 3, oder 4
+  subject     String   // z.B. "Recht", "Technik", "Betrieb"
+  code        String?  // z.B. "R-047"
+  attachments Attachment[]
+  answers     Answer[]
+  progress    UserQuestionProgress[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("questions")
+}
+
+model Answer {
+  id         Int      @id @default(autoincrement())
+  text       String   @db.Text
+  isCorrect  Boolean  @default(false)
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@map("answers")
+}
+
+model Attachment {
+  id         Int      @id @default(autoincrement())
+  url        String
+  type       String   // "image", "audio", "link"
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@map("attachments")
+}
+
+model UserQuestionProgress {
+  id         Int        @id @default(autoincrement())
+  userId     Int
+  questionId Int
+  confidence Confidence @default(UNKNOWN)
+  updatedAt  DateTime   @updatedAt
+  user       User       @relation(fields: [userId], references: [id])
+  question   Question   @relation(fields: [questionId], references: [id])
+
+  @@unique([userId, questionId])
+  @@map("user_question_progress")
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+enum Confidence {
+  UNKNOWN
+  MEDIUM
+  KNOWN
 }
