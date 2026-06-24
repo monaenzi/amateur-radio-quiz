@@ -5,8 +5,11 @@ import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
 import Footer from '@/components/Footer'
+import { useSession } from 'next-auth/react'
 
 export default function KarteikartenPage() {
+  const { data: session } = useSession()
+  const isLoggedIn = !!session?.user
   const [showAnswer, setShowAnswer] = useState(false)
 
   const card = {
@@ -17,7 +20,7 @@ export default function KarteikartenPage() {
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="w-full bg-white md:mx-auto md:max-w-7xl">
-        <Header variant="default" />
+        <Header variant={isLoggedIn ? "welcome" : "default"} />
 
         <section className="mx-auto flex min-h-[calc(100vh-96px)] w-full max-w-sm flex-col px-6 py-4 md:max-w-2xl md:px-8">
           <p className="mb-4 text-sm font-bold text-gray-500">Karte 1 von 10</p>

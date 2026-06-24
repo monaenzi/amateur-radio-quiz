@@ -16,7 +16,7 @@ export default function PruefungErgebnis() {
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="w-full bg-white md:mx-auto md:max-w-7xl">
-        <Header variant="default" />
+        <Header variant="welcome" />
 
         <div className="flex flex-col px-6 pb-24 pt-6 md:px-12 md:pt-10">
           {/* Warning */}

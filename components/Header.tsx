@@ -139,13 +139,13 @@ if (variant === 'auth') {
 
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
-              <Link href="/">Home</Link>
-              <Link href="/lernen">Lernen</Link>
-              <Link href="/pruefung">Prüfung</Link>
-              <Link href="/statistik">Statistik</Link>
+              <Link href="/dashboard">Home</Link>
+              <Link href="/quiz">Lernen</Link>
+              <Link href="/exam_locked">Prüfung</Link>
+              <Link href="/statistics">Statistik</Link>
             </nav>
 
-            <Link href="/">
+            <Link href="/dashboard">
               <Image
                 src="/logoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
@@ -177,10 +177,10 @@ if (variant === 'auth') {
 
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
-              <Link href="/">Home</Link>
-              <Link href="/lernen">Lernen</Link>
-              <Link href="/pruefung">Prüfung</Link>
-              <Link href="/statistik">Statistik</Link>
+              <Link href="/dashboard">Home</Link>
+              <Link href="/quiz">Lernen</Link>
+              <Link href="/examSimulation">Prüfung</Link>
+              <Link href="/statistics">Statistik</Link>
             </nav>
 
             <Link href="/">

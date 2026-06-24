@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="w-full bg-white md:mx-auto md:max-w-7xl">
-        <Header variant="default" />
+        <Header variant={isLoggedIn ? "welcome" : "default"} />
 
         {/* Content */}
         <div className="p-6">
