@@ -80,8 +80,8 @@ if (variant === 'auth') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
 
-        {/* NEU */}
-        <div className="absolute left-6 top-1/2 -translate-y-1/2">
+
+        <div className="absolute left-6 top-1/2 -translate-y-1/2 md:hidden">
           <BackButton />
         </div>
 
@@ -127,7 +127,8 @@ if (variant === 'auth') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex flex-1 items-center">
+                 <div className="absolute left-6 top-1/2 -translate-y-1/2 md:hidden">
+
             <BackButton />
           </div>
           <div className="flex flex-col items-center">
@@ -163,7 +164,8 @@ if (variant === 'auth') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex flex-1 items-center">
+               <div className="absolute left-6 top-1/2 -translate-y-1/2 md:hidden">
+
             <BackButton />
           </div>
           <div className="flex flex-col items-center">
