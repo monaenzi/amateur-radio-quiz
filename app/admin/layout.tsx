@@ -8,7 +8,6 @@ export default function AdminLayout({
 }) {
     return (
         <div className="pb-16">
-            <Header variant="admin" />
             {children}
             <AdminFooterNav />
         </div>
