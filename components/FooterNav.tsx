@@ -14,7 +14,7 @@ export default function FooterNav() {
                 </Link>
 
                 <Link
-                    href="/lernen"
+                    href="/quiz" // Später auf fachgebiteauswahl ändern
                     className="flex flex-col items-center gap-1 border-r border-[#008CEA] py-3 text-[#008CEA]"
                 >
                     <BookOpen size={20} />
@@ -22,7 +22,7 @@ export default function FooterNav() {
                 </Link>
 
                 <Link
-                    href="/pruefung"
+                    href="/exam_locked"
                     className="flex flex-col items-center gap-1 border-r border-[#008CEA] py-3 text-[#008CEA]"
                 >
                     <ClipboardList size={20} />
@@ -30,7 +30,7 @@ export default function FooterNav() {
                 </Link>
 
                 <Link
-                    href="/statistik"
+                    href="/statistics"
                     className="flex flex-col items-center gap-1 py-3 text-[#008CEA]"
                 >
                     <ChartColumn size={20} />
