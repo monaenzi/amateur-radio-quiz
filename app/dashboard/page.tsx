@@ -1,8 +1,13 @@
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
+import { auth } from '@/auth'
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth()
+  const isLoggedIn = !!session?.user
+  const name = session?.user?.name ?? session?.user?.email ?? 'Gast'
+
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="w-full bg-white md:mx-auto md:max-w-7xl">
@@ -10,11 +15,15 @@ export default function Home() {
 
         {/* Content */}
         <div className="p-6">
-          <p className="mb-6 text-center text-sm text-gray-500">
-            Fortschritt wird <span className="text-red-500">NICHT</span> gespeichert
-          </p>
+          {!isLoggedIn && (
+            <p className="mb-6 text-center text-sm text-gray-500">
+              Fortschritt wird <span className="text-red-500">NICHT</span> gespeichert
+            </p>
+          )}
 
-          <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, Gast</h2>
+          <h2 className="text-3xl font-bold text-[#0A8BE8]">
+            HALLO, {isLoggedIn ? name : 'Gast'}
+            </h2>
 
           <div className="mt-6">
             <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKATEGORIE</label>

@@ -26,7 +26,14 @@ export function useLogin() {
     if (result?.error) {
       setError('E-Mail oder Passwort falsch.')
     } else {
-      router.push('/dashboard')
+      const sessionRes = await fetch('/api/auth/session')
+      const session = await sessionRes.json()
+
+      if (session?.user?.role === 'ADMIN') {
+        router.push('/admin')
+      } else {
+        router.push('/dashboard')
+      }
     }
   }
 
