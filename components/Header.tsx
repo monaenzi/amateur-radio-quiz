@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import BackButton from './BackButton'
+import LogoutButton from './LogoutButton'
 
 type HeaderProps = {
   variant?: 'home' | 'welcome' | 'default' | 'auth' | 'admin' | 'authAdmin'
@@ -22,8 +23,8 @@ export default function Header({ variant = 'home' }: HeaderProps) {
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
               <Link href="/admin">Dashboard</Link>
-
               <Link href="/admin/questions">Fragen</Link>
+              <LogoutButton />
             </nav>
 
             <Link href="/">
@@ -57,8 +58,8 @@ export default function Header({ variant = 'home' }: HeaderProps) {
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
               <Link href="/admin">Dashboard</Link>
-
               <Link href="/admin/questions">Fragen</Link>
+              <LogoutButton />
             </nav>
 
             <Link href="/">
@@ -181,6 +182,7 @@ if (variant === 'auth') {
               <Link href="/quiz">Lernen</Link>
               <Link href="/examSimulation">Prüfung</Link>
               <Link href="/statistics">Statistik</Link>
+              <LogoutButton />
             </nav>
 
             <Link href="/">
