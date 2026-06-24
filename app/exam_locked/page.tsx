@@ -32,7 +32,7 @@ export default function ExamGuestPage() {
                     </AppButton>
  
                         <AppButton
-                            href="/register"
+                           // href="/register" // aktuell noch nciht klar ob eigener screen oder externe verlinkung
                             className="rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white"
                         >
                             Mitglied werden

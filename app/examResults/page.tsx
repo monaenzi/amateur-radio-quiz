@@ -26,7 +26,7 @@ export default function PruefungErgebnis() {
           </p>
 
           {/* Title */}
-          <h1 className="mb-5 text-center text-2xl font-bold leading-tight text-gray-900 md:mb-8">
+          <h1 className="mb-20 text-center text-2xl font-bold leading-tight text-gray-900 md:mb-8">
             Prüfungssimulation Ergebnis
           </h1>
 
@@ -77,7 +77,7 @@ export default function PruefungErgebnis() {
 
             {/* RIGHT: Kategorien + Button */}
             <div className="flex-1">
-              <p className="mb-2 text-sm font-semibold text-gray-800">Ergebnis pro Fachgebiet</p>
+              <p className="mtmb-2 text-sm font-semibold text-gray-800">Ergebnis pro Fachgebiet</p>
 
               <div className="mb-2 w-full overflow-hidden rounded-xl border border-gray-200">
                 {categories.map((cat, i) => (
@@ -100,7 +100,9 @@ export default function PruefungErgebnis() {
                 ))}
               </div>
 
-              <AppButton>Wiederholen</AppButton>
+              <AppButton href="/exam" className="md:mt-4 mt-15">
+                Wiederholen
+              </AppButton>
             </div>
           </div>
         </div>

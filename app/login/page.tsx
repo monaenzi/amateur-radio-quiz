@@ -12,7 +12,7 @@ export default function LoginPage() {
       <div className="mx-auto h-full bg-white md:max-w-7xl">
         <Header variant="auth" />
 
-        <div className="mt-2 text-center">
+        <div className="mb:mt-2 mt-70 text-center">
           <h1 className="text-2xl font-bold text-gray-600">Anmelden</h1>
           <p className="mt-3 text-sm text-gray-400">
             Melde dich mit deinem Konto an.
