@@ -71,6 +71,12 @@ export default function LearnPage() {
                             <input type="checkbox" className="h-5 w-5 accent-[#008CEA]" />
                         </div>
                     </div>
+
+                    <div className="mt-8">
+                        <button className="w-full rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white">
+                            Jetzt lernen
+                        </button>
+                    </div>
                 </div>
 
                 <FooterNav />
