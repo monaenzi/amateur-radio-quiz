@@ -41,9 +41,15 @@ export default function KarteikartenPage() {
               <AppButton onClick={() => setShowAnswer(true)}>Antwort anzeigen</AppButton>
             ) : (
               <div className="grid grid-cols-3 gap-3">
-                <AppButton>✓</AppButton>
-                <AppButton>~</AppButton>
-                <AppButton>✕</AppButton>
+                <button className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90">
+                  ✓
+                </button>
+                <button className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90">
+                  ~
+                </button>
+                <button className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90">
+                  ✕
+                </button>
               </div>
             )}
           </div>
