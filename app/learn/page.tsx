@@ -5,21 +5,27 @@ import { Scale, Radio, RadioTower } from "lucide-react";
 export default function LearnPage() {
     return (
         <main className="min-h-screen bg-gray-100 md:p-8"> 
+            {/* Der Haupt-Container füllt die gesamte Bildschirmhöhe und ordnet Header, Content und Footer untereinander an */}
             <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl md:min-h-[850px] md:rounded-2xl md:shadow-lg overflow-hidden">
                 
                 <Header variant="default" />
 
-                <div className="flex flex-1 flex-col justify-center px-6 pb-12 pt-6">
+                {/* Dieser Bereich dehnt sich aus (flex-1) und verteilt den Inhalt über die gesamte Page */}
+                <div className="flex flex-1 flex-col px-6 pb-12 pt-17">
                     
-                    <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">
-                        Was willst du lernen?
-                    </h1>
+                    {/* Oberer Bereich */}
+                    <div>
+                        <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">
+                            Was willst du lernen?
+                        </h1>
 
-                    <h2 className="mb-3 text-sm font-bold tracking-wide text-gray-700">
-                        FACHGEBIETE
-                    </h2>
+                        <h2 className="mb-3 text-sm font-bold tracking-wide text-gray-700">
+                            FACHGEBIETE
+                        </h2>
+                    </div>
 
-                    <div className="rounded-xl border border-gray-200">
+                    {/* Mittlerer Bereich: Die Fachgebiete-Box */}
+                    <div className="rounded-xl border border-gray-200 bg-white">
                         <div className="flex items-center gap-3 p-4">
                             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E6F4FD]">
                                 <Scale size={18} className="text-[#008CEA]" />
@@ -67,7 +73,8 @@ export default function LearnPage() {
                         </div>
                     </div>
 
-                    <div className="mt-8">
+                    {/* Unterer Bereich: Durch mt-auto rutscht der Button automatisch ganz nach unten */}
+                    <div className="pt-16">
                         <button className="w-full rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white hover:bg-[#0077c8] transition-colors">
                             Jetzt lernen
                         </button>
