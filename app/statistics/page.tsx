@@ -1,12 +1,16 @@
 import Header from "@/components/Header";
 import FooterNav from "@/components/FooterNav";
 import { Scale, Radio, RadioTower } from "lucide-react";
+import { auth } from '@/auth'
 
-export default function StatistikPage() {
+export default async function StatistikPage() {
+    const session = await auth()
+    const isLoggedIn = !!session?.user
+
     return (
         <main className="min-h-screen bg-white md:p-8">
             <div className="w-full bg-white md:mx-auto md:max-w-7xl">
-                <Header variant="default" />
+                <Header variant={isLoggedIn ? "welcome" : "default"} />
 
                 <div className="px-6 pb-24 pt-6">
                     <h2 className="mb-3 text-sm font-bold tracking-wide text-gray-700">

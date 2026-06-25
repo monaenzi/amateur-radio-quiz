@@ -4,6 +4,7 @@ import { use } from 'react'
 import { useQuestionEditor } from './useQuestionEditor'
 import AppButton from '@/components/AppButton'
 import { Trash2 } from 'lucide-react';
+import Header from '@/components/Header';
 
 export default function QuestionEditor({
   params,
@@ -29,6 +30,8 @@ export default function QuestionEditor({
 
   return (
     <main className="min-h-screen bg-white p-6">
+      <Header variant="admin" />
+      
       <h1 className="text-2xl font-bold text-gray-700 mb-6">
         {isNew ? 'Neue Frage' : 'Frage bearbeiten'}
       </h1>

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import BackButton from './BackButton'
+import LogoutButton from './LogoutButton'
 
 type HeaderProps = {
   variant?: 'home' | 'welcome' | 'default' | 'auth' | 'admin' | 'authAdmin'
@@ -22,8 +23,8 @@ export default function Header({ variant = 'home' }: HeaderProps) {
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
               <Link href="/admin">Dashboard</Link>
-
               <Link href="/admin/questions">Fragen</Link>
+              <LogoutButton />
             </nav>
 
             <Link href="/">
@@ -57,8 +58,8 @@ export default function Header({ variant = 'home' }: HeaderProps) {
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
               <Link href="/admin">Dashboard</Link>
-
               <Link href="/admin/questions">Fragen</Link>
+              <LogoutButton />
             </nav>
 
             <Link href="/">
@@ -76,11 +77,9 @@ export default function Header({ variant = 'home' }: HeaderProps) {
     )
   }
 
-if (variant === 'auth') {
+  if (variant === 'auth') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
-
-
         <div className="absolute left-6 top-1/2 -translate-y-1/2 md:hidden">
           <BackButton />
         </div>
@@ -127,8 +126,7 @@ if (variant === 'auth') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
-                 <div className="absolute left-6 top-1/2 -translate-y-1/2 md:hidden">
-
+          <div className="absolute left-6 top-1/2 -translate-y-1/2 md:hidden">
             <BackButton />
           </div>
           <div className="flex flex-col items-center">
@@ -139,13 +137,14 @@ if (variant === 'auth') {
 
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
-              <Link href="/">Home</Link>
+              {/* <Link href="/">Home</Link> */}
+              <Link href="/dashboard">Home</Link>
               <Link href="/quiz">Lernen</Link>
               <Link href="/exam_locked">Prüfung</Link>
               <Link href="/statistics">Statistik</Link>
             </nav>
 
-            <Link href="/">
+            <Link href="/dashboard">
               <Image
                 src="/logoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
@@ -164,12 +163,10 @@ if (variant === 'auth') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
-               <div className="absolute left-6 top-1/2 -translate-y-1/2 md:hidden">
-
+          <div className="absolute left-6 top-1/2 -translate-y-1/2 md:hidden">
             <BackButton />
           </div>
           <div className="flex flex-col items-center">
-            
             <h1 className="text-2xl font-bold text-white">Willkommen zurück</h1>
 
             <p className="text-sm text-white/80">ÖVSV Lernkurs</p>
@@ -177,10 +174,15 @@ if (variant === 'auth') {
 
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
-              <Link href="/">Home</Link>
+              {/* <Link href="/">Home</Link> */}
               <Link href="/quiz">Lernen</Link>
               <Link href="/examSimulation">Prüfung</Link>
               <Link href="/statistics">Statistik</Link>
+              <Link href="/dashboard">Home</Link>
+              <Link href="/quiz">Lernen</Link>
+              <Link href="/examSimulation">Prüfung</Link>
+              <Link href="/statistics">Statistik</Link>
+              <LogoutButton />
             </nav>
 
             <Link href="/">

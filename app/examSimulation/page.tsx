@@ -72,7 +72,7 @@ export default function ExamPage() {
   return (
     <main className="h-screen overflow-x-hidden overflow-y-auto bg-white md:p-8">
       <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl">
-        <Header variant="default" />
+        <Header variant="welcome" />
 
         <section className="mx-auto w-full max-w-md flex-1 px-6 py-6 pb-32 md:max-w-5xl md:px-0 md:py-4 md:pb-8">
           <div className="md:flex md:gap-8">
