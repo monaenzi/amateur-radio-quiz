@@ -100,7 +100,7 @@ export default function PruefungErgebnis() {
                 ))}
               </div>
 
-              <AppButton href="/exam" className="md:mt-4 mt-15">
+              <AppButton href="/examSimulation" className="md:mt-4 mt-15">
                 Wiederholen
               </AppButton>
             </div>

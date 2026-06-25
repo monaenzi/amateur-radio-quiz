@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="w-full bg-white md:mx-auto md:max-w-7xl">
-        <Header variant={isLoggedIn ? "welcome" : "default"} />
+        <Header variant={isLoggedIn ? 'welcome' : 'default'} />
 
         {/* Content */}
         <div className="p-6">
@@ -21,9 +21,7 @@ export default async function Home() {
             </p>
           )}
 
-          <h2 className="text-3xl font-bold text-[#0A8BE8]">
-            HALLO, {isLoggedIn ? name : 'Gast'}
-            </h2>
+          <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, {isLoggedIn ? name : 'Gast'}</h2>
 
           <div className="mt-6">
             <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKATEGORIE</label>
@@ -47,14 +45,13 @@ export default async function Home() {
 
           <div className="mt-50 flex justify-center">
             <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center  md:hidden">
-              <AppButton>Lernen</AppButton>
-              <AppButton>Prüfung simulieren</AppButton>
+              <AppButton href="/quiz">Lernen</AppButton>
+              <AppButton href="/exam_locked">Prüfung simulieren</AppButton>
             </div>
           </div>
         </div>
 
-        <FooterNav/>
-        
+        <FooterNav />
       </div>
     </main>
   )
