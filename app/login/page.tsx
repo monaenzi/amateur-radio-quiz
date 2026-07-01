@@ -25,13 +25,16 @@ export default function LoginPage() {
             placeholder="E-Mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && document.getElementById('password')?.focus()}
             className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA] text-gray-600"
           />
           <input
+            id="password"
             type="password"
             placeholder="Passwort"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
             className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA] text-gray-600"
           />
 
