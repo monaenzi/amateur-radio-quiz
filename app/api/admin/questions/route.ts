@@ -72,7 +72,7 @@ export async function POST(request: Request) {
         create: body.answers,
       },
       attachments: {
-        create: body.attachment ?? [],
+        create: body.attachments ?? [],
       },
     },
   })
