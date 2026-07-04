@@ -5,6 +5,7 @@ import { useQuestionEditor } from './useQuestionEditor'
 import AppButton from '@/components/AppButton'
 import { Trash2 } from 'lucide-react';
 import Header from '@/components/Header';
+import { useRouter } from 'next/navigation'
 
 export default function QuestionEditor({
   params,
@@ -12,6 +13,7 @@ export default function QuestionEditor({
   params: Promise<{ id: string }>
 }) {
   const { id } = use(params)
+  const router = useRouter()
   const {
     form,
     setForm,
@@ -26,6 +28,7 @@ export default function QuestionEditor({
     removeAttachment,
     updateAttachment,
     handleSubmit,
+    handleSubmitAndPreview,
   } = useQuestionEditor(id)
 
   return (
@@ -166,6 +169,14 @@ export default function QuestionEditor({
           <AppButton onClick={handleSubmit} disabled={loading}>
             {loading ? 'Speichern...' : 'Speichern'}
           </AppButton>
+
+          <button
+            onClick={handleSubmitAndPreview}
+            disabled={loading}
+            className="rounded-md border border-[#008CEA] px-6 py-3 font-bold text-[#008CEA] hover:bg-blue-50 disabled:opacity-50"
+          >
+            Speichern & Vorschau
+          </button>
         </div>
       </div>
     </main>

@@ -135,6 +135,31 @@ export function useQuestionEditor(id: string) {
     router.push('/admin/questions')
   }
 
+  async function handleSubmitAndPreview() {
+  setLoading(true)
+  setError('')
+
+  const url = isNew ? '/api/admin/questions' : `/api/admin/questions/${id}`
+  const method = isNew ? 'POST' : 'PUT'
+
+  const res = await fetch(url, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(form),
+  })
+
+  setLoading(false)
+
+  if (!res.ok) {
+    setError('Fehler beim Speichern.')
+    return
+  }
+
+  const data = await res.json()
+  const questionId = isNew ? data.id : id
+  router.push(`/admin/questions/${questionId}/preview`)
+}
+
   return {
     form,
     setForm,
@@ -149,5 +174,6 @@ export function useQuestionEditor(id: string) {
     removeAttachment,
     updateAttachment,
     handleSubmit,
+    handleSubmitAndPreview,
   }
 }
