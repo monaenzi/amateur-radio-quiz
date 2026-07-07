@@ -32,7 +32,7 @@ export default function KarteikartenPage() {
     const [loading, setLoading] = useState(true)
 
     useEffect(function () {
-        const url = subject
+        const url = subject && subject !== 'all'
             ? `/api/questions?class=${classId}&subject=${subject}`
             : `/api/questions?class=${classId}`
 
