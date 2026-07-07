@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import { questionService } from '@/services/question.service'
+import { handleApiError } from '@/lib/api-error-handler'
+import { ValidationError } from '@/lib/errors'
 
 export async function GET(
   request: Request,
@@ -11,18 +13,16 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { id: idParam } = await params
-  const id = parseInt(idParam)
-
-  if (isNaN(id)) {
-    return NextResponse.json({ error: 'Ungültige ID' }, { status: 400 })
-  }
-
   try {
+    const { id: idParam } = await params
+    const id = parseInt(idParam)
+
+    if (isNaN(id)) throw new ValidationError('Ungültige ID')
+
     const question = await questionService.getById(id)
     return NextResponse.json(question)
-  } catch {
-    return NextResponse.json({ error: 'Nicht gefunden' }, { status: 404 })
+  } catch (error) {
+    return handleApiError(error)
   }
 }
 
@@ -35,14 +35,16 @@ export async function PUT(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { id: idParam } = await params
-  const id = parseInt(idParam)
-  const body = await request.json()
-
   try {
+    const { id: idParam } = await params
+    const id = parseInt(idParam)
+
+    if (isNaN(id)) throw new ValidationError('Ungültige ID')
+
+    const body = await request.json()
     await questionService.update(id, body)
     return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json({ error: 'Nicht gefunden' }, { status: 404 })
+  } catch (error) {
+    return handleApiError(error)
   }
 }

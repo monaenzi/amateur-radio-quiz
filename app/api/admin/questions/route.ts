@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import { questionService } from '@/services/question.service'
+import { handleApiError } from '@/lib/api-error-handler'
+import { ValidationError } from '@/lib/errors'
 
 export async function GET(request: Request) {
   const session = await auth()
@@ -8,14 +10,17 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { searchParams } = new URL(request.url)
-  const questions = await questionService.getAll({
-    search: searchParams.get('search') ?? undefined,
-    classFilter: searchParams.get('class') ?? undefined,
-    subjectFilter: searchParams.get('subject') ?? undefined,
-  })
-
-  return NextResponse.json(questions)
+  try {
+    const { searchParams } = new URL(request.url)
+    const questions = await questionService.getAll({
+      search: searchParams.get('search') ?? undefined,
+      classFilter: searchParams.get('class') ?? undefined,
+      subjectFilter: searchParams.get('subject') ?? undefined,
+    })
+    return NextResponse.json(questions)
+  } catch (error) {
+    return handleApiError(error)
+  }
 }
 
 export async function DELETE(request: Request) {
@@ -24,18 +29,16 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { searchParams } = new URL(request.url)
-  const id = searchParams.get('id')
-
-  if (!id) {
-    return NextResponse.json({ error: 'ID fehlt' }, { status: 400 })
-  }
-
   try {
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+
+    if (!id) throw new ValidationError('ID fehlt')
+
     await questionService.delete(parseInt(id))
     return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json({ error: 'Frage nicht gefunden' }, { status: 404 })
+  } catch (error) {
+    return handleApiError(error)
   }
 }
 
@@ -45,8 +48,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const body = await request.json()
-
-  const question = await questionService.create(body)
-  return NextResponse.json(question)
+  try {
+    const body = await request.json()
+    const question = await questionService.create(body)
+    return NextResponse.json(question)
+  } catch (error) {
+    return handleApiError(error)
+  }
 }
