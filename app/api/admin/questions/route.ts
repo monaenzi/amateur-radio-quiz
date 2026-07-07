@@ -1,34 +1,18 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { auth } from '@/auth'
+import { questionService } from '@/services/question.service'
 
 export async function GET(request: Request) {
   const session = await auth()
-
   if (!session || session.user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   const { searchParams } = new URL(request.url)
-  const classFilter = searchParams.get('class')
-  const subjectFilter = searchParams.get('subject')
-  const search = searchParams.get('search')
-
-  const where = {
-    ...(classFilter && { class: parseInt(classFilter) }),
-    ...(subjectFilter && { subject: subjectFilter }),
-    ...(search && {
-      OR : [
-        { text: { contains: search } },
-        { code: { contains: search } },
-      ]
-    }),
-  }
-
-  const questions = await prisma.question.findMany({
-    where,
-    include: { answers: true, attachments: true },
-    orderBy: { createdAt: 'desc' },
+  const questions = await questionService.getAll({
+    search: searchParams.get('search') ?? undefined,
+    classFilter: searchParams.get('class') ?? undefined,
+    subjectFilter: searchParams.get('subject') ?? undefined,
   })
 
   return NextResponse.json(questions)
@@ -36,7 +20,6 @@ export async function GET(request: Request) {
 
 export async function DELETE(request: Request) {
   const session = await auth()
-
   if (!session || session.user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
@@ -48,9 +31,12 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: 'ID fehlt' }, { status: 400 })
   }
 
-  await prisma.question.delete({ where: { id: parseInt(id) } })
-
-  return NextResponse.json({ success: true })
+  try {
+    await questionService.delete(parseInt(id))
+    return NextResponse.json({ success: true })
+  } catch {
+    return NextResponse.json({ error: 'Frage nicht gefunden' }, { status: 404 })
+  }
 }
 
 export async function POST(request: Request) {
@@ -61,21 +47,6 @@ export async function POST(request: Request) {
 
   const body = await request.json()
 
-  const question = await prisma.question.create({
-    data: {
-      text: body.text,
-      explanation: body.explanation,
-      class: body.class,
-      subject: body.subject,
-      code: body.code,
-      answers: {
-        create: body.answers,
-      },
-      attachments: {
-        create: body.attachments ?? [],
-      },
-    },
-  })
-
+  const question = await questionService.create(body)
   return NextResponse.json(question)
 }

@@ -1,7 +1,6 @@
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
-import { prisma } from '@/lib/prisma'
-import bcrypt from 'bcryptjs'
+import { authService } from '@/services/auth.service'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -13,25 +12,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
-        })
-
-        if (!user) return null
-
-        const passwordMatch = await bcrypt.compare(
+        return authService.login(
+          credentials.email as string,
           credentials.password as string,
-          user.password
         )
-
-        if (!passwordMatch) return null
-
-        return {
-          id: String(user.id),
-          email: user.email,
-          name: user.name,
-          role: user.role,
-        }
       },
     }),
   ],
