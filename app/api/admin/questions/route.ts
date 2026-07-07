@@ -3,6 +3,7 @@ import { auth } from '@/auth'
 import { questionService } from '@/services/question.service'
 import { handleApiError } from '@/lib/api-error-handler'
 import { ValidationError } from '@/lib/errors'
+import { createQuestionSchema } from '@/lib/schemas'
 
 export async function GET(request: Request) {
   const session = await auth()
@@ -51,9 +52,15 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
 
-    console.log('CREATE QUESTION BODY:', body)
+    const result = createQuestionSchema.safeParse(body)
 
-    const question = await questionService.create(body)
+    if (!result.success) {
+      throw new ValidationError(
+        result.error.issues[0]?.message ?? 'Ungültige Eingabe'
+      )
+    }
+
+    const question = await questionService.create(result.data)
 
     return NextResponse.json(question)
   } catch (error) {

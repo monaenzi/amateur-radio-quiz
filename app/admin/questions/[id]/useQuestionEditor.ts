@@ -128,7 +128,8 @@ export function useQuestionEditor(id: string) {
     setLoading(false)
 
     if (!res.ok) {
-      setError('Fehler beim Speichern.')
+      const data = await res.json()
+      setError(data.error ?? 'Fehler beim Speichern.')
       return
     }
 
@@ -151,7 +152,8 @@ export function useQuestionEditor(id: string) {
     setLoading(false)
 
     if (!res.ok) {
-      setError('Fehler beim Speichern.')
+      const data = await res.json()
+      setError(data.error ?? 'Fehler beim Speichern.')
       return
     }
 
