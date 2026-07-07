@@ -16,7 +16,7 @@ export type Attachment = {
 export type QuestionForm = {
   text: string
   explanation: string
-  class: number
+  classes: number[]
   subject: string
   code: string
   attachments: Attachment[]
@@ -26,7 +26,7 @@ export type QuestionForm = {
 const defaultForm: QuestionForm = {
   text: '',
   explanation: '',
-  class: 1,
+  classes: [1],
   subject: 'Recht',
   code: '',
   attachments: [],
@@ -52,7 +52,7 @@ export function useQuestionEditor(id: string) {
           setForm({
             text: data.text,
             explanation: data.explanation ?? '',
-            class: data.class,
+            classes: data.classes.map((c: { class: number }) => c.class),
             subject: data.subject,
             code: data.code ?? '',
             attachments: data.attachments ?? [],
@@ -136,29 +136,29 @@ export function useQuestionEditor(id: string) {
   }
 
   async function handleSubmitAndPreview() {
-  setLoading(true)
-  setError('')
+    setLoading(true)
+    setError('')
 
-  const url = isNew ? '/api/admin/questions' : `/api/admin/questions/${id}`
-  const method = isNew ? 'POST' : 'PUT'
+    const url = isNew ? '/api/admin/questions' : `/api/admin/questions/${id}`
+    const method = isNew ? 'POST' : 'PUT'
 
-  const res = await fetch(url, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(form),
-  })
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    })
 
-  setLoading(false)
+    setLoading(false)
 
-  if (!res.ok) {
-    setError('Fehler beim Speichern.')
-    return
+    if (!res.ok) {
+      setError('Fehler beim Speichern.')
+      return
+    }
+
+    const data = await res.json()
+    const questionId = isNew ? data.id : id
+    router.push(`/admin/questions/${questionId}/preview`)
   }
-
-  const data = await res.json()
-  const questionId = isNew ? data.id : id
-  router.push(`/admin/questions/${questionId}/preview`)
-}
 
   return {
     form,

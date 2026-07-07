@@ -6,11 +6,17 @@ export type Question = {
   id: number
   text: string
   subject: string
-  class: number
+  classes: {
+    id: number
+    class: number
+  }[]
   code: string | null
-  answers: { id: number; text: string; isCorrect: boolean }[]
+  answers: {
+    id: number
+    text: string
+    isCorrect: boolean
+  }[]
 }
-
 export function useQuestionList() {
   const [questions, setQuestions] = useState<Question[]>([])
   const [search, setSearch] = useState('')

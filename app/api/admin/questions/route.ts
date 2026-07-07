@@ -50,7 +50,11 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
+
+    console.log('CREATE QUESTION BODY:', body)
+
     const question = await questionService.create(body)
+
     return NextResponse.json(question)
   } catch (error) {
     return handleApiError(error)
