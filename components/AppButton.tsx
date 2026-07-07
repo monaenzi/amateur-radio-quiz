@@ -17,9 +17,26 @@ export default function AppButton({
 }: AppButtonProps) {
   const baseClass =
     'mx-auto flex items-center justify-center h-10 w-50 rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90'
+
+  if (href?.startsWith('http')) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${baseClass} ${className ?? ''}`}
+      >
+        {children}
+      </a>
+    )
+  }
+
   if (href) {
     return (
-      <Link href={href} className={`${baseClass} ${className ?? ''}`}>
+      <Link
+        href={href}
+        className={`${baseClass} ${className ?? ''}`}
+      >
         {children}
       </Link>
     )

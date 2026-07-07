@@ -32,7 +32,7 @@ export default function ExamGuestPage() {
                     </AppButton>
  
                         <AppButton
-                           // href="/register" // aktuell noch nciht klar ob eigener screen oder externe verlinkung
+                            href="https://www.oevsv.at/mitgliedschaft/"
                             className="rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white"
                         >
                             Mitglied werden
