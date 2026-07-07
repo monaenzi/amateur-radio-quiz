@@ -1,6 +1,9 @@
 {
   "name": "temp-next",
   "version": "0.1.0",
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -29,6 +32,7 @@
     "eslint-config-next": "16.2.6",
     "prettier": "^3.8.3",
     "tailwindcss": "^4",
+    "tsx": "^4.23.0",
     "typescript": "^5"
   }
 }

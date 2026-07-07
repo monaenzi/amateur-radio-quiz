@@ -28,9 +28,9 @@ model Question {
   id          Int      @id @default(autoincrement())
   text        String   @db.Text
   explanation String?  @db.Text
-  class       Int      // 1, 3, oder 4
-  subject     String   // z.B. "Recht", "Technik", "Betrieb"
+  subject     String   // "Recht", "Technik", "Betrieb"
   code        String?  // z.B. "R-047"
+  classes     QuestionClass[]
   attachments Attachment[]
   answers     Answer[]
   progress    UserQuestionProgress[]
@@ -38,6 +38,16 @@ model Question {
   updatedAt   DateTime @updatedAt
 
   @@map("questions")
+}
+
+model QuestionClass {
+  id         Int      @id @default(autoincrement())
+  class      Int      // 1, 3 oder 4
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, class])
+  @@map("question_classes")
 }
 
 model Answer {

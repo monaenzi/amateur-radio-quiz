@@ -1,0 +1,3928 @@
+[
+  {
+    "id": "1-01",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "01",
+    "masterNummer": 1,
+    "question": "Welche gesetzlichen Bestimmungen sind für den Amateurfunk maßgeblich?"
+  },
+  {
+    "id": "1-02",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "02",
+    "masterNummer": 2,
+    "question": "Was ist die ITU?"
+  },
+  {
+    "id": "1-03",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "03",
+    "masterNummer": 3,
+    "question": "Welche Zwecke verfolgt der internationale Fernmeldevertrag?"
+  },
+  {
+    "id": "1-04",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "04",
+    "masterNummer": 4,
+    "question": "Welche Aufgaben hat das Radiocommunication Bureau?"
+  },
+  {
+    "id": "1-05",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "05",
+    "masterNummer": 5,
+    "question": "Was ist die CEPT und welche Bedeutung hat sie?"
+  },
+  {
+    "id": "1-06",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "06",
+    "masterNummer": 6,
+    "question": "Was ist die VO Funk (Radio Regulations) und was regelt sie?"
+  },
+  {
+    "id": "1-07",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "07",
+    "masterNummer": 7,
+    "question": "Definieren Sie den Begriff „Funkanlage“ im Sinne des TKG."
+  },
+  {
+    "id": "1-08",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "08",
+    "masterNummer": 8,
+    "question": "Erläutern Sie den Unterschied zwischen einem Telekommunikationsdienst und dem Amateurfunkdienst?"
+  },
+  {
+    "id": "1-09",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "09",
+    "masterNummer": 9,
+    "question": "Wann erlischt eine Bewilligung?"
+  },
+  {
+    "id": "1-10",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "10",
+    "masterNummer": 10,
+    "question": "Was kann passieren, wenn Sie ohne oder ohne entsprechende Amateurfunkbewilligung Amateurfunk betreiben?"
+  },
+  {
+    "id": "1-11",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "11",
+    "masterNummer": 11,
+    "question": "Welche Funkanlagen sind bewilligungspflichtig, welche Art der Bewilligungen gibt es?"
+  },
+  {
+    "id": "1-12",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "12",
+    "masterNummer": 12,
+    "question": "Sie ändern den Standort Ihrer Funkanlage – was haben Sie zu tun?"
+  },
+  {
+    "id": "1-13",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "13",
+    "masterNummer": 13,
+    "question": "Was versteht man unter dem Aufsichtsrecht der Fernmeldebehörden über Telekommunikationsanlagen?"
+  },
+  {
+    "id": "1-14",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "14",
+    "masterNummer": 14,
+    "question": "Ein Organ der Fernmeldebehörde will ihre Funkanlage überprüfen, was haben Sie zu tun?"
+  },
+  {
+    "id": "1-15",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "15",
+    "masterNummer": 15,
+    "question": "Welche Geheimhaltungspflichten treffen Sie als Funkamateur?"
+  },
+  {
+    "id": "1-16",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "16",
+    "masterNummer": 16,
+    "question": "Was kann die Fernmeldebehörde machen, falls Sie einen anderen Funkdienst stören?"
+  },
+  {
+    "id": "1-17",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "17",
+    "masterNummer": 17,
+    "question": "Welche Gebühren müssen als Funkamateur entrichtet werden?"
+  },
+  {
+    "id": "1-18",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "18",
+    "masterNummer": 18,
+    "question": "Definieren Sie den Begriff Amateurfunkdienst?"
+  },
+  {
+    "id": "1-19",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "19",
+    "masterNummer": 19,
+    "question": "Definieren Sie den Begriff Funkamateure?"
+  },
+  {
+    "id": "1-20",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "20",
+    "masterNummer": 20,
+    "question": "Definieren Sie den Begriff Amateurfunkstelle?"
+  },
+  {
+    "id": "1-21",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "21",
+    "masterNummer": 21,
+    "question": "Definieren Sie den Begriff Stationsverantwortlicher?"
+  },
+  {
+    "id": "1-22",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "22",
+    "masterNummer": 22,
+    "question": "Definieren Sie den Begriff Klubfunkstelle?"
+  },
+  {
+    "id": "1-23",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "23",
+    "masterNummer": 23,
+    "question": "Definieren Sie den Begriff Bakensender?"
+  },
+  {
+    "id": "1-24",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "24",
+    "masterNummer": 24,
+    "question": "Definieren Sie den Begriff Relaisfunkstelle?"
+  },
+  {
+    "id": "1-25",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "25",
+    "masterNummer": 25,
+    "question": "Darf Amateurfunk von Nichtamateuren abgehört werden?"
+  },
+  {
+    "id": "1-26",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "26",
+    "masterNummer": 26,
+    "question": "Voraussetzungen zur Erlangung einer Amateurfunkbewilligung?"
+  },
+  {
+    "id": "1-27",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "27",
+    "masterNummer": 27,
+    "question": "Wie und wo ist ein Antrag auf Erteilung einer Amateurfunkbewilligung zu stellen?"
+  },
+  {
+    "id": "1-28",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "28",
+    "masterNummer": 28,
+    "question": "Rufzeichen und Sonderrufzeichen?"
+  },
+  {
+    "id": "1-29",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "29",
+    "masterNummer": 29,
+    "question": "Wozu berechtigt eine Amateurfunkbewilligung?"
+  },
+  {
+    "id": "1-30",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "30",
+    "masterNummer": 30,
+    "question": "Unter welchen Voraussetzungen dürfen Aussendungen durchgeführt werden?"
+  },
+  {
+    "id": "1-31",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "31",
+    "masterNummer": 31,
+    "question": "Wie ist der Amateurfunkverkehr abzuwickeln?"
+  },
+  {
+    "id": "1-32",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "32",
+    "masterNummer": 32,
+    "question": "Definieren Sie den Begriff Not- und Katastrophenfunkverkehr?"
+  },
+  {
+    "id": "1-33",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "33",
+    "masterNummer": 33,
+    "question": "Wo können Sie erfahren, unter welchen technischen Parametern (Sendeart, Leistungsstufe, Einschränkungen, etc.) Sie mit Ihrer Lizenzklasse in welchem Frequenzband Amateurfunk betreiben dürfen?"
+  },
+  {
+    "id": "1-34",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "34",
+    "masterNummer": 34,
+    "question": "Was ist ein und wozu gibt es ein Funktagebuch?"
+  },
+  {
+    "id": "1-35",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "35",
+    "masterNummer": 35,
+    "question": "In welchem Umfang ist Mitbenutzung einer Amateurfunkstelle möglich?"
+  },
+  {
+    "id": "1-36",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "36",
+    "masterNummer": 36,
+    "question": "Welche Behörden dürfen Amtshandlungen im Bereich des Amateurfunks setzen?"
+  },
+  {
+    "id": "1-37",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "37",
+    "masterNummer": 37,
+    "question": "Nennen Sie einige Verwaltungsstrafbestimmungen in Bezug auf den Amateurfunk?"
+  },
+  {
+    "id": "1-38",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "38",
+    "masterNummer": 38,
+    "question": "Was ist eine CEPT - Lizenz? (oder CEPT - Novizen - Lizenz)"
+  },
+  {
+    "id": "1-39",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "39",
+    "masterNummer": 39,
+    "question": "Was darf ein ausländischer CEPT - Lizenz Inhaber oder CEPT – Novizen - Lizenz in Österreich ohne eigene österreichische Bewilligung?"
+  },
+  {
+    "id": "1-40",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "40",
+    "masterNummer": 40,
+    "question": "Was bedeutet der Begriff Reziprozität und nennen Sie ein Beispiel?"
+  },
+  {
+    "id": "1-41",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "41",
+    "masterNummer": 41,
+    "question": "Nennen Sie die Bewilligungsklassen und wozu berechtigen diese?"
+  },
+  {
+    "id": "1-42",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "42",
+    "masterNummer": 42,
+    "question": "Welche Leistungsstufen kennen Sie und nennen Sie deren Merkmale?"
+  },
+  {
+    "id": "1-43",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "43",
+    "masterNummer": 43,
+    "question": "Unter welchen Voraussetzungen kann eine Amateurfunkbewilligung für die Leistungsstufe C erteilt werden?"
+  },
+  {
+    "id": "1-44",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "44",
+    "masterNummer": 44,
+    "question": "Unter welchen Voraussetzungen kann eine Amateurfunkbewilligung für die Leistungsstufe D erteilt werden?"
+  },
+  {
+    "id": "1-45",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "45",
+    "masterNummer": 45,
+    "question": "Was bedeutet der Status eines Funkdienstes (Primär, Primär/Exklusiv(Pex), Sekundär, ISM)?"
+  },
+  {
+    "id": "1-46",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "46",
+    "masterNummer": 46,
+    "question": "Ist die Verwendung der Betriebsart Telegraphie an eine bestimmte Voraussetzungen gebunden?"
+  },
+  {
+    "id": "1-47",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "47",
+    "masterNummer": 47,
+    "question": "Wann wird eine schädliche Störung als solche behandelt?"
+  },
+  {
+    "id": "1-48",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "48",
+    "masterNummer": 48,
+    "question": "Was gilt für einen Amateurfunkbetrieb auf Schiffen und in Flugzeugen?"
+  },
+  {
+    "id": "1-49",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "49",
+    "masterNummer": 49,
+    "question": "Welche Aussendungen dürfen von einer Amateurfunkstelle empfangen werden?"
+  },
+  {
+    "id": "1-50",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "50",
+    "masterNummer": 50,
+    "question": "Was darf der Nachrichteninhalt einer Amateurfunkaussendung sein?"
+  },
+  {
+    "id": "1-51",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "51",
+    "masterNummer": 51,
+    "question": "Gibt es eine Möglichkeit, dass ein Funkamateur, der die Prüfungskategorie 3 erfolgreich abgelegt hat, auf anderen Frequenzen als dem 2m / 70cm-Band Funkverkehr haben darf?"
+  },
+  {
+    "id": "1-52",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "52",
+    "masterNummer": 52,
+    "question": "Wer darf eine Relaisfunkstelle errichten / betreiben / benutzen und wie ist deren Rufzeichen auszusenden?"
+  },
+  {
+    "id": "1-53",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "53",
+    "masterNummer": 53,
+    "question": "Was haben Sie zu tun, wenn Sie Funkverkehr mit einer nicht bewilligten Amateurfunkstelle haben und mit wem dürfen Sie keinen Amateurfunkverkehr haben?"
+  },
+  {
+    "id": "1-54",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "54",
+    "masterNummer": 54,
+    "question": "Welche besonderen Aufgaben hat die ITU in Bezug auf Funkdienste und welche Ausschüsse sind dafür zuständig?"
+  },
+  {
+    "id": "1-55",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "55",
+    "masterNummer": 55,
+    "question": "Was bedeutet missbräuchliche Verwendung von Funkanlagen?"
+  },
+  {
+    "id": "1-56",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "56",
+    "masterNummer": 56,
+    "question": "Was hat der Inhaber einer Amateurfunkstelle zu tun, wenn er nicht bei dieser Stelle anwesend ist?"
+  },
+  {
+    "id": "1-57",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "57",
+    "masterNummer": 57,
+    "question": "Welche Bestimmungen sind beim Betrieb einer Amateurfunkstelle im Ausland zu beachten?"
+  },
+  {
+    "id": "1-58",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "58",
+    "masterNummer": 58,
+    "question": "Unter welchen Voraussetzungen darf der Inhaber einer Amateurfunkbewilligung der Bewilligungsklasse 3 im Ausland Amateurfunkbetrieb durchführen?"
+  },
+  {
+    "id": "1-59",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "59",
+    "masterNummer": 59,
+    "question": "Wozu berechtigt eine Amateurfunkbewilligung der Klasse 4?"
+  },
+  {
+    "id": "1-60",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "60",
+    "masterNummer": 60,
+    "question": "Aufgrund welcher internationalen Regelung dürfen Funkamateure aus bestimmten Ländern auch ohne individuelle Gastzulassung vorübergehend in Österreich Amateurfunk ausüben?"
+  },
+  {
+    "id": "1-61",
+    "category": "Recht",
+    "classes": [
+      1,
+      3,
+      4
+    ],
+    "gruppe": "1",
+    "nummer": "61",
+    "masterNummer": 61,
+    "question": "Unter welchen Voraussetzungen ist die Verbindung von Amateurfunkstellen mittels Internettechnologie zulässig?"
+  },
+  {
+    "id": "2.1-01",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "01",
+    "masterNummer": 9,
+    "question": "Wie eröffnen Sie einen Funkverkehr in Phonie, wie in Telegraphie?"
+  },
+  {
+    "id": "2.1-02",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "02",
+    "masterNummer": 11,
+    "question": "Was ist das gebräuchliche Minimum einer Amateurfunkverbindung?"
+  },
+  {
+    "id": "2.1-03",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "03",
+    "masterNummer": 12,
+    "question": "Welche Bedeutung haben die Q-Gruppen im allgemeinen?"
+  },
+  {
+    "id": "2.1-04",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "04",
+    "masterNummer": 12,
+    "question": "Sie wollen, dass Ihre Gegenstation die Sendeleistung vermindert - welche Q-Gruppe verwenden Sie?"
+  },
+  {
+    "id": "2.1-05",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "05",
+    "masterNummer": 37,
+    "question": "Was bedeuten die Hinweise „5 UP’ bzw. “10 DOWN\"?"
+  },
+  {
+    "id": "2.1-06",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "06",
+    "masterNummer": 10,
+    "question": "Sie wollen in einen bestehenden Funkverkehr einsteigen - wie führen Sie das durch?"
+  },
+  {
+    "id": "2.1-07",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "07",
+    "masterNummer": 55,
+    "question": "Welche betrieblichen Auswirkungen haben die besonderen Ausbreitungsbedingungen auf Kurzwelle?"
+  },
+  {
+    "id": "2.1-08",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "08",
+    "masterNummer": 56,
+    "question": "Welche betriebliche Auswirkung hat die Bodenwellen-Ausbreitung?"
+  },
+  {
+    "id": "2.1-09",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "09",
+    "masterNummer": 57,
+    "question": "Welche betriebliche Auswirkung hat die Raumwellen-Ausbreitung, in welchem Frequenzbereich ist sie von Bedeutung?"
+  },
+  {
+    "id": "2.1-10",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "10",
+    "masterNummer": 58,
+    "question": "Welche betriebliche Bedeutung hat die kritische Frequenz?"
+  },
+  {
+    "id": "2.1-11",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "11",
+    "masterNummer": 59,
+    "question": "Welche betriebliche Bedeutung haben die Begriffe “MUF” und “LUF”?"
+  },
+  {
+    "id": "2.1-12",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "12",
+    "masterNummer": 67,
+    "question": "Was versteht man unter Fading auf Kurzwelle, wodurch entsteht Fading und wie reagieren Sie, um den Funkverkehr aufrecht zu erhalten?"
+  },
+  {
+    "id": "2.1-13",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "13",
+    "masterNummer": 20,
+    "question": "Ausbreitung von Funkwellen - Ausbreitungsmerkmale in den verschiedenen Amateurfunk Frequenzbereichen?"
+  },
+  {
+    "id": "2.1-14",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "14",
+    "masterNummer": 48,
+    "question": "Welchen Einfluß hat die Ionosphäre auf die Ausbreitung. von Funkwellen über 30 MHz ?"
+  },
+  {
+    "id": "2.1-15",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "15",
+    "masterNummer": 21,
+    "question": "Erklären Sie die Begriffe Fresnelzone, Geländeschnitt"
+  },
+  {
+    "id": "2.1-16",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "16",
+    "masterNummer": 60,
+    "question": "Was ist die tote Zone, was ein Skip?"
+  },
+  {
+    "id": "2.1-17",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "17",
+    "masterNummer": 61,
+    "question": "Wovon hängt die maximal erzielbare Reichweite auf Kurzwelle ab?"
+  },
+  {
+    "id": "2.1-18",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "18",
+    "masterNummer": 62,
+    "question": "Was verstehen Sie unter kurzem - was unter langem Weg?"
+  },
+  {
+    "id": "2.1-19",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "19",
+    "masterNummer": 63,
+    "question": "Was verstehen Sie unter dem Dämmerungseffekt?"
+  },
+  {
+    "id": "2.1-20",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "20",
+    "masterNummer": 64,
+    "question": "Was verstehen Sie unter der „Grey-Line“, welche Besonderheiten in der Funkausbreitung können auftreten?"
+  },
+  {
+    "id": "2.1-21",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "21",
+    "masterNummer": 51,
+    "question": "Beschreiben Sie den Aufbau der lonosphäre und welche betriebliche Konsequenzen ergeben sich daraus?"
+  },
+  {
+    "id": "2.1-22",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "22",
+    "masterNummer": 52,
+    "question": "Wie verhalten sich die lonosphärenschichten im Tagesverlauf bzw. im Jahresverlauf?"
+  },
+  {
+    "id": "2.1-23",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "23",
+    "masterNummer": 53,
+    "question": "Welchen Einfluss hat die geographische Breite auf die Kurzwellenausbreitung?"
+  },
+  {
+    "id": "2.1-24",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "24",
+    "masterNummer": 47,
+    "question": "Was versteht man unter Sonnenaktivität, unter der Sonnenfleckenrelativzahl, unter dem „Solar-Flux“? - welchen Einfluss hat sie auf die Kurzwellenausbreitung?"
+  },
+  {
+    "id": "2.1-25",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "25",
+    "masterNummer": 54,
+    "question": "Welchen Zyklen unterliegen die Ausbreitungsbedingungen auf Kurzwelle?"
+  },
+  {
+    "id": "2.1-26",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "26",
+    "masterNummer": 65,
+    "question": "Beschreiben Sie das charakteristische Ausbreitungsverhalten in den dem Amateurfunkdienst zugewiesenen Frequenzbändern unter 30 MHz?"
+  },
+  {
+    "id": "2.1-27",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "27",
+    "masterNummer": 66,
+    "question": "Was versteht man unter einem Mögel-Dellinger-Effekt und welche betriebliche Auswirkungen hat er?"
+  },
+  {
+    "id": "2.1-28",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "28",
+    "masterNummer": 68,
+    "question": "Welche Auswirkungen haben Polarlicht - Erscheinungen auf die Kurzwellenausbreitung?"
+  },
+  {
+    "id": "2.1-29",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "29",
+    "masterNummer": 69,
+    "question": "Welche Faktoren können den Funkbetrieb auf Kurzwelle beeinflussen?"
+  },
+  {
+    "id": "2.1-30",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "30",
+    "masterNummer": 70,
+    "question": "Wie wirkt sich die Tageszeit auf die Ausbreitung in den Kurzwellenbändern bis 40m aus? (160m-/80m-/40m-Band)"
+  },
+  {
+    "id": "2.1-31",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "31",
+    "masterNummer": 71,
+    "question": "Was verstehen Sie unter „Sporadic – E - Verbindungen“?"
+  },
+  {
+    "id": "2.1-32",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "32",
+    "masterNummer": 72,
+    "question": "Was verstehen Sie unter „Short - Skips“?"
+  },
+  {
+    "id": "2.1-33",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "33",
+    "masterNummer": 14,
+    "question": "Was verstehen Sie unter einem Notverkehr, wie wird er angekündigt?"
+  },
+  {
+    "id": "2.1-34",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "34",
+    "masterNummer": 15,
+    "question": "Sie empfangen einen Notruf – woran erkennen Sie diesen und wie haben Sie sich zu verhalten?"
+  },
+  {
+    "id": "2.1-35",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "35",
+    "masterNummer": 16,
+    "question": "Auf welchen Bändern könnten Sie einen Notruf empfangen?"
+  },
+  {
+    "id": "2.1-36",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "36",
+    "masterNummer": 49,
+    "question": "Welche Sendearten sind im Kurzwellenbereich zulässig?"
+  },
+  {
+    "id": "2.1-37",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "37",
+    "masterNummer": 18,
+    "question": "Müssen Sie ein Funktagebuch führen und welche Angaben muss es enthalten?"
+  },
+  {
+    "id": "2.1-38",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "38",
+    "masterNummer": 42,
+    "question": "Was verstehen Sie im Telegraphiebetrieb unter „BK-Verkehr“?"
+  },
+  {
+    "id": "2.1-39",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "39",
+    "masterNummer": 1,
+    "question": "Was verstehen Sie unter UTC (GMT) - Zusammenhang zu Lokalzeit, Sommerzeit"
+  },
+  {
+    "id": "2.1-40",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "40",
+    "masterNummer": 4,
+    "question": "Nennen Sie die konkreten Frequenzbereiche, die dem Amateurfunkdienst in den jeweiligen Frequenzbändern zugewiesen sind (5 Beispiele)"
+  },
+  {
+    "id": "2.1-41",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "41",
+    "masterNummer": 46,
+    "question": "Wie arbeiten Sie mit ausländischen Amateurfunkstationen zusammen, die einen anderen/erweiterten Bandbereich benutzen? (Beispiele: 40m, 80m) ?"
+  },
+  {
+    "id": "2.1-42",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "42",
+    "masterNummer": 19,
+    "question": "Was bedeuten die folgenden Abkürzungen? (5 Abkürzungen aus der folgenden Liste)"
+  },
+  {
+    "id": "2.1-43",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "43",
+    "masterNummer": 67,
+    "question": "Wie wirkt sich Polarisationsfading auf den Kurzwellenbetrieb aus?"
+  },
+  {
+    "id": "2.1-44",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "44",
+    "masterNummer": 67,
+    "question": "Was versteht man unter Schwund im Kurzwellenbereich und wie reagieren Sie, um den Funkverkehr aufrecht zu erhalten?"
+  },
+  {
+    "id": "2.1-45",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "45",
+    "masterNummer": 41,
+    "question": "Welche Maßnahmen ergreifen Sie, wenn Sie darauf aufmerksam gemacht werden, dass Ihre Aussendung „splattert“?"
+  },
+  {
+    "id": "2.1-46",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "46",
+    "masterNummer": 36,
+    "question": "Was ist ein „Pile-Up“ - wie verhalten Sie sich richtig?"
+  },
+  {
+    "id": "2.1-47",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "47",
+    "masterNummer": 17,
+    "question": "Was verstehen Sie unter den Begriffen MAYDAY - SECURITEE - SILENCE MAYDAY – MAYDAY RELAY?"
+  },
+  {
+    "id": "2.1-48",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "48",
+    "masterNummer": 44,
+    "question": "Welche Mess- und Kontrollgeräte sind bei einer Amateurfunkstelle vorgeschrieben?"
+  },
+  {
+    "id": "2.1-49",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "49",
+    "masterNummer": 40,
+    "question": "Was ist bei der Abstimmung des Leistungsverstärkers einer Amateurfunkstelle zu beachten?"
+  },
+  {
+    "id": "2.1-50",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "50",
+    "masterNummer": 5,
+    "question": "Wie wird ein Funkrufzeichen allgemein bzw. ein Amateurfunkrufzeichen aufgebaut – nach welcher Vorschrift?"
+  },
+  {
+    "id": "2.1-51",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "51",
+    "masterNummer": 2,
+    "question": "Buchstabieren Sie folgende Worte bzw. den folgenden Text nach dem internationalen Buchstabieralphabet (Worte oder kurzer Text nach Wahl des Prüfers)"
+  },
+  {
+    "id": "2.1-52",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "52",
+    "masterNummer": 45,
+    "question": "Was ist beim Betrieb an den Bandgrenzen zu beachten?"
+  },
+  {
+    "id": "2.1-53",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "53",
+    "masterNummer": 6,
+    "question": "Nennen Sie Beispiele österreichischer Amateurfunkrufzeichen mit Zusätzen ( z.B.: am, mm, /1 )."
+  },
+  {
+    "id": "2.1-54",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "54",
+    "masterNummer": 7,
+    "question": "Nennen Sie die Landeskenner von fünf Nachbarländern und von fünf weiteren Ländern."
+  },
+  {
+    "id": "2.1-55",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "55",
+    "masterNummer": 8,
+    "question": "Was bedeuten die Ziffern im österreichischen Amateurfunkrufzeichen, welche Rufzeichenzusätze sind zulässig?"
+  },
+  {
+    "id": "2.1-56",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "56",
+    "masterNummer": 49,
+    "question": "Welche Bestimmungen sind beim Betrieb im 160m - Band zu beachten?"
+  },
+  {
+    "id": "2.1-57",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "57",
+    "masterNummer": 28,
+    "question": "Welche Betriebsverfahren werden bei Scatter - Verbindungen verwendet?"
+  },
+  {
+    "id": "2.1-58",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "58",
+    "masterNummer": 30,
+    "question": "Welche Betriebsverfahren werden bei Meteorscatter - Verbindungen angewendet?"
+  },
+  {
+    "id": "2.1-59",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "59",
+    "masterNummer": 25,
+    "question": "Erklären Sie die Betriebsabwicklung bei Relaisbetrieb."
+  },
+  {
+    "id": "2.1-60",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "60",
+    "masterNummer": 29,
+    "question": "Was versteht man unter „EME - Verbindungen“ - welches Betriebsverfahren wird angewendet?"
+  },
+  {
+    "id": "2.1-61",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "61",
+    "masterNummer": 31,
+    "question": "Was verstehen Sie unter Packet Radio - welches Betriebsverfahren wird angewendet?"
+  },
+  {
+    "id": "2.1-62",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "62",
+    "masterNummer": 32,
+    "question": "Was verstehen Sie unter den Begriffen Mailbox, Digipeater, Netzknoten und welche betriebliche Besonderheiten sind zu beachten?"
+  },
+  {
+    "id": "2.1-63",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "63",
+    "masterNummer": 24,
+    "question": "Erklären Sie die Begriffe Relaisfunkstelle, Transponder, Bakensender und welche betrieblichen Besonderheiten sind zu beachten?"
+  },
+  {
+    "id": "2.1-64",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "64",
+    "masterNummer": 33,
+    "question": "Erklären Sie die Betriebsabwicklung bei ATV-Betrieb."
+  },
+  {
+    "id": "2.1-65",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "65",
+    "masterNummer": 26,
+    "question": "Was ist bei Überreichweitenbedingungen zu beachten?"
+  },
+  {
+    "id": "2.1-66",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "66",
+    "masterNummer": 22,
+    "question": "Welchen Einfluss hat die Wahl des Standortes für UKW-Ausbreitung?"
+  },
+  {
+    "id": "2.1-67",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "67",
+    "masterNummer": 34,
+    "question": "Erklären Sie das Betriebsverfahren SSTV."
+  },
+  {
+    "id": "2.1-68",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "68",
+    "masterNummer": 39,
+    "question": "Nennen Sie Einflüsse, die die Lesbarkeit einer Funkverbindung verschlechtern."
+  },
+  {
+    "id": "2.1-69",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "69",
+    "masterNummer": 38,
+    "question": "Wie beurteilen Sie die Aussendung Ihrer Gegenstelle und wie wird diese Beurteilung der Gegenstelle mitgeteilt?"
+  },
+  {
+    "id": "2.1-70",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "70",
+    "masterNummer": 13,
+    "question": "Wie teilen Sie der Gegenstation Ihren Standort mit?"
+  },
+  {
+    "id": "2.1-71",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "71",
+    "masterNummer": 35,
+    "question": "Was ist ein „Contest“ - wie verhalten Sie sich richtig?"
+  },
+  {
+    "id": "2.1-72",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "72",
+    "masterNummer": 27,
+    "question": "Wie gehen Sie bei der Planung einer Amateurfunkverbindung zu einem bestimmten Ort vor?"
+  },
+  {
+    "id": "2.1-73",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "73",
+    "masterNummer": 43,
+    "question": "Was ist hinsichtlich der Herstellung oder Veränderung von Amateurfunkgeräten zu beachten?"
+  },
+  {
+    "id": "2.1-74",
+    "category": "Betrieb",
+    "classes": [
+      1,
+      4
+    ],
+    "gruppe": "2.1",
+    "nummer": "74",
+    "masterNummer": 23,
+    "question": "Beschreiben Sie das typische Ausbreitungsverhalten in den Frequenzbändern 6m - 2m und 70cm."
+  },
+  {
+    "id": "3.1-01",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "01",
+    "masterNummer": 1,
+    "question": "Ohmsches und Kirchhoff’sches Gesetz"
+  },
+  {
+    "id": "3.1-02",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "02",
+    "masterNummer": 2,
+    "question": "Begriff Leiter, Halbleiter, Nichtleiter"
+  },
+  {
+    "id": "3.1-03",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "03",
+    "masterNummer": 3,
+    "question": "Kondensator, Begriff Kapazität, Einheiten - Verhalten bei Gleich- und Wechselspannung"
+  },
+  {
+    "id": "3.1-04",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "04",
+    "masterNummer": 4,
+    "question": "Spule, Begriff Induktivität, Einheiten - Verhalten bei Gleich- und Wechselspannung"
+  },
+  {
+    "id": "3.1-05",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "05",
+    "masterNummer": 5,
+    "question": "Wärmeverhalten von elektrischen Bauelementen"
+  },
+  {
+    "id": "3.1-06",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "06",
+    "masterNummer": 6,
+    "question": "Stromquellen (Kenngrössen)"
+  },
+  {
+    "id": "3.1-07",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "07",
+    "masterNummer": 7,
+    "question": "Sinus- und nicht-sinusförmige Signale"
+  },
+  {
+    "id": "3.1-08",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "08",
+    "masterNummer": 8,
+    "question": "Was verstehen Sie unter dem Begriff Skin-Effekt ?"
+  },
+  {
+    "id": "3.1-09",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "09",
+    "masterNummer": 9,
+    "question": "Gleich- und Wechselspannung - Kenngrößen"
+  },
+  {
+    "id": "3.1-10",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "10",
+    "masterNummer": 10,
+    "question": "Was verstehen Sie unter dem Begriff Permeabilität ?"
+  },
+  {
+    "id": "3.1-11",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "11",
+    "masterNummer": 11,
+    "question": "Serien- und Parallelschaltung von R, L, C"
+  },
+  {
+    "id": "3.1-12",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "12",
+    "masterNummer": 12,
+    "question": "Was verstehen Sie unter dem Begriff Dielektrikum ?"
+  },
+  {
+    "id": "3.1-13",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "13",
+    "masterNummer": 13,
+    "question": "Wirk- Blind- und Scheinleistung bei Wechselstrom."
+  },
+  {
+    "id": "3.1-14",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "14",
+    "masterNummer": 14,
+    "question": "Begriff elektrischer Widerstand (Schein- Wirk- und Blindwiderstand), Leitwert"
+  },
+  {
+    "id": "3.1-15",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "15",
+    "masterNummer": 15,
+    "question": "Berechnen Sie den induktiven Blindwiderstand einer Spule mit 30 µH bei 7 MHz (Werte sind variabel)"
+  },
+  {
+    "id": "3.1-16",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "16",
+    "masterNummer": 16,
+    "question": "Berechnen Sie den kapazitiven Blindwiderstand eines Kondensators von 500 pF bei 10 MHz (Werte sind variabel)"
+  },
+  {
+    "id": "3.1-17",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "17",
+    "masterNummer": 17,
+    "question": "Der Transformator - Prinzip und Anwendung"
+  },
+  {
+    "id": "3.1-18",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "18",
+    "masterNummer": 18,
+    "question": "Der Resonanzschwingkreis - Kenngrößen"
+  },
+  {
+    "id": "3.1-19",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "19",
+    "masterNummer": 19,
+    "question": "Der Resonanzschwingkreis - Anwendungen in der Funktechnik"
+  },
+  {
+    "id": "3.1-20",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "20",
+    "masterNummer": 20,
+    "question": "Berechnen Sie die Resonanzfrequenz eines Schwingkreises mit folgenden Werten: L = 15 H, C = 30 pF (Werte sind variabel)"
+  },
+  {
+    "id": "3.1-21",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "21",
+    "masterNummer": 21,
+    "question": "Filter – Arten, Aufbau, Verwendung und Wirkungsweise"
+  },
+  {
+    "id": "3.1-22",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "22",
+    "masterNummer": 22,
+    "question": "Was sind Halbleiter ?"
+  },
+  {
+    "id": "3.1-23",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "23",
+    "masterNummer": 23,
+    "question": "Die Diode - Aufbau, Wirkungsweise und Anwendung"
+  },
+  {
+    "id": "3.1-24",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "24",
+    "masterNummer": 24,
+    "question": "Der Transistor - Aufbau, Wirkungsweise und Anwendung"
+  },
+  {
+    "id": "3.1-25",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "25",
+    "masterNummer": 25,
+    "question": "Die Elektronenröhre - Aufbau, Wirkungsweise und Anwendung"
+  },
+  {
+    "id": "3.1-26",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "26",
+    "masterNummer": 26,
+    "question": "Arten von Gleichrichterschaltungen - Wirkungsweise"
+  },
+  {
+    "id": "3.1-27",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "27",
+    "masterNummer": 27,
+    "question": "Stabilisatorschaltungen"
+  },
+  {
+    "id": "3.1-28",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "28",
+    "masterNummer": 28,
+    "question": "Hochspannungsnetzteil - Aufbau, Dimensionierung und Schutzmaßnahmen"
+  },
+  {
+    "id": "3.1-29",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "29",
+    "masterNummer": 29,
+    "question": "Welche Arten von digitalen Bauteilen kennen Sie ? - Wirkungsweise"
+  },
+  {
+    "id": "3.1-30",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "30",
+    "masterNummer": 30,
+    "question": "Was sind elektronische Gatter ? - Wirkungsweise"
+  },
+  {
+    "id": "3.1-31",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "31",
+    "masterNummer": 31,
+    "question": "Messung von Spannung und Strom am Beispiel eines vorgegebenen Stromkreises"
+  },
+  {
+    "id": "3.1-32",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "32",
+    "masterNummer": 32,
+    "question": "Erklären Sie die prinzipielle Wirkungsweise eines Griddipmeters, Anwendung und Funktion"
+  },
+  {
+    "id": "3.1-33",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "33",
+    "masterNummer": 33,
+    "question": "Erklären Sie die Funktionsweise eines HF-Wattmeters"
+  },
+  {
+    "id": "3.1-34",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "34",
+    "masterNummer": 34,
+    "question": "Erklären Sie die Funktionsweise eines Oszillografen (Oszilloskop)"
+  },
+  {
+    "id": "3.1-35",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "35",
+    "masterNummer": 35,
+    "question": "Erklären Sie die Funktionsweise eines Spektrumanalysators"
+  },
+  {
+    "id": "3.1-36",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "36",
+    "masterNummer": 36,
+    "question": "Begriff Demodulation"
+  },
+  {
+    "id": "3.1-37",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "37",
+    "masterNummer": 37,
+    "question": "Zeichnen Sie das Blockschaltbild eines Überlagerungsempfängers"
+  },
+  {
+    "id": "3.1-38",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "38",
+    "masterNummer": 38,
+    "question": "Was verstehen Sie unter Spiegelfrequenz und Zwischenfrequenz ?"
+  },
+  {
+    "id": "3.1-39",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "39",
+    "masterNummer": 39,
+    "question": "Erklären Sie die Kenngrößen eines Empfängers - Empfindlichkeit, intermodulationsfreier Bereich, Eigenrauschen"
+  },
+  {
+    "id": "3.1-40",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "40",
+    "masterNummer": 40,
+    "question": "Erklären Sie den Begriff des Rauschens. - Auswirkungen auf den Empfang."
+  },
+  {
+    "id": "3.1-41",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "41",
+    "masterNummer": 41,
+    "question": "Mischer in Empfängern - Funktionsweise und mögliche technische Probleme"
+  },
+  {
+    "id": "3.1-42",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "42",
+    "masterNummer": 42,
+    "question": "Nichtlineare Verzerrungen - Ursachen und Auswirkungen"
+  },
+  {
+    "id": "3.1-43",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "43",
+    "masterNummer": 43,
+    "question": "Empfängerstörstrahlung - Ursachen und Auswirkungen"
+  },
+  {
+    "id": "3.1-44",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "44",
+    "masterNummer": 44,
+    "question": "Mikrofonarten - Wirkungsweise"
+  },
+  {
+    "id": "3.1-45",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "45",
+    "masterNummer": 45,
+    "question": "Prinzip, Arten und Kenngrößen der Einseitenbandmodulation"
+  },
+  {
+    "id": "3.1-46",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "46",
+    "masterNummer": 46,
+    "question": "Prinzip, Arten und Kenngrößen der Pulsmodulation"
+  },
+  {
+    "id": "3.1-47",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "47",
+    "masterNummer": 47,
+    "question": "Erklären Sie die wichtigsten Anwendungen der digitalen Modulationsverfahren"
+  },
+  {
+    "id": "3.1-48",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "48",
+    "masterNummer": 48,
+    "question": "Erklären Sie die Begriffe CRC und FEC"
+  },
+  {
+    "id": "3.1-49",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "49",
+    "masterNummer": 49,
+    "question": "Prinzip und Kenngrößen der Frequenzmodulation"
+  },
+  {
+    "id": "3.1-50",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "50",
+    "masterNummer": 50,
+    "question": "Prinzip und Kenngrößen der Amplitudenmodulation"
+  },
+  {
+    "id": "3.1-51",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "51",
+    "masterNummer": 51,
+    "question": "Erklären Sie den Begriff Modulation (analoge und digitale Verfahren)"
+  },
+  {
+    "id": "3.1-52",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "52",
+    "masterNummer": 52,
+    "question": "Oszillatoren - Grundprinzip, Arten"
+  },
+  {
+    "id": "3.1-53",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "53",
+    "masterNummer": 53,
+    "question": "Erklären Sie den Begriff VCO"
+  },
+  {
+    "id": "3.1-54",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "54",
+    "masterNummer": 54,
+    "question": "Erklären Sie den Begriff PLL"
+  },
+  {
+    "id": "3.1-55",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "55",
+    "masterNummer": 55,
+    "question": "Erklären Sie den Begriff DSP"
+  },
+  {
+    "id": "3.1-56",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "56",
+    "masterNummer": 56,
+    "question": "Erklären Sie die Begriffe sampling, anti aliasing filter, ADC/DAC"
+  },
+  {
+    "id": "3.1-57",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "57",
+    "masterNummer": 57,
+    "question": "Merkmale, Komponenten, Baugruppen eines Senders"
+  },
+  {
+    "id": "3.1-58",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "58",
+    "masterNummer": 58,
+    "question": "Zweck von Puffer- und Vervielfacherstufen, Aufbau"
+  },
+  {
+    "id": "3.1-59",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "59",
+    "masterNummer": 59,
+    "question": "Aufbau einer Senderendstufe, Leistungsauskopplung"
+  },
+  {
+    "id": "3.1-60",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "60",
+    "masterNummer": 60,
+    "question": "Anpassung eines Senderausganges an eine symmetrische oder unsymmetrische Antennenspeiseleitung"
+  },
+  {
+    "id": "3.1-61",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "61",
+    "masterNummer": 61,
+    "question": "Der Antennentuner, Wirkungsweise, 2 typische Beispiele"
+  },
+  {
+    "id": "3.1-62",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "62",
+    "masterNummer": 62,
+    "question": "Antennenzuleitungen - Aufbau, Kenngrößen"
+  },
+  {
+    "id": "3.1-63",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "63",
+    "masterNummer": 63,
+    "question": "Erklären Sie den Begriff Balun. Aufbau, Verwendung und Wirkungsweise"
+  },
+  {
+    "id": "3.1-64",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "64",
+    "masterNummer": 64,
+    "question": "Der Dipol - Aufbau, Kenngrößen und Eigenschaften"
+  },
+  {
+    "id": "3.1-65",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "65",
+    "masterNummer": 65,
+    "question": "Die Vertikalantenne - Aufbau, Kenngrößen und Eigenschaften"
+  },
+  {
+    "id": "3.1-66",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "66",
+    "masterNummer": 66,
+    "question": "Gekoppelte Antennen - Aufbau, Kenngrößen und Eigenschaften"
+  },
+  {
+    "id": "3.1-67",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "67",
+    "masterNummer": 67,
+    "question": "Strahlungsdiagramm einer Antenne"
+  },
+  {
+    "id": "3.1-68",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "68",
+    "masterNummer": 68,
+    "question": "Die Yagi-Antenne - Aufbau, Kenngrößen und Eigenschaften"
+  },
+  {
+    "id": "3.1-69",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "69",
+    "masterNummer": 69,
+    "question": "Breitbandantennen - Aufbau, Kenngrößen und Eigenschaften"
+  },
+  {
+    "id": "3.1-70",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "70",
+    "masterNummer": 70,
+    "question": "Die Parabolantenne - Aufbau, Kenngrößen und Eigenschaften"
+  },
+  {
+    "id": "3.1-71",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "71",
+    "masterNummer": 71,
+    "question": "Erklären Sie den Begriff Wellenwiderstand"
+  },
+  {
+    "id": "3.1-72",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "72",
+    "masterNummer": 72,
+    "question": "Stehwellen und Wanderwellen, Ursachen und Auswirkungen"
+  },
+  {
+    "id": "3.1-73",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "73",
+    "masterNummer": 73,
+    "question": "Strahlungsfeld einer Antenne, Gefahren"
+  },
+  {
+    "id": "3.1-74",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "74",
+    "masterNummer": 74,
+    "question": "Aufbau und Kenngrößen eines Koaxialkabels"
+  },
+  {
+    "id": "3.1-75",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "75",
+    "masterNummer": 75,
+    "question": "Erklären Sie den Begriff Dezibel am Beispiel der Anwendung in der Antennentechnik"
+  },
+  {
+    "id": "3.1-76",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "76",
+    "masterNummer": 76,
+    "question": "Was versteht man unter Richtantennen, Anwendungsmöglichkeiten"
+  },
+  {
+    "id": "3.1-77",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "77",
+    "masterNummer": 77,
+    "question": "Welche Kenngrößen von Antennen kennen Sie und wie können sie gemessen werden ?"
+  },
+  {
+    "id": "3.1-78",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "78",
+    "masterNummer": 78,
+    "question": "Dimensionieren Sie einen Halbwellendipol für f = 3.6 MHz ; V = 0.97 (Werte sind variabel)"
+  },
+  {
+    "id": "3.1-79",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "79",
+    "masterNummer": 79,
+    "question": "Bestimmen Sie die effektive Strahlungsleistung bei folgenden Gegebenheiten: Senderleistung: 200 Watt; Dämpfung der Antennenleitung: 6 dB/100m; Kabellänge : 50 m; Gewinn: 10 dB (Werte sind variabel)"
+  },
+  {
+    "id": "3.1-80",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "80",
+    "masterNummer": 80,
+    "question": "Bestimmen Sie die effektive Strahlungsleistung bei folgenden Gegebenheiten: Senderleistung: 100 Watt; Dämpfung der Antennenleitung: 12 dB/100m; Kabellänge : 25 m; Rundstrahlantenne mit einem Gesamtwirkungsgrad von 50 % (Werte sind variabel)"
+  },
+  {
+    "id": "3.1-81",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "81",
+    "masterNummer": 81,
+    "question": "Langdrahtantennen - Aufbau, Kenngrößen und Eigenschaften"
+  },
+  {
+    "id": "3.1-82",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "82",
+    "masterNummer": 82,
+    "question": "Zweck von Radials / Erdnetz bei Vertikalantennen - Dimensionierung"
+  },
+  {
+    "id": "3.1-83",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "83",
+    "masterNummer": 83,
+    "question": "Blitzschutz für Antennenanlagen"
+  },
+  {
+    "id": "3.1-84",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "84",
+    "masterNummer": 84,
+    "question": "Sicherheitsabstände bei Antennen"
+  },
+  {
+    "id": "3.1-85",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "85",
+    "masterNummer": 85,
+    "question": "Erklären Sie den Begriff „elektromagnetisches Feld“, „Kenngrößen“"
+  },
+  {
+    "id": "3.1-86",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "86",
+    "masterNummer": 86,
+    "question": "Begriff elektrisches und magnetisches Feld; Abschirmmaßnahmen für das elektrische bzw. das magnetische Feld?"
+  },
+  {
+    "id": "3.1-87",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "87",
+    "masterNummer": 87,
+    "question": "Erklären Sie den Begriff „EMV“ und dessen Bedeutung im Amateurfunk"
+  },
+  {
+    "id": "3.1-88",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "88",
+    "masterNummer": 88,
+    "question": "Erklären Sie den Begriff „EMVU“ und dessen Bedeutung im Amateurfunk"
+  },
+  {
+    "id": "3.1-89",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "89",
+    "masterNummer": 89,
+    "question": "Erklären Sie den Begriff „Trap“, Aufbau und Wirkungsweise"
+  },
+  {
+    "id": "3.1-90",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "90",
+    "masterNummer": 90,
+    "question": "Was versteht man unter einem Hohlraumresonator, Anwendung."
+  },
+  {
+    "id": "3.1-91",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "91",
+    "masterNummer": 91,
+    "question": "Funkentstörmaßnahmen im Bereich Stromversorgung der Amateurfunkstelle"
+  },
+  {
+    "id": "3.1-92",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "92",
+    "masterNummer": 92,
+    "question": "Funkentstörmaßnahmen bei Beeinflussung durch hochfrequente Ströme und Felder"
+  },
+  {
+    "id": "3.1-93",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "93",
+    "masterNummer": 93,
+    "question": "Was sind Tastklicks, wie werden sie vermieden?"
+  },
+  {
+    "id": "3.1-94",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "94",
+    "masterNummer": 94,
+    "question": "Erklären Sie die Begriffe: „Unerwünschte Aussendungen“, „Ausserbandaussendungen“, „Nebenaussendungen“ (spurious emissions)"
+  },
+  {
+    "id": "3.1-95",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "95",
+    "masterNummer": 95,
+    "question": "Erklären Sie den Begriff: „Splatter“ - Ursachen und Auswirkungen"
+  },
+  {
+    "id": "3.1-96",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "96",
+    "masterNummer": 96,
+    "question": "Erklären sie den Begriff „schädliche Störungen“"
+  },
+  {
+    "id": "3.1-97",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "97",
+    "masterNummer": 97,
+    "question": "Prinzipieller Aufbau einer Relaisfunkstelle und einer Bakenfunkstelle"
+  },
+  {
+    "id": "3.1-98",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "98",
+    "masterNummer": 98,
+    "question": "Definieren Sie den Begriff „Senderleistung“"
+  },
+  {
+    "id": "3.1-99",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "99",
+    "masterNummer": 99,
+    "question": "Definieren Sie den Begriff „Spitzenleistung“"
+  },
+  {
+    "id": "3.1-100",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "100",
+    "masterNummer": 100,
+    "question": "Definieren Sie den Begriff „belegte Bandbreite“"
+  },
+  {
+    "id": "3.1-101",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "101",
+    "masterNummer": 101,
+    "question": "Definieren Sie den Begriff „Interferenz in elektronischen Anlagen“; beschreiben Sie Ursachen und Gegenmassnahmen"
+  },
+  {
+    "id": "3.1-102",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "102",
+    "masterNummer": 102,
+    "question": "Erklären Sie die Begriffe „Blocking“, „Intermodulation“"
+  },
+  {
+    "id": "3.1-103",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "103",
+    "masterNummer": 103,
+    "question": "Welche Gefahren bestehen für Personen durch den elektrischen Strom ?"
+  },
+  {
+    "id": "3.1-104",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "104",
+    "masterNummer": 104,
+    "question": "Was ist beim Betrieb von Hochspannung führenden Geräten zu beachten ?"
+  },
+  {
+    "id": "3.1-105",
+    "category": "Technik",
+    "classes": [
+      1
+    ],
+    "gruppe": "3.1",
+    "nummer": "105",
+    "masterNummer": 105,
+    "question": "Definieren Sie die Gefahren durch Gewitter für die Funkstation und das Bedienpersonal, beschreiben Sie Vorbeugemassnahmen"
+  },
+  {
+    "id": "2.2-01",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "01",
+    "masterNummer": 4,
+    "question": "Frequenzbereich des 70cm-Amateurfunkbandes / 2m Bandes ?"
+  },
+  {
+    "id": "2.2-02",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "02",
+    "masterNummer": 9,
+    "question": "Wie eröffnen Sie einen Sprechfunkverkehr?"
+  },
+  {
+    "id": "2.2-03",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "03",
+    "masterNummer": 5,
+    "question": "Wie sind Amateurfunkrufzeichen aufgebaut?"
+  },
+  {
+    "id": "2.2-04",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "04",
+    "masterNummer": null,
+    "question": "Welche Zusätze zu einem Amateurfunkrufzeichen sind zulässig?"
+  },
+  {
+    "id": "2.2-05",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "05",
+    "masterNummer": 7,
+    "question": "Nennen Sie mindestens 5 Landeskenner der umliegenden Länder."
+  },
+  {
+    "id": "2.2-06",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "06",
+    "masterNummer": null,
+    "question": "Wie beurteilen Sie das Signal Ihrer Gegenstation?"
+  },
+  {
+    "id": "2.2-07",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "07",
+    "masterNummer": 38,
+    "question": "Was versteht man unter \"S-Stufe(n)“?"
+  },
+  {
+    "id": "2.2-08",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "08",
+    "masterNummer": null,
+    "question": "Was versteht man unter Not- und Katastrophenfunkverkehr, wie wird er gekennzeichnet?"
+  },
+  {
+    "id": "2.2-09",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "09",
+    "masterNummer": null,
+    "question": "Wie nahe dürfen Sie beim Sendebetrieb an die Bandgrenze herangehen?"
+  },
+  {
+    "id": "2.2-10",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "10",
+    "masterNummer": 41,
+    "question": "Welche Sendearten sind mit der Bewilligungsklasse 3 zulässig und mit welcher maximalen Sendeleistung ?"
+  },
+  {
+    "id": "2.2-11",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "11",
+    "masterNummer": 24,
+    "question": "Was versteht man unter einem Amateurfunkrelais, wozu dient es?"
+  },
+  {
+    "id": "2.2-12",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "12",
+    "masterNummer": null,
+    "question": "Wie wickeln Sie einen Betrieb über ein Amateurfunkrelais ab?"
+  },
+  {
+    "id": "2.2-13",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "13",
+    "masterNummer": 2,
+    "question": "Buchstabieren Sie Ihren Vor- und Zunamen nach dem internationalen Buchstabieralphabet."
+  },
+  {
+    "id": "2.2-14",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "14",
+    "masterNummer": null,
+    "question": "Wie verhalten Sie sich beim Empfang von Signalen mit \"Doppler - Shift\"?"
+  },
+  {
+    "id": "2.2-15",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "15",
+    "masterNummer": 25,
+    "question": "Was versteht man unter “Frequenzablage \" bei Relaisbetrieb?"
+  },
+  {
+    "id": "2.2-16",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "16",
+    "masterNummer": 20,
+    "question": "Nennen Sie drei anormale Ausbreitungsmöglichkeiten im 70 cm-Band oder 2m Band."
+  },
+  {
+    "id": "2.2-17",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "17",
+    "masterNummer": null,
+    "question": "Welche Betriebsverfahren werden im Satellitenfunkverkehr angewendet?"
+  },
+  {
+    "id": "2.2-18",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "18",
+    "masterNummer": 28,
+    "question": "Was verstehen Sie unter \"Scatter - Verbindung\"?"
+  },
+  {
+    "id": "2.2-19",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "19",
+    "masterNummer": 29,
+    "question": "Was verstehen Sie unter „EME – Verbindung“?"
+  },
+  {
+    "id": "2.2-20",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "20",
+    "masterNummer": 30,
+    "question": "Was verstehen Sie unter \"Meteor - Scatter\"?"
+  },
+  {
+    "id": "2.2-21",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "21",
+    "masterNummer": null,
+    "question": "Was verstehen Sie unter \"Tropo - Scatter\"?"
+  },
+  {
+    "id": "2.2-22",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "22",
+    "masterNummer": 22,
+    "question": "Was verstehen Sie unter Überreichweiten, was unter dem Funkhorizont?"
+  },
+  {
+    "id": "2.2-23",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "23",
+    "masterNummer": null,
+    "question": "Wodurch werden starke Überreichweiten im 70 cm-Band verursacht?"
+  },
+  {
+    "id": "2.2-24",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "24",
+    "masterNummer": null,
+    "question": "Wie verhalten Sie sich bei Überreichweitenbedingungen, wenn Sie im Relaisbetrieb arbeiten?"
+  },
+  {
+    "id": "2.2-25",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "25",
+    "masterNummer": null,
+    "question": "Wie können Sie sich über die herrschenden Ausbreitungsbedingungen informieren?"
+  },
+  {
+    "id": "2.2-26",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "26",
+    "masterNummer": null,
+    "question": "Welche Faktoren beeinflussen die erzielbare Reichweite im 2m-Band?"
+  },
+  {
+    "id": "2.2-27",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "27",
+    "masterNummer": 12,
+    "question": "Erklären Sie die Bedeutung der auch im Sprechfunk verwendeten Q – Gruppen: QSO - QSY - QRL."
+  },
+  {
+    "id": "2.2-28",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "28",
+    "masterNummer": 12,
+    "question": "Erklären Sie die Bedeutung der auch im Sprechfunk verwendeten Q – Gruppen: QRM - QRB - QSB"
+  },
+  {
+    "id": "2.2-29",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "29",
+    "masterNummer": 12,
+    "question": "Erklären Sie die Bedeutung der auch im Sprechfunk verwendeten Q – Gruppen: QRT - QSL."
+  },
+  {
+    "id": "2.2-30",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "30",
+    "masterNummer": 19,
+    "question": "Erklären Sie die Bedeutung der im Sprechfunk verwendeten Abkürzungen 73- 55- 88- CL."
+  },
+  {
+    "id": "2.2-31",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "31",
+    "masterNummer": 31,
+    "question": "Was versteht man unter der Betriebsart \"Packet - Radio“, welche Betriebsverfahren werden dabei angewendet?"
+  },
+  {
+    "id": "2.2-32",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "32",
+    "masterNummer": null,
+    "question": "Welche Faktoren beeinflussen die erzielbare Reichweite im 70cm-Band?"
+  },
+  {
+    "id": "2.2-33",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "33",
+    "masterNummer": 37,
+    "question": "Was verstehen Sie unter \"Split-Betrieb“?"
+  },
+  {
+    "id": "2.2-34",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "34",
+    "masterNummer": null,
+    "question": "Welche Verfahren werden bei ATV-Betrieb im 70 cm-Band angewendet und welche Besonderheiten sind dabei zu beachten?"
+  },
+  {
+    "id": "2.2-35",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "35",
+    "masterNummer": null,
+    "question": "Wie gehen Sie bei der Planung einer Amateurfunkverbindung zu einem bestimmten Ort vor?"
+  },
+  {
+    "id": "2.2-36",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "36",
+    "masterNummer": null,
+    "question": "Wie teilen Sie der Gegenstation den Standort ihrer Amateurfunkstelle mit?"
+  },
+  {
+    "id": "2.2-37",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "37",
+    "masterNummer": 43,
+    "question": "Was ist hinsichtlich der Herstellung oder Veränderung von Geräten für den Amateurfunkverkehr im 2m oder 70 cm-Band zu beachten?"
+  },
+  {
+    "id": "2.2-38",
+    "category": "Betrieb",
+    "classes": [
+      3
+    ],
+    "gruppe": "2.2",
+    "nummer": "38",
+    "masterNummer": 40,
+    "question": "Sie haben einen abstimmbaren Leistungsverstärker - wie stimmen Sie ihn ab?"
+  },
+  {
+    "id": "3.2-01",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "01",
+    "masterNummer": 1,
+    "question": "In welchem Zusammenhang stehen die Größen Strom – Spannung - Widerstand in einem Stromkreis?"
+  },
+  {
+    "id": "3.2-02",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "02",
+    "masterNummer": 2,
+    "question": "Was versteht man unter einem Kurzschluß - wie entsteht er?"
+  },
+  {
+    "id": "3.2-03",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "03",
+    "masterNummer": 6,
+    "question": "Nennen Sie Stromquellen"
+  },
+  {
+    "id": "3.2-04",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "04",
+    "masterNummer": 6,
+    "question": "Kenngrößen einer Gleichstromquelle"
+  },
+  {
+    "id": "3.2-05",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "05",
+    "masterNummer": null,
+    "question": "Kenngrößen einer Wechselstromquelle - Gefahrengrenze?"
+  },
+  {
+    "id": "3.2-06",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "06",
+    "masterNummer": null,
+    "question": "Nennen Sie die wichtigsten Eigenschaften von Ohm ´schen Widerständen, Induktivitäten und Kapazitäten."
+  },
+  {
+    "id": "3.2-07",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "07",
+    "masterNummer": null,
+    "question": "Was verstehen Sie unter dem Begriff „Fehlanpassung“?"
+  },
+  {
+    "id": "3.2-08",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "08",
+    "masterNummer": 17,
+    "question": "Was verstehen Sie unter dem Begriff „Transformation“?"
+  },
+  {
+    "id": "3.2-09",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "09",
+    "masterNummer": null,
+    "question": "Prinzipieller Aufbau eines Kommunikationssystems."
+  },
+  {
+    "id": "3.2-10",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "10",
+    "masterNummer": 44,
+    "question": "Erläutern Sie die Wirkungsweise von Mikrophon und Lautsprecher bzw. Kopfhörer."
+  },
+  {
+    "id": "3.2-11",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "11",
+    "masterNummer": null,
+    "question": "Prinzipieller Aufbau eines Senders"
+  },
+  {
+    "id": "3.2-12",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "12",
+    "masterNummer": null,
+    "question": "Funktionsprinzip des Oszillators"
+  },
+  {
+    "id": "3.2-13",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "13",
+    "masterNummer": null,
+    "question": "Prinzipieller Aufbau eines Empfängers"
+  },
+  {
+    "id": "3.2-14",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "14",
+    "masterNummer": 37,
+    "question": "Prinzip des Überlagerungsempfängers"
+  },
+  {
+    "id": "3.2-15",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "15",
+    "masterNummer": null,
+    "question": "Was verstehen Sie unter dem Begriff Zwischenfrequenz?"
+  },
+  {
+    "id": "3.2-16",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "16",
+    "masterNummer": 51,
+    "question": "Was verstehen Sie unter dem Begriff Modulation?"
+  },
+  {
+    "id": "3.2-17",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "17",
+    "masterNummer": null,
+    "question": "Kenngrößen der Amplitudenmodulation"
+  },
+  {
+    "id": "3.2-18",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "18",
+    "masterNummer": null,
+    "question": "Kenngrößen der Frequenzmodulation"
+  },
+  {
+    "id": "3.2-19",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "19",
+    "masterNummer": null,
+    "question": "Definieren Sie den Begriff „belegte Bandbreite“."
+  },
+  {
+    "id": "3.2-20",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "20",
+    "masterNummer": 45,
+    "question": "Arten und Vorteile der Einseitenbandmodulation?"
+  },
+  {
+    "id": "3.2-21",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "21",
+    "masterNummer": null,
+    "question": "Begriff Dezibel (Werte fragen: zB 3 dB, 6 dB, 10 dB, 30 dB Leistungssteigerung)"
+  },
+  {
+    "id": "3.2-22",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "22",
+    "masterNummer": null,
+    "question": "Was ist eine Diode - Wirkungsweise, Verwendung?"
+  },
+  {
+    "id": "3.2-23",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "23",
+    "masterNummer": null,
+    "question": "Was ist ein Transistor - Wirkungsweise, Verwendung?"
+  },
+  {
+    "id": "3.2-24",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "24",
+    "masterNummer": 37,
+    "question": "Was versteht man unter „AGC“ und „AFC“?"
+  },
+  {
+    "id": "3.2-25",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "25",
+    "masterNummer": 39,
+    "question": "Erklären Sie die Empfängerkenngrößen - Empfindlichkeit, Eigenrauschen, Empfangsmischprodukte"
+  },
+  {
+    "id": "3.2-26",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "26",
+    "masterNummer": 40,
+    "question": "Was versteht man unter dem S/N - Verhältnis?"
+  },
+  {
+    "id": "3.2-27",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "27",
+    "masterNummer": null,
+    "question": "Erklären Sie die Begriffe „digital“ und „analog“."
+  },
+  {
+    "id": "3.2-28",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "28",
+    "masterNummer": 98,
+    "question": "Was versteht man unter der Ausgangsleistung, was unter der Verlustleistung?"
+  },
+  {
+    "id": "3.2-29",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "29",
+    "masterNummer": 79,
+    "question": "Was versteht man unter der Strahlungsleistung? (Beispiel vorgeben, zB. Sender mit 10 W Ausgangsleistung; Antennenkabel mit 3 dB Dämpfung; Antenne mit 10 dB Gewinn)"
+  },
+  {
+    "id": "3.2-30",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "30",
+    "masterNummer": 62,
+    "question": "Begriff Speiseleitung (Antennenzuleitung) - Kenngrößen?"
+  },
+  {
+    "id": "3.2-31",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "31",
+    "masterNummer": null,
+    "question": "Auswirkung(en) des Stehwellenverhältnisses (SWR)?"
+  },
+  {
+    "id": "3.2-32",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "32",
+    "masterNummer": null,
+    "question": "Kenngrößen einer Antenne am Beispiel des Dipols"
+  },
+  {
+    "id": "3.2-33",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "33",
+    "masterNummer": null,
+    "question": "Vertikalantenne - Eigenschaften"
+  },
+  {
+    "id": "3.2-34",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "34",
+    "masterNummer": null,
+    "question": "Die Yagi-Antenne - Aufbau, Eigenschaften, Kenngrößen"
+  },
+  {
+    "id": "3.2-35",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "35",
+    "masterNummer": null,
+    "question": "Dipolkombinationen (Zeilen, Spalten)"
+  },
+  {
+    "id": "3.2-36",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "36",
+    "masterNummer": null,
+    "question": "Die Parabolantenne - Aufbau, Eigenschaften, Kenngrößen"
+  },
+  {
+    "id": "3.2-37",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "37",
+    "masterNummer": null,
+    "question": "Mobilantennen - Aufbau, Eigenschaften, Kenngrößen, Montageort"
+  },
+  {
+    "id": "3.2-38",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "38",
+    "masterNummer": null,
+    "question": "Grundausrüstung einer Amateurfunkstelle für Sprechfunk (Komponenten)"
+  },
+  {
+    "id": "3.2-39",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "39",
+    "masterNummer": null,
+    "question": "Grundausrüstung einer Amateurfunkstelle für Packet Radio"
+  },
+  {
+    "id": "3.2-40",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "40",
+    "masterNummer": null,
+    "question": "Grundausrüstung einer Amateurfunkstelle für ATV-Betrieb"
+  },
+  {
+    "id": "3.2-41",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "41",
+    "masterNummer": null,
+    "question": "Was versteht man unter Betriebserde- was unter Blitzschutzerde?"
+  },
+  {
+    "id": "3.2-42",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "42",
+    "masterNummer": null,
+    "question": "Was versteht man unter BCI, TVI?"
+  },
+  {
+    "id": "3.2-43",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "43",
+    "masterNummer": null,
+    "question": "Maßnahmen gegen BCI, TVI?"
+  },
+  {
+    "id": "3.2-44",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "44",
+    "masterNummer": null,
+    "question": "Was versteht man unter dem \"SQUELCH“ - wozu dient er?"
+  },
+  {
+    "id": "3.2-45",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "45",
+    "masterNummer": null,
+    "question": "Wie bestimmt man die Resonanzfrequenz einer Antenne?"
+  },
+  {
+    "id": "3.2-46",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "46",
+    "masterNummer": null,
+    "question": "Was ist ein SWR-Meter, wo und wie wird es eingesetzt?"
+  },
+  {
+    "id": "3.2-47",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "47",
+    "masterNummer": null,
+    "question": "Was versteht man unter einem \"Antennen-Tuner\"?"
+  },
+  {
+    "id": "3.2-48",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "48",
+    "masterNummer": null,
+    "question": "Was versteht man unter \"Dopplershift\"?"
+  },
+  {
+    "id": "3.2-49",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "49",
+    "masterNummer": null,
+    "question": "Komponenten einer Amateurfunkstation für Satellitenfunk"
+  },
+  {
+    "id": "3.2-50",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "50",
+    "masterNummer": null,
+    "question": "Abstrahlung und Ausbreitung elektromagnetischer Wellen, Feldstärke?"
+  },
+  {
+    "id": "3.2-51",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "51",
+    "masterNummer": null,
+    "question": "Was versteht man unter Freiraumausbreitung?"
+  },
+  {
+    "id": "3.2-52",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "52",
+    "masterNummer": null,
+    "question": "Welche Einflüsse haben Hindernisse auf die UKW-Ausbreitung?"
+  },
+  {
+    "id": "3.2-53",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "53",
+    "masterNummer": 96,
+    "question": "Definieren Sie den Begriff „Schädliche Störung“?"
+  },
+  {
+    "id": "3.2-54",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "54",
+    "masterNummer": null,
+    "question": "Definieren Sie den Begriff „Senderleistung“?"
+  },
+  {
+    "id": "3.2-55",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "55",
+    "masterNummer": null,
+    "question": "Definieren Sie den Begriff „Spitzenleistung“?"
+  },
+  {
+    "id": "3.2-56",
+    "category": "Technik",
+    "classes": [
+      3,
+      4
+    ],
+    "gruppe": "3.2",
+    "nummer": "56",
+    "masterNummer": null,
+    "question": "Definieren Sie den Begriff „unerwünschte Aussendung“?"
+  }
+]
