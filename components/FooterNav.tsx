@@ -12,7 +12,7 @@ export default function FooterNav() {
         <nav className="fixed bottom-0 left-0 right-0 border-t border-[#008CEA] bg-white md:hidden">
             <div className="grid grid-cols-4">
                 <Link
-                    href="/"
+                    href="/dashboard"
                     className="flex flex-col items-center gap-1 border-r border-[#008CEA] py-3 text-[#008CEA]"
                 >
                     <Home size={20} />
