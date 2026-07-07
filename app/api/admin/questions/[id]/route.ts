@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { auth } from '@/auth'
+import { questionService } from '@/services/question.service'
 
 export async function GET(
   request: Request,
@@ -18,16 +18,12 @@ export async function GET(
     return NextResponse.json({ error: 'Ungültige ID' }, { status: 400 })
   }
 
-  const question = await prisma.question.findUnique({
-    where: { id },
-    include: { answers: true, attachments: true },
-  })
-
-  if (!question) {
+  try {
+    const question = await questionService.getById(id)
+    return NextResponse.json(question)
+  } catch {
     return NextResponse.json({ error: 'Nicht gefunden' }, { status: 404 })
   }
-
-  return NextResponse.json(question)
 }
 
 export async function PUT(
@@ -43,24 +39,10 @@ export async function PUT(
   const id = parseInt(idParam)
   const body = await request.json()
 
-  await prisma.question.update({
-    where: { id },
-    data: {
-      text: body.text,
-      explanation: body.explanation,
-      class: body.class,
-      subject: body.subject,
-      code: body.code,
-      answers: {
-        deleteMany: {},
-        create: body.answers,
-      },
-      attachments: {
-        deleteMany: {},
-        create: body.attachments ?? [],
-      },
-    },
-  })
-
-  return NextResponse.json({ success: true })
+  try {
+    await questionService.update(id, body)
+    return NextResponse.json({ success: true })
+  } catch {
+    return NextResponse.json({ error: 'Nicht gefunden' }, { status: 404 })
+  }
 }
