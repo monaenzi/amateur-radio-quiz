@@ -2,6 +2,7 @@ import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
 import { auth } from '@/auth'
+import ClassSelector from '@/components/ClassSelector'
 
 export default async function Home() {
   const session = await auth()
@@ -26,9 +27,7 @@ export default async function Home() {
           <div className="mt-6">
             <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKATEGORIE</label>
 
-            <select className="w-full rounded-lg bg-gray-200 p-3 text-gray-800">
-              <option>Klasse 1</option>
-            </select>
+            <ClassSelector />
           </div>
 
           <div className="mt-8">
