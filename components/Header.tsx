@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { LogIn } from 'lucide-react'
 import BackButton from './BackButton'
 import LogoutButton from './LogoutButton'
 
@@ -142,6 +143,12 @@ export default function Header({ variant = 'home' }: HeaderProps) {
                 <BackButton />
               </div>
             )}
+            <div className="ml-2">
+              <Link href="/login" className="flex flex-col items-center text-white">
+                <LogIn size={24} />
+                <span className="text-[7px] uppercase tracking-[0.15em]">Login</span>
+              </Link>
+            </div>
           </div>
 
           <div className="flex flex-col items-center">
