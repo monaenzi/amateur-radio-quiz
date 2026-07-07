@@ -1,5 +1,8 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import BackButton from './BackButton'
 import LogoutButton from './LogoutButton'
 
@@ -8,6 +11,11 @@ type HeaderProps = {
 }
 
 export default function Header({ variant = 'home' }: HeaderProps) {
+  const pathname = usePathname()
+
+  // Seiten wo der BackButton NICHT angezeigt werden soll
+  const hideBackButton = pathname === '/dashboard' || pathname === '/'
+
   if (variant === 'authAdmin') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
@@ -26,7 +34,13 @@ export default function Header({ variant = 'home' }: HeaderProps) {
               <LogoutButton />
             </nav>
             <Link href="/">
-              <Image src="/logoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
+              <Image
+                src="/logoWhite.png"
+                alt="ÖVSV Lernkurs Logo"
+                width={30}
+                height={30}
+                priority
+              />
             </Link>
           </div>
         </div>
@@ -38,9 +52,7 @@ export default function Header({ variant = 'home' }: HeaderProps) {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex flex-1 items-center">
-            <BackButton />
-          </div>
+          <div className="flex flex-1 items-center">{!hideBackButton && <BackButton />}</div>
 
           <div className="flex flex-col items-center">
             <h1 className="text-2xl font-bold text-white">Admin</h1>
@@ -54,7 +66,13 @@ export default function Header({ variant = 'home' }: HeaderProps) {
               <LogoutButton />
             </nav>
             <Link href="/">
-              <Image src="/logoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
+              <Image
+                src="/logoWhite.png"
+                alt="ÖVSV Lernkurs Logo"
+                width={30}
+                height={30}
+                priority
+              />
             </Link>
           </div>
         </div>
@@ -67,9 +85,11 @@ export default function Header({ variant = 'home' }: HeaderProps) {
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex-1 flex items-center">
-            <div className="md:hidden">
-              <BackButton />
-            </div>
+            {!hideBackButton && (
+              <div className="md:hidden">
+                <BackButton />
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col items-center">
@@ -79,7 +99,13 @@ export default function Header({ variant = 'home' }: HeaderProps) {
 
           <div className="flex-1 flex items-center justify-end">
             <Link href="/">
-              <Image src="/logoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
+              <Image
+                src="/logoWhite.png"
+                alt="ÖVSV Lernkurs Logo"
+                width={30}
+                height={30}
+                priority
+              />
             </Link>
           </div>
         </div>
@@ -111,9 +137,11 @@ export default function Header({ variant = 'home' }: HeaderProps) {
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex-1 flex items-center">
-            <div className="md:hidden">
-              <BackButton />
-            </div>
+            {!hideBackButton && (
+              <div className="md:hidden">
+                <BackButton />
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col items-center">
@@ -129,7 +157,13 @@ export default function Header({ variant = 'home' }: HeaderProps) {
               <Link href="/statistics">Statistik</Link>
             </nav>
             <Link href="/dashboard">
-              <Image src="/logoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
+              <Image
+                src="/logoWhite.png"
+                alt="ÖVSV Lernkurs Logo"
+                width={30}
+                height={30}
+                priority
+              />
             </Link>
           </div>
         </div>
@@ -142,9 +176,11 @@ export default function Header({ variant = 'home' }: HeaderProps) {
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex-1 flex items-center">
-            <div className="md:hidden">
-              <BackButton />
-            </div>
+            {!hideBackButton && (
+              <div className="md:hidden">
+                <BackButton />
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col items-center">
@@ -152,7 +188,7 @@ export default function Header({ variant = 'home' }: HeaderProps) {
             <p className="text-sm text-white/80">ÖVSV Lernkurs</p>
           </div>
 
-          <div className="flex-1 flex items-center justify-end gap-6">
+          <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
               <Link href="/dashboard">Home</Link>
               <Link href="/quiz">Lernen</Link>
@@ -161,7 +197,13 @@ export default function Header({ variant = 'home' }: HeaderProps) {
               <LogoutButton />
             </nav>
             <Link href="/dashboard">
-              <Image src="/logoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
+              <Image
+                src="/logoWhite.png"
+                alt="ÖVSV Lernkurs Logo"
+                width={30}
+                height={30}
+                priority
+              />
             </Link>
           </div>
         </div>

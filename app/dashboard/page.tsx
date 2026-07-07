@@ -1,6 +1,7 @@
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
+import LogoutButton from '@/components/LogoutButton'
 import { auth } from '@/auth'
 
 export default async function Home() {
@@ -21,7 +22,25 @@ export default async function Home() {
             </p>
           )}
 
-          <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, {isLoggedIn ? name : 'Gast'}</h2>
+          {/* HALLO mit Logout Button - nur bei welcome und nur auf mobil */}
+          {isLoggedIn && (
+            <div className="flex items-center justify-between md:hidden">
+              <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, {name}</h2>
+              <LogoutButton />
+            </div>
+          )}
+
+          {/* HALLO ohne Logout Button - auf desktop */}
+          {isLoggedIn && (
+            <h2 className="text-3xl font-bold text-[#0A8BE8] hidden md:block">
+              HALLO, {name}
+            </h2>
+          )}
+
+          {/* HALLO für Gast */}
+          {!isLoggedIn && (
+            <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, Gast</h2>
+          )}
 
           <div className="mt-6">
             <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKATEGORIE</label>
@@ -44,7 +63,7 @@ export default async function Home() {
           </div>
 
           <div className="mt-50 flex justify-center">
-            <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center  md:hidden">
+            <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center md:hidden">
               <AppButton href="/quiz">Lernen</AppButton>
               <AppButton href="/exam_locked">Prüfung simulieren</AppButton>
             </div>

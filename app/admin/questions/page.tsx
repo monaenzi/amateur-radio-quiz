@@ -2,8 +2,8 @@
 
 import { useQuestionList } from './useQuestionList'
 import { useRouter } from 'next/navigation'
-import { Trash2, Pen } from 'lucide-react';
-import Header from '@/components/Header';
+import { Trash2, Pen } from 'lucide-react'
+import Header from '@/components/Header'
 
 export default function QuestionList() {
   const router = useRouter()
@@ -22,7 +22,7 @@ export default function QuestionList() {
   return (
     <main className="min-h-screen bg-white">
       <Header variant="admin" />
-      
+
       <div className="p-6">
         <div className="flex flex-col gap-3">
           {/* Suche */}
@@ -78,18 +78,14 @@ export default function QuestionList() {
               className="flex items-center justify-between rounded-md border border-gray-200 px-4 py-3"
             >
               <div className="flex flex-col gap-1">
-                {q.code && (
-                  <span className="text-xs font-bold text-[#008CEA]">
-                    {q.code}
-                  </span>
-                )}
+                {q.code && <span className="text-xs font-bold text-[#008CEA]">{q.code}</span>}
                 <p className="text-sm text-gray-600 line-clamp-2">{q.text}</p>
                 <div className="flex gap-2">
                   <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
                     {q.subject}
                   </span>
                   <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
-                    Klasse {q.class}
+                    Klasse {q.classes.map((c) => c.class).join(', ')}
                   </span>
                 </div>
               </div>
