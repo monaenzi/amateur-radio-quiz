@@ -3,8 +3,17 @@ import { prisma } from '@/lib/prisma'
 export const examRepository = {
   getRandomQuestions(classFilter: number, limit: number = 20) {
     return prisma.question.findMany({
-      where: { class: classFilter },
-      include: { answers: true, attachments: true },
+      where: {
+        classes: {
+          some: {
+            class: classFilter,
+          },
+        },
+      },
+      include: {
+        answers: true,
+        attachments: true,
+      },
       take: limit,
     })
   },
@@ -13,22 +22,39 @@ export const examRepository = {
     return prisma.question.findMany({
       where: {
         subject,
-        ...(classFilter && { class: classFilter }),
+        ...(classFilter && {
+          classes: {
+            some: {
+              class: classFilter,
+            },
+          },
+        }),
       },
-      include: { answers: true, attachments: true },
+      include: {
+        answers: true,
+        attachments: true,
+      },
     })
   },
 
   getQuestionsForLearning(userId: number, classFilter?: number) {
     return prisma.question.findMany({
       where: {
-        ...(classFilter && { class: classFilter }),
+        ...(classFilter && {
+          classes: {
+            some: {
+              class: classFilter,
+            },
+          },
+        }),
       },
       include: {
         answers: true,
         attachments: true,
         progress: {
-          where: { userId },
+          where: {
+            userId,
+          },
         },
       },
     })
