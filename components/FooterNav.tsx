@@ -1,7 +1,13 @@
+'use client'
+
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { Home, BookOpen, ClipboardList, ChartColumn } from "lucide-react";
 
 export default function FooterNav() {
+    const { status } = useSession();
+    const examHref = status === 'authenticated' ? "/examSimulation" : "/exam_locked"
+
     return (
         <nav className="fixed bottom-0 left-0 right-0 border-t border-[#008CEA] bg-white md:hidden">
             <div className="grid grid-cols-4">
@@ -22,7 +28,7 @@ export default function FooterNav() {
                 </Link>
 
                 <Link
-                    href="/exam_locked"
+                    href={examHref}
                     className="flex flex-col items-center gap-1 border-r border-[#008CEA] py-3 text-[#008CEA]"
                 >
                     <ClipboardList size={20} />
