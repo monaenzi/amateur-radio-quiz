@@ -1,4 +1,5 @@
 import { questionRepository } from '@/repositories/question.repository'
+import { NotFoundError } from '@/lib/errors'
 
 export const questionService = {
   async getAll(filters: {
@@ -15,7 +16,7 @@ export const questionService = {
 
   async getById(id: number) {
     const question = await questionRepository.findById(id)
-    if (!question) throw new Error('Frage nicht gefunden')
+    if (!question) throw new NotFoundError('Frage nicht gefunden')
     return question
   },
 
@@ -40,12 +41,14 @@ export const questionService = {
     answers: { text: string; isCorrect: boolean }[]
     attachments: { url: string; type: string }[]
   }) {
-    await this.getById(id) // wirft Error wenn nicht gefunden
+    const existing = await questionRepository.findById(id)
+    if (!existing) throw new NotFoundError('Frage nicht gefunden')
     return questionRepository.update(id, data)
   },
 
   async delete(id: number) {
-    await this.getById(id) // wirft Error wenn nicht gefunden
+    const existing = await questionRepository.findById(id)
+    if (!existing) throw new NotFoundError('Frage nicht gefunden')
     return questionRepository.delete(id)
   },
 
