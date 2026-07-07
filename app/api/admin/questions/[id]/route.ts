@@ -3,6 +3,7 @@ import { auth } from '@/auth'
 import { questionService } from '@/services/question.service'
 import { handleApiError } from '@/lib/api-error-handler'
 import { ValidationError } from '@/lib/errors'
+import { updateQuestionSchema } from '@/lib/schemas'
 
 export async function GET(
   request: Request,
@@ -42,7 +43,13 @@ export async function PUT(
     if (isNaN(id)) throw new ValidationError('Ungültige ID')
 
     const body = await request.json()
-    await questionService.update(id, body)
+
+    const result = updateQuestionSchema.safeParse(body)
+    if (!result.success) {
+      throw new ValidationError(result.error.issues[0]?.message ?? 'Ungültige Eingabe')
+    }
+
+    await questionService.update(id, result.data)
     return NextResponse.json({ success: true })
   } catch (error) {
     return handleApiError(error)
