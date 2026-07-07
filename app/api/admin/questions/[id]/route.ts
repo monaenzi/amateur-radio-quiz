@@ -57,7 +57,7 @@ export async function PUT(
       },
       attachments: {
         deleteMany: {},
-        create: body.attachment ?? [],
+        create: body.attachments ?? [],
       },
     },
   })

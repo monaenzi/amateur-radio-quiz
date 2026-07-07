@@ -29,8 +29,12 @@ export function useQuestionList() {
   }
 
   useEffect(() => {
-    fetchQuestions()
-  }, [classFilter, subjectFilter])
+    const timeout = setTimeout(() => {
+      fetchQuestions()
+    }, 300)
+
+    return () => clearTimeout(timeout)
+  }, [search, classFilter, subjectFilter])
 
   async function deleteQuestion(id: number) {
     await fetch(`/api/admin/questions?id=${id}`, { method: 'DELETE' })

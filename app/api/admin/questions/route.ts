@@ -17,7 +17,12 @@ export async function GET(request: Request) {
   const where = {
     ...(classFilter && { class: parseInt(classFilter) }),
     ...(subjectFilter && { subject: subjectFilter }),
-    ...(search && { text: { contains: search } }),
+    ...(search && {
+      OR : [
+        { text: { contains: search } },
+        { code: { contains: search } },
+      ]
+    }),
   }
 
   const questions = await prisma.question.findMany({
@@ -67,7 +72,7 @@ export async function POST(request: Request) {
         create: body.answers,
       },
       attachments: {
-        create: body.attachment ?? [],
+        create: body.attachments ?? [],
       },
     },
   })
