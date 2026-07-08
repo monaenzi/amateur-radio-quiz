@@ -144,7 +144,7 @@ export default function Header({ variant = 'home' }: HeaderProps) {
               </div>
             )}
             {pathname === '/dashboard' && (
-              <div className="ml-2 md:hidden">
+              <div className="ml-2">
                 <Link href="/login" className="flex flex-col items-center text-white">
                   <LogIn size={24} />
                   <span className="text-[10px] uppercase tracking-[0.15em]">Login</span>
