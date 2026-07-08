@@ -1,17 +1,47 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
 import Footer from '@/components/Footer'
 import AppButton from '@/components/AppButton'
 
-const categories = [
-  { label: 'Recht', correct: 2, total: 3 },
-  { label: 'Technik', correct: 2, total: 3 },
-  { label: 'Betrieb', correct: 3, total: 3 },
-]
+type ExamResult = {
+  classId: string
+  percentage: number
+  correctAnswers: number
+  totalQuestions: number
+  subjectStats: {
+    label: string
+    correct: number
+    total: number
+  }[]
+}
 
 export default function PruefungErgebnis() {
-  const percentage = 78
-  const correctAnswers = 7
+  const [result, setResult] = useState<ExamResult | null>(null)
+  const searchParams = useSearchParams()
+  const classId = searchParams.get('class') ?? '1'
+
+  useEffect(() => {
+    const stored =
+      typeof window !== 'undefined' ? window.localStorage.getItem('examSimulationResult') : null
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored) as ExamResult
+        setResult(parsed)
+      } catch {
+        setResult(null)
+      }
+    }
+  }, [])
+
+  const categories = result?.subjectStats ?? []
+  const percentage = result?.percentage ?? 0
+  const correctAnswers = result?.correctAnswers ?? 0
+  const totalQuestions = result?.totalQuestions ?? 0
+  const retryClass = result?.classId ?? classId
 
   return (
     <main className="min-h-screen bg-white md:p-8">
@@ -77,7 +107,7 @@ export default function PruefungErgebnis() {
 
             {/* RIGHT: Kategorien + Button */}
             <div className="flex-1">
-              <p className="mtmb-2 text-sm font-semibold text-gray-800">Ergebnis pro Fachgebiet</p>
+              <p className="mt-2 text-sm font-semibold text-gray-800">Ergebnis pro Fachgebiet</p>
 
               <div className="mb-2 w-full overflow-hidden rounded-xl border border-gray-200">
                 {categories.map((cat, i) => (
@@ -100,7 +130,7 @@ export default function PruefungErgebnis() {
                 ))}
               </div>
 
-              <AppButton href="/examSimulation" className="md:mt-4 mt-15">
+              <AppButton href={`/examSimulation?class=${retryClass}`} className="md:mt-4 mt-15">
                 Wiederholen
               </AppButton>
             </div>
