@@ -6,6 +6,10 @@ type PaginationOptions = {
   pageSize?: number
 }
 
+type FindManyOptions = {
+  randomizeBySubject?: boolean
+}
+
 type FallbackQuestion = {
   id: string
   question: string
@@ -48,10 +52,43 @@ function filterFallbackQuestions(
   })
 }
 
+function shuffleArray<T>(items: T[]) {
+  const copy = [...items]
+
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1))
+    ;[copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]]
+  }
+
+  return copy
+}
+
+function selectThreePerSubject<T extends { subject?: string | null }>(items: T[]) {
+  const grouped = new Map<string, T[]>()
+
+  items.forEach((item) => {
+    const subjectName = item.subject?.trim() || 'Allgemein'
+    const subjectItems = grouped.get(subjectName) ?? []
+    subjectItems.push(item)
+    grouped.set(subjectName, subjectItems)
+  })
+
+  const selectedItems: T[] = []
+  const shuffledSubjects = shuffleArray(Array.from(grouped.keys()))
+
+  shuffledSubjects.forEach((subjectName) => {
+    const subjectItems = shuffleArray(grouped.get(subjectName) ?? [])
+    selectedItems.push(...subjectItems.slice(0, 3))
+  })
+
+  return shuffleArray(selectedItems)
+}
+
 export const questionRepository = {
   async findMany(
     filters: { search?: string; classFilter?: number; subjectFilter?: string[] },
-    pagination?: PaginationOptions
+    pagination?: PaginationOptions,
+    options?: FindManyOptions
   ) {
     const { search, classFilter, subjectFilter } = filters
     const page = pagination?.page && pagination.page > 0 ? pagination.page : 1
@@ -101,12 +138,14 @@ export const questionRepository = {
     })
 
     if (dbItems.length > 0) {
+      const baseItems = options?.randomizeBySubject ? selectThreePerSubject(dbItems) : dbItems
+
       if (pagination) {
         const skip = (page - 1) * pageSize
-        const total = dbItems.length
+        const total = baseItems.length
 
         return {
-          items: dbItems.slice(skip, skip + pageSize),
+          items: baseItems.slice(skip, skip + pageSize),
           total,
           page,
           pageSize,
@@ -114,17 +153,18 @@ export const questionRepository = {
         }
       }
 
-      return dbItems
+      return baseItems
     }
 
     const fallbackItems = filterFallbackQuestions(filters).map(mapFallbackQuestion)
+    const baseItems = options?.randomizeBySubject ? selectThreePerSubject(fallbackItems) : fallbackItems
 
     if (pagination) {
       const skip = (page - 1) * pageSize
-      const total = fallbackItems.length
+      const total = baseItems.length
 
       return {
-        items: fallbackItems.slice(skip, skip + pageSize),
+        items: baseItems.slice(skip, skip + pageSize),
         total,
         page,
         pageSize,
@@ -132,7 +172,7 @@ export const questionRepository = {
       }
     }
 
-    return fallbackItems
+    return baseItems
   },
 
   findById(id: number) {

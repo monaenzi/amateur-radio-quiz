@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
     const classParam = searchParams.get('class')
     const subjectParam = searchParams.get('subject')
     const search = searchParams.get('search') ?? undefined
+    const randomizeBySubject = searchParams.get('randomizeBySubject') === 'true'
     const classFilter = classParam ? parseInt(classParam, 10) : undefined
 
     let subjectFilter: string[] | undefined = undefined
@@ -18,6 +19,8 @@ export async function GET(req: NextRequest) {
         classFilter,
         subjectFilter,
         search,
+    }, undefined, {
+        randomizeBySubject,
     })
 
     return NextResponse.json(questions)

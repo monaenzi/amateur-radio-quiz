@@ -11,9 +11,12 @@ export const questionService = {
     pagination?: {
       page?: number
       pageSize?: number
+    },
+    options?: {
+      randomizeBySubject?: boolean
     }
   ) {
-    return questionRepository.findMany(filters, pagination)
+    return questionRepository.findMany(filters, pagination, options)
   },
 
   async getById(id: number) {

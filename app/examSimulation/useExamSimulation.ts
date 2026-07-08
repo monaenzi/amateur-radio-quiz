@@ -37,9 +37,7 @@ export function useExamSimulation() {
     setSubmitted(false)
     setShowExplanation(false)
 
-    const url = subject
-      ? `/api/questions?class=${classId}&subject=${subject}`
-      : `/api/questions?class=${classId}`
+    const url = `/api/questions?class=${classId}${subject ? `&subject=${subject}` : ''}&randomizeBySubject=true`
 
     fetch(url)
       .then((res) => res.json())
