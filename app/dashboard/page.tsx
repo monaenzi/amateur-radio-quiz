@@ -62,7 +62,7 @@ export default async function Home() {
           </div>
 
           <div className="mt-50 flex justify-center">
-            <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center md:hidden">
+            <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center">
               <AppButton href="/quiz">Lernen</AppButton>
               <AppButton href="/exam_locked">Prüfung simulieren</AppButton>
             </div>
