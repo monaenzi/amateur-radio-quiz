@@ -1,9 +1,9 @@
-import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
 import LogoutButton from '@/components/LogoutButton'
 import { auth } from '@/auth'
 import ClassSelector from '@/components/ClassSelector'
+import DashboardActionButtons from '@/components/DashboardActionButtons'
 
 type Props = {
   searchParams: Promise<{ class?: string }>
@@ -15,7 +15,7 @@ export default async function Home({ searchParams }: Props) {
   const name = session?.user?.name ?? session?.user?.email ?? 'Gast'
 
   const resolvedParams = await searchParams
-  const currentClass = resolvedParams.class ?? '1'
+  const currentClass = resolvedParams.class
 
   return (
     <main className="min-h-screen bg-white md:p-8">
@@ -69,10 +69,7 @@ export default async function Home({ searchParams }: Props) {
           </div>
 
           <div className="mt-50 flex justify-center">
-            <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center">
-              <AppButton href={`/learn?class=${currentClass}`}>Lernen</AppButton>
-              <AppButton href={`/examSimulation?class=${currentClass}`}>Prüfung simulieren</AppButton>
-            </div>
+            <DashboardActionButtons />
           </div>
         </div>
 
