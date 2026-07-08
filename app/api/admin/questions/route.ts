@@ -18,15 +18,23 @@ export async function GET(request: Request) {
     const subjectParam = searchParams.get('subject')
     const classFilter = classParam ? parseInt(classParam, 10) : undefined
 
+    const pageParam = Number.parseInt(searchParams.get('page') ?? '1', 10)
+    const pageSizeParam = Number.parseInt(searchParams.get('pageSize') ?? '10', 10)
+    const page = Number.isNaN(pageParam) || pageParam < 1 ? 1 : pageParam
+    const pageSize = Number.isNaN(pageSizeParam) || pageSizeParam < 1 ? 10 : pageSizeParam
+
     let subjectFilter: string[] | undefined = undefined
     if (subjectParam && subjectParam !== 'all') {
       subjectFilter = subjectParam.split(',')
     }
-    const questions = await questionService.getAll({
-      search: searchParams.get('search') ?? undefined,
-      classFilter,
-      subjectFilter,
-    })
+    const questions = await questionService.getAll(
+      {
+        search: searchParams.get('search') ?? undefined,
+        classFilter,
+        subjectFilter,
+      },
+      { page, pageSize }
+    )
     return NextResponse.json(questions)
   } catch (error) {
     return handleApiError(error)

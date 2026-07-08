@@ -1,47 +1,86 @@
 import { prisma } from '@/lib/prisma'
 
+type PaginationOptions = {
+  page?: number
+  pageSize?: number
+}
+
 export const questionRepository = {
-  findMany(filters: { search?: string; classFilter?: number; subjectFilter?: string[] }) { // <-- Hier string[] statt string
+  async findMany(
+    filters: { search?: string; classFilter?: number; subjectFilter?: string[] },
+    pagination?: PaginationOptions
+  ) {
     const { search, classFilter, subjectFilter } = filters
+    const page = pagination?.page && pagination.page > 0 ? pagination.page : 1
+    const pageSize = pagination?.pageSize && pagination.pageSize > 0 ? pagination.pageSize : 10
+
+    const where = {
+      ...(classFilter !== undefined && {
+        classes: {
+          some: {
+            class: classFilter,
+          },
+        },
+      }),
+
+      ...(subjectFilter && {
+        subject: {
+          in: subjectFilter,
+        },
+      }),
+
+      ...(search && {
+        OR: [
+          {
+            text: {
+              contains: search,
+            },
+          },
+          {
+            code: {
+              contains: search,
+            },
+          },
+        ],
+      }),
+    }
+
+    if (pagination) {
+      const skip = (page - 1) * pageSize
+
+      const [items, total] = await prisma.$transaction([
+        prisma.question.findMany({
+          where,
+          include: {
+            answers: true,
+            attachments: true,
+            classes: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+          skip,
+          take: pageSize,
+        }),
+        prisma.question.count({ where }),
+      ])
+
+      return {
+        items,
+        total,
+        page,
+        pageSize,
+        totalPages: Math.ceil(total / pageSize),
+      }
+    }
 
     return prisma.question.findMany({
-      where: {
-        ...(classFilter  !== undefined && {
-          classes: {
-            some: {
-              class: classFilter,
-            },
-          },
-        }),
-
-        ...(subjectFilter && {
-          subject: {
-            in: subjectFilter,
-          },
-        }),
-
-        ...(search && {
-          OR: [
-            {
-              text: {
-                contains: search,
-              },
-            },
-            {
-              code: {
-                contains: search,
-              },
-            },
-          ],
-        }),
-      },
-
+      where,
       include: {
         answers: true,
         attachments: true,
         classes: true,
       },
-
       orderBy: {
         createdAt: 'desc',
       },

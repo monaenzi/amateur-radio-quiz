@@ -2,12 +2,18 @@ import { questionRepository } from '@/repositories/question.repository'
 import { NotFoundError } from '@/lib/errors'
 
 export const questionService = {
-  async getAll(filters: {
-    search?: string
-    classFilter?: number
-    subjectFilter?: string[]
-  }) {
-    return questionRepository.findMany(filters)
+  async getAll(
+    filters: {
+      search?: string
+      classFilter?: number
+      subjectFilter?: string[]
+    },
+    pagination?: {
+      page?: number
+      pageSize?: number
+    }
+  ) {
+    return questionRepository.findMany(filters, pagination)
   },
 
   async getById(id: number) {

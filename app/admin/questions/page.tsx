@@ -15,6 +15,10 @@ export default function QuestionList() {
     setClassFilter,
     subjectFilter,
     setSubjectFilter,
+    page,
+    totalPages,
+    total,
+    goToPage,
     fetchQuestions,
     deleteQuestion,
   } = useQuestionList()
@@ -107,6 +111,30 @@ export default function QuestionList() {
             </div>
           ))}
         </div>
+
+        {total > 0 && (
+          <div className="mt-4 flex flex-col gap-2 border-t border-gray-200 pt-4 text-sm text-gray-500 md:flex-row md:items-center md:justify-between">
+            <p>
+              Seite {page} von {totalPages} • {total} Fragen gesamt
+            </p>
+            <div className="flex gap-2">
+              <button
+                onClick={() => goToPage(page - 1)}
+                disabled={page <= 1}
+                className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Zurück
+              </button>
+              <button
+                onClick={() => goToPage(page + 1)}
+                disabled={page >= totalPages}
+                className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Weiter
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </main>
   )
