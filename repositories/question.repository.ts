@@ -6,7 +6,7 @@ export const questionRepository = {
 
     return prisma.question.findMany({
       where: {
-        ...(classFilter && {
+        ...(classFilter  !== undefined && {
           classes: {
             some: {
               class: classFilter,
@@ -173,7 +173,7 @@ export const questionRepository = {
     return prisma.question.groupBy({
       by: ['subject'],
 
-      where: classFilter
+      where: classFilter !== undefined
         ? {
             classes: {
               some: {
@@ -191,7 +191,7 @@ export const questionRepository = {
 
   count(classFilter?: number) {
     return prisma.question.count({
-      where: classFilter
+      where: classFilter !== undefined
         ? {
             classes: {
               some: {
