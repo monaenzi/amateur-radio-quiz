@@ -125,26 +125,28 @@ export default function KarteikartenPage() {
 
                     <div className="mt-8 md:mx-auto md:w-full md:max-w-md">
                         {!showAnswer ? (
-                            <AppButton onClick={function () { setShowAnswer(true) }}>
-                                Antwort anzeigen
-                            </AppButton>
+                            <div>
+                                <AppButton onClick={function () { setShowAnswer(true) }}>
+                                    Antwort anzeigen
+                                </AppButton>
+                            </div>
                         ) : (
                             <div className="grid grid-cols-3 gap-3">
                                 <button
                                     onClick={handleNext}
-                                    className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                    className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
                                 >
                                     ✓
                                 </button>
                                 <button
                                     onClick={handleNext}
-                                    className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                    className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
                                 >
                                     ~
                                 </button>
                                 <button
                                     onClick={handleNext}
-                                    className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                    className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
                                 >
                                     ✕
                                 </button>
