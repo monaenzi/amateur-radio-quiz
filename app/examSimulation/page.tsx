@@ -148,7 +148,7 @@ export default function ExamPage() {
                 {submitted && (
                   <button
                     onClick={() => setShowExplanation((prev) => !prev)}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-700 p-4 text-center text-gray-800 md:rounded-lg md:p-2 md:text-xs"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-700 p-4 text-center text-gray-800 md:rounded-lg md:p-2 md:text-xs cursor-pointer"
                   >
                     Erklärung {showExplanation ? 'ausblenden' : 'einblenden'}
                   </button>

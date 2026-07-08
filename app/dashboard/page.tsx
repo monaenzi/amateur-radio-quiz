@@ -51,7 +51,7 @@ export default async function Home({ searchParams }: Props) {
           )}
 
           <div className="mt-6">
-            <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKATEGORIE</label>
+            <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKLASSE</label>
 
             <ClassSelector />
           </div>

@@ -89,7 +89,7 @@ export default function LearnPage() {
                         <button
                             onClick={handleStartLearning}
                             disabled={selected.length === 0 || loading}
-                            className="w-full rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white disabled:opacity-50 hover:bg-[#0077c8] transition-colors"
+                            className="w-full rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white disabled:opacity-50 hover:bg-[#0077c8] transition-colors cursor-pointer"
                         >
                             {selected.length > 0 ? `Jetzt lernen (${selected.length} gewählt)` : 'Jetzt lernen'}
                         </button>
