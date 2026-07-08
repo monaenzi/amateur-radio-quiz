@@ -199,7 +199,7 @@ export default function Header({ variant = 'home' }: HeaderProps) {
           </div>
 
           <div className="flex flex-col items-center">
-            <h1 className="text-2xl font-bold text-white">Willkommen zurück</h1>
+            <h1 className="text-2xl font-bold text-white">Lernkurs</h1>
             <p className="text-sm text-white/80">ÖVSV Lernkurs</p>
           </div>
 
