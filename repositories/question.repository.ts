@@ -1,8 +1,51 @@
 import { prisma } from '@/lib/prisma'
+import fallbackQuestionsData from '@/prisma/questions.json'
 
 type PaginationOptions = {
   page?: number
   pageSize?: number
+}
+
+type FallbackQuestion = {
+  id: string
+  question: string
+  category: string
+  classes: number[]
+}
+
+const fallbackQuestions = fallbackQuestionsData as FallbackQuestion[]
+
+function mapFallbackQuestion(question: FallbackQuestion) {
+  return {
+    id: Number(question.id.replace(/\D/g, '')) || 0,
+    text: question.question,
+    explanation: null,
+    subject: question.category,
+    code: question.id,
+    answers: [],
+    attachments: [],
+    classes: question.classes.map((classId) => ({ class: classId })),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }
+}
+
+function filterFallbackQuestions(
+  filters: { search?: string; classFilter?: number; subjectFilter?: string[] }
+) {
+  const { search, classFilter, subjectFilter } = filters
+  const normalizedSearch = search?.trim().toLowerCase()
+
+  return fallbackQuestions.filter((question) => {
+    const matchesClass = classFilter === undefined || question.classes.includes(classFilter)
+    const matchesSubject = !subjectFilter || subjectFilter.includes(question.category)
+    const matchesSearch =
+      !normalizedSearch ||
+      [question.question, question.category, question.id]
+        .some((value) => value.toLowerCase().includes(normalizedSearch))
+
+    return matchesClass && matchesSubject && matchesSearch
+  })
 }
 
 export const questionRepository = {
@@ -45,36 +88,7 @@ export const questionRepository = {
       }),
     }
 
-    if (pagination) {
-      const skip = (page - 1) * pageSize
-
-      const [items, total] = await prisma.$transaction([
-        prisma.question.findMany({
-          where,
-          include: {
-            answers: true,
-            attachments: true,
-            classes: true,
-          },
-          orderBy: {
-            createdAt: 'desc',
-          },
-          skip,
-          take: pageSize,
-        }),
-        prisma.question.count({ where }),
-      ])
-
-      return {
-        items,
-        total,
-        page,
-        pageSize,
-        totalPages: Math.ceil(total / pageSize),
-      }
-    }
-
-    return prisma.question.findMany({
+    const dbItems = await prisma.question.findMany({
       where,
       include: {
         answers: true,
@@ -85,6 +99,40 @@ export const questionRepository = {
         createdAt: 'desc',
       },
     })
+
+    if (dbItems.length > 0) {
+      if (pagination) {
+        const skip = (page - 1) * pageSize
+        const total = dbItems.length
+
+        return {
+          items: dbItems.slice(skip, skip + pageSize),
+          total,
+          page,
+          pageSize,
+          totalPages: Math.ceil(total / pageSize),
+        }
+      }
+
+      return dbItems
+    }
+
+    const fallbackItems = filterFallbackQuestions(filters).map(mapFallbackQuestion)
+
+    if (pagination) {
+      const skip = (page - 1) * pageSize
+      const total = fallbackItems.length
+
+      return {
+        items: fallbackItems.slice(skip, skip + pageSize),
+        total,
+        page,
+        pageSize,
+        totalPages: Math.ceil(total / pageSize),
+      }
+    }
+
+    return fallbackItems
   },
 
   findById(id: number) {

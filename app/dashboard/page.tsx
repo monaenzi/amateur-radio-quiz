@@ -71,7 +71,7 @@ export default async function Home({ searchParams }: Props) {
           <div className="mt-50 flex justify-center">
             <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center">
               <AppButton href={`/learn?class=${currentClass}`}>Lernen</AppButton>
-              <AppButton href={`/exam_locked?class=${currentClass}`}>Prüfung simulieren</AppButton>
+              <AppButton href={`/examSimulation?class=${currentClass}`}>Prüfung simulieren</AppButton>
             </div>
           </div>
         </div>
