@@ -13,10 +13,19 @@ export async function GET(request: Request) {
 
   try {
     const { searchParams } = new URL(request.url)
+    
+    const classParam = searchParams.get('class')
+    const subjectParam = searchParams.get('subject')
+    const classFilter = classParam ? parseInt(classParam, 10) : undefined
+
+    let subjectFilter: string[] | undefined = undefined
+    if (subjectParam && subjectParam !== 'all') {
+      subjectFilter = subjectParam.split(',')
+    }
     const questions = await questionService.getAll({
       search: searchParams.get('search') ?? undefined,
-      classFilter: searchParams.get('class') ?? undefined,
-      subjectFilter: searchParams.get('subject') ?? undefined,
+      classFilter,
+      subjectFilter,
     })
     return NextResponse.json(questions)
   } catch (error) {

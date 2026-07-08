@@ -1,65 +1,160 @@
 'use client'
 
-import { useState } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
-import Footer from '@/components/Footer'
 import { useSession } from 'next-auth/react'
 
+type Answer = {
+    id: number
+    text: string
+    isCorrect: boolean
+}
+
+type Question = {
+    id: number
+    text: string
+    answers: Answer[]
+}
+
 export default function KarteikartenPage() {
-  const { data: session } = useSession()
-  const isLoggedIn = !!session?.user
-  const [showAnswer, setShowAnswer] = useState(false)
+    const { data: session } = useSession()
+    const isLoggedIn = !!session?.user
+    const searchParams = useSearchParams()
+    const router = useRouter()
+    const classId = searchParams.get('class') ?? '1'
+    const subject = searchParams.get('subject') ?? undefined
 
-  const card = {
-    question: 'Was bedeutet QTH im Amateurfunk?',
-    answer: 'QTH bedeutet Standort.',
-  }
+    const [questions, setQuestions] = useState<Question[]>([])
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [showAnswer, setShowAnswer] = useState(false)
+    const [loading, setLoading] = useState(true)
 
-  return (
-    <main className="min-h-screen bg-white md:p-8">
-      <div className="w-full bg-white md:mx-auto md:max-w-7xl">
-        <Header variant={isLoggedIn ? "welcome" : "default"} />
+    useEffect(function () {
+        const url = subject 
+            ? `/api/questions?class=${classId}&subject=${subject}`
+            : `/api/questions?class=${classId}`
 
-        <section className="mx-auto flex min-h-[calc(100vh-96px)] w-full max-w-sm flex-col px-6 py-4 md:max-w-2xl md:px-8">
-          <p className="mb-4 text-sm font-bold text-gray-500">Karte 1 von 10</p>
+        fetch(url)
+            .then(function (res) { return res.json() })
+            .then(function (data) {
+                setQuestions(data)
+                setLoading(false)
+            })
+    }, [classId, subject])
 
-          <div className="mb-8 h-2 rounded-full bg-gray-200">
-            <div className="h-2 w-[10%] rounded-full bg-[#008CEA]" />
-          </div>
+    function handleNext() {
+        setShowAnswer(false)
+        setCurrentIndex(function (prev) { return prev + 1 })
+    }
 
-          <section className="flex min-h-[50vh] flex-col items-center justify-center rounded-3xl bg-[#d7efff] p-8 text-center md:min-h-[35vh] md:p-12">
-            {' '}
-            <p className="mb-8 text-sm font-bold text-[#008CEA] md:text-base">
-              {showAnswer ? 'Antwort' : 'Frage'}
-            </p>
-            <h1 className="text-xl font-bold leading-relaxed text-gray-700 md:text-2xl">
-              {showAnswer ? card.answer : card.question}
-            </h1>
-          </section>
+    if (loading) {
+        return (
+            <main className="min-h-screen bg-white md:p-8">
+                <div className="w-full bg-white md:mx-auto md:max-w-7xl">
+                    <Header variant={isLoggedIn ? 'welcome' : 'default'} />
+                    <div className="flex min-h-[calc(100vh-96px)] items-center justify-center">
+                        <p className="text-gray-500 animate-pulse">Fragen werden geladen...</p>
+                    </div>
+                </div>
+            </main>
+        )
+    }
 
-          <div className="mt-8 md:mx-auto md:w-full md:max-w-md">
-            {!showAnswer ? (
-              <AppButton onClick={() => setShowAnswer(true)}>Antwort anzeigen</AppButton>
-            ) : (
-              <div className="grid grid-cols-3 gap-3">
-                <button className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90">
-                  ✓
-                </button>
-                <button className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90">
-                  ~
-                </button>
-                <button className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90">
-                  ✕
-                </button>
-              </div>
-            )}
-          </div>
-        </section>
-      </div>
-      <Footer />
-      <FooterNav />
-    </main>
-  )
+    if (questions.length === 0) {
+        return (
+            <main className="min-h-screen bg-white md:p-8">
+                <div className="w-full bg-white md:mx-auto md:max-w-7xl">
+                    <Header variant={isLoggedIn ? 'welcome' : 'default'} />
+                    <div className="flex min-h-[calc(100vh-96px)] flex-col items-center justify-center gap-4">
+                        <p className="text-gray-500">Keine Fragen für diese Auswahl gefunden.</p>
+                        <AppButton onClick={function() { router.push('/dashboard') }}>Zurück zum Dashboard</AppButton>
+                    </div>
+                </div>
+            </main>
+        )
+    }
+
+    if (currentIndex >= questions.length) {
+        return (
+            <main className="min-h-screen bg-white md:p-8">
+                <div className="w-full bg-white md:mx-auto md:max-w-7xl">
+                    <Header variant={isLoggedIn ? 'welcome' : 'default'} />
+                    <div className="flex min-h-[calc(100vh-96px)] flex-col items-center justify-center text-center px-6">
+                        <AppButton onClick={function() { router.push('/dashboard') }}>Zurück zum Dashboard</AppButton>
+                    </div>
+                </div>
+            </main>
+        )
+    }
+
+    const card = questions[currentIndex]
+    const progress = Math.round(((currentIndex + 1) / questions.length) * 100)
+
+    return (
+        <main className="min-h-screen bg-white md:p-8">
+            <div className="w-full bg-white md:mx-auto md:max-w-7xl">
+                <Header variant={isLoggedIn ? 'welcome' : 'default'} />
+
+                <section className="mx-auto flex min-h-[calc(100vh-96px)] w-full max-w-sm flex-col px-6 py-4 md:max-w-2xl md:px-8">
+                    <p className="mb-4 text-sm font-bold text-gray-500">
+                        Karte {currentIndex + 1} von {questions.length}
+                    </p>
+
+                    <div className="mb-8 h-2 rounded-full bg-gray-200">
+                        <div
+                            className="h-2 rounded-full bg-[#008CEA] transition-all duration-300"
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
+
+                    <section className="flex min-h-[40vh] flex-col items-center justify-center rounded-3xl bg-[#d7efff] p-8 text-center md:min-h-[35vh] md:p-12 shadow-sm">
+                        <p className="mb-6 text-xs font-extrabold uppercase tracking-widest text-[#008CEA]">
+                            {showAnswer ? 'Antwort' : 'Frage'}
+                        </p>
+                        <h1 className="text-lg font-bold leading-relaxed text-gray-800 md:text-2xl">
+                            {showAnswer 
+                                ? (card.answers.find(function (a) { return a.isCorrect })?.text ?? 'Keine korrekte Antwort hinterlegt') 
+                                : card.text
+                            }
+                            </h1>
+
+                    </section>
+
+                    <div className="mt-8 md:mx-auto md:w-full md:max-w-md">
+                        {!showAnswer ? (
+                            <AppButton onClick={function () { setShowAnswer(true) }}>
+                                Antwort anzeigen
+                            </AppButton>
+                        ) : (
+                            <div className="grid grid-cols-3 gap-3">
+                                <button
+                                    onClick={handleNext}
+                                    className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                >
+                                    ✓
+                                </button>
+                                <button
+                                    onClick={handleNext}
+                                    className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                >
+                                    ~
+                                </button>
+                                <button
+                                    onClick={handleNext}
+                                    className="h-10 w-full rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </section>
+
+                <FooterNav />
+            </div>
+        </main>
+    )
 }

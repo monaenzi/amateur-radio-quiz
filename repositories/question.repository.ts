@@ -1,12 +1,12 @@
 import { prisma } from '@/lib/prisma'
 
 export const questionRepository = {
-  findMany(filters: { search?: string; classFilter?: number; subjectFilter?: string }) {
+  findMany(filters: { search?: string; classFilter?: number; subjectFilter?: string[] }) { // <-- Hier string[] statt string
     const { search, classFilter, subjectFilter } = filters
 
     return prisma.question.findMany({
       where: {
-        ...(classFilter && {
+        ...(classFilter  !== undefined && {
           classes: {
             some: {
               class: classFilter,
@@ -15,7 +15,9 @@ export const questionRepository = {
         }),
 
         ...(subjectFilter && {
-          subject: subjectFilter,
+          subject: {
+            in: subjectFilter,
+          },
         }),
 
         ...(search && {
@@ -173,7 +175,7 @@ export const questionRepository = {
     return prisma.question.groupBy({
       by: ['subject'],
 
-      where: classFilter
+      where: classFilter !== undefined
         ? {
             classes: {
               some: {
@@ -191,7 +193,7 @@ export const questionRepository = {
 
   count(classFilter?: number) {
     return prisma.question.count({
-      where: classFilter
+      where: classFilter !== undefined
         ? {
             classes: {
               some: {
