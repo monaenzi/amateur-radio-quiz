@@ -3,9 +3,16 @@ import { questionService } from '@/services/question.service'
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url)
-    const classFilter = searchParams.get('class') ?? undefined
-    const subjectFilter = searchParams.get('subject') ?? undefined
+    
+    const classParam = searchParams.get('class')
+    const subjectParam = searchParams.get('subject')
     const search = searchParams.get('search') ?? undefined
+    const classFilter = classParam ? parseInt(classParam, 10) : undefined
+
+    let subjectFilter: string[] | undefined = undefined
+    if (subjectParam && subjectParam !== 'all') {
+        subjectFilter = subjectParam.split(',')
+    }
 
     const questions = await questionService.getAll({
         classFilter,
