@@ -1,15 +1,9 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import { Scale, Radio, RadioTower } from 'lucide-react'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
-
-type SubjectStat = {
-    subject: string
-    _count: { id: number }
-}
+import { useLearn } from './useLearn'
 
 const subjectIcons: Record<string, React.ReactNode> = {
     Recht: <Scale size={18} className="text-[#008CEA]" />,
@@ -18,46 +12,15 @@ const subjectIcons: Record<string, React.ReactNode> = {
 }
 
 export default function LearnPage() {
-    const searchParams = useSearchParams()
-    const router = useRouter()
-    const classId = searchParams.get('class') ?? '1'
-
-    const [stats, setStats] = useState<SubjectStat[]>([])
-    const [selected, setSelected] = useState<string[]>([])
-
-    useEffect(function () {
-        fetch(`/api/questions/stats?class=${classId}`)
-            .then(function (res) { return res.json() })
-            .then(function (data) { setStats(data.bySubject) })
-    }, [classId])
-
-    function handleSelect(subject: string) {
-        setSelected(function (prev) {
-            if (prev.includes(subject)) {
-                return prev.filter((s) => s !== subject)
-            } else {
-                return [...prev, subject]
-            }
-        })
-    }
-
-    function handleSelectAll() {
-        const allSubjects = stats.map((s) => s.subject)
-        
-        if (selected.length === allSubjects.length) {
-            setSelected([])
-        } else {
-            setSelected(allSubjects)
-        }
-    }
-
-    function handleStartLearning() {
-        if (selected.length === 0) return
-        const subjectQuery = selected.join(',')
-        router.push(`/quiz?class=${classId}&subject=${subjectQuery}`)
-    }
-
-    const isAllSelected = stats.length > 0 && selected.length === stats.length
+    const {
+        stats,
+        selected,
+        loading,
+        isAllSelected,
+        handleSelect,
+        handleSelectAll,
+        handleStartLearning,
+    } = useLearn()
 
     return (
         <main className="min-h-screen bg-gray-100 md:p-8">
@@ -75,52 +38,60 @@ export default function LearnPage() {
                         </h2>
                     </div>
 
-                    <div className="rounded-xl border border-gray-200 bg-white">
-                        {stats.map(function (stat, index) {
-                            return (
-                                <div key={stat.subject}>
-                                    {index > 0 && <div className="border-t border-gray-200" />}
-                                    <div className="flex items-center gap-3 p-4">
-                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E6F4FD]">
-                                            {subjectIcons[stat.subject]}
+                    <div className="rounded-xl border border-gray-200 bg-white min-h-[150px] flex flex-col justify-center">
+                        {loading ? (
+                            <p className="text-center text-sm text-gray-500 py-8 animate-pulse">
+                                Fachgebiete werden geladen...
+                            </p>
+                        ) : (
+                            <>
+                                {stats.map(function (stat, index) {
+                                    return (
+                                        <div key={stat.subject}>
+                                            {index > 0 && <div className="border-t border-gray-200" />}
+                                            <div className="flex items-center gap-3 p-4">
+                                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E6F4FD]">
+                                                    {subjectIcons[stat.subject]}
+                                                </div>
+                                                <div className="flex-1">
+                                                    <p className="text-sm font-bold text-gray-900">{stat.subject}</p>
+                                                    <p className="text-xs text-gray-500">{stat._count.id} Fragen</p>
+                                                </div>
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selected.includes(stat.subject)}
+                                                    onChange={function () { handleSelect(stat.subject) }}
+                                                    className="h-5 w-5 accent-[#008CEA] cursor-pointer"
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="flex-1">
-                                            <p className="text-sm font-bold text-gray-900">{stat.subject}</p>
-                                            <p className="text-xs text-gray-500">{stat._count.id} Fragen</p>
-                                        </div>
-                                        <input
-                                            type="checkbox"
-                                            checked={selected.includes(stat.subject)}
-                                            onChange={function () { handleSelect(stat.subject) }}
-                                            className="h-5 w-5 accent-[#008CEA] cursor-pointer"
-                                        />
+                                    )
+                                })}
+
+                                <div className="border-t border-gray-200" />
+
+                                <div className="flex items-center gap-3 p-4">
+                                    <div className="flex-1 pl-1">
+                                        <p className="text-sm text-gray-700 font-medium">Alle Fachgebiete gemischt</p>
                                     </div>
+                                    <input
+                                        type="checkbox"
+                                        checked={isAllSelected}
+                                        onChange={handleSelectAll}
+                                        className="h-5 w-5 accent-[#008CEA] cursor-pointer"
+                                    />
                                 </div>
-                            )
-                        })}
-
-                        <div className="border-t border-gray-200" />
-
-                        <div className="flex items-center gap-3 p-4">
-                            <div className="flex-1 pl-1">
-                                <p className="text-sm text-gray-700 font-medium">Alle Fachgebiete gemischt</p>
-                            </div>
-                            <input
-                                type="checkbox"
-                                checked={isAllSelected}
-                                onChange={handleSelectAll}
-                                className="h-5 w-5 accent-[#008CEA] cursor-pointer"
-                            />
-                        </div>
+                            </>
+                        )}
                     </div>
 
                     <div className="pt-16">
                         <button
                             onClick={handleStartLearning}
-                            disabled={selected.length === 0}
+                            disabled={selected.length === 0 || loading}
                             className="w-full rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white disabled:opacity-50 hover:bg-[#0077c8] transition-colors"
                         >
-                            Jetzt lernen ({selected.length} gewählt)
+                            {selected.length > 0 ? `Jetzt lernen (${selected.length} gewählt)` : 'Jetzt lernen'}
                         </button>
                     </div>
                 </div>
