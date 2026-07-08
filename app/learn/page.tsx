@@ -23,7 +23,7 @@ export default function LearnPage() {
     const classId = searchParams.get('class') ?? '1'
 
     const [stats, setStats] = useState<SubjectStat[]>([])
-    const [selected, setSelected] = useState<string | null>(null)
+    const [selected, setSelected] = useState<string[]>([])
 
     useEffect(function () {
         fetch(`/api/questions/stats?class=${classId}`)
@@ -32,13 +32,32 @@ export default function LearnPage() {
     }, [classId])
 
     function handleSelect(subject: string) {
-        setSelected(subject === selected ? null : subject)
+        setSelected(function (prev) {
+            if (prev.includes(subject)) {
+                return prev.filter((s) => s !== subject)
+            } else {
+                return [...prev, subject]
+            }
+        })
+    }
+
+    function handleSelectAll() {
+        const allSubjects = stats.map((s) => s.subject)
+        
+        if (selected.length === allSubjects.length) {
+            setSelected([])
+        } else {
+            setSelected(allSubjects)
+        }
     }
 
     function handleStartLearning() {
-        if (!selected) return
-        router.push(`/quiz?class=${classId}&subject=${selected}`)
+        if (selected.length === 0) return
+        const subjectQuery = selected.join(',')
+        router.push(`/quiz?class=${classId}&subject=${subjectQuery}`)
     }
+
+    const isAllSelected = stats.length > 0 && selected.length === stats.length
 
     return (
         <main className="min-h-screen bg-gray-100 md:p-8">
@@ -71,9 +90,9 @@ export default function LearnPage() {
                                         </div>
                                         <input
                                             type="checkbox"
-                                            checked={selected === stat.subject}
+                                            checked={selected.includes(stat.subject)}
                                             onChange={function () { handleSelect(stat.subject) }}
-                                            className="h-5 w-5 accent-[#008CEA]"
+                                            className="h-5 w-5 accent-[#008CEA] cursor-pointer"
                                         />
                                     </div>
                                 </div>
@@ -84,13 +103,13 @@ export default function LearnPage() {
 
                         <div className="flex items-center gap-3 p-4">
                             <div className="flex-1 pl-1">
-                                <p className="text-sm text-gray-400">Alle Fachgebiete gemischt</p>
+                                <p className="text-sm text-gray-700 font-medium">Alle Fachgebiete gemischt</p>
                             </div>
                             <input
                                 type="checkbox"
-                                checked={selected === 'all'}
-                                onChange={function () { handleSelect('all') }}
-                                className="h-5 w-5 accent-[#008CEA]"
+                                checked={isAllSelected}
+                                onChange={handleSelectAll}
+                                className="h-5 w-5 accent-[#008CEA] cursor-pointer"
                             />
                         </div>
                     </div>
@@ -98,10 +117,10 @@ export default function LearnPage() {
                     <div className="pt-16">
                         <button
                             onClick={handleStartLearning}
-                            disabled={!selected}
+                            disabled={selected.length === 0}
                             className="w-full rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white disabled:opacity-50 hover:bg-[#0077c8] transition-colors"
                         >
-                            Jetzt lernen
+                            Jetzt lernen ({selected.length} gewählt)
                         </button>
                     </div>
                 </div>
