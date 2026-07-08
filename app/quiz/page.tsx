@@ -1,6 +1,6 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
@@ -23,6 +23,7 @@ export default function KarteikartenPage() {
     const { data: session } = useSession()
     const isLoggedIn = !!session?.user
     const searchParams = useSearchParams()
+    const router = useRouter()
     const classId = searchParams.get('class') ?? '1'
     const subject = searchParams.get('subject') ?? undefined
 
@@ -32,7 +33,7 @@ export default function KarteikartenPage() {
     const [loading, setLoading] = useState(true)
 
     useEffect(function () {
-        const url = subject && subject !== 'all'
+        const url = subject 
             ? `/api/questions?class=${classId}&subject=${subject}`
             : `/api/questions?class=${classId}`
 
@@ -55,7 +56,7 @@ export default function KarteikartenPage() {
                 <div className="w-full bg-white md:mx-auto md:max-w-7xl">
                     <Header variant={isLoggedIn ? 'welcome' : 'default'} />
                     <div className="flex min-h-[calc(100vh-96px)] items-center justify-center">
-                        <p className="text-gray-500">Fragen werden geladen...</p>
+                        <p className="text-gray-500 animate-pulse">Fragen werden geladen...</p>
                     </div>
                 </div>
             </main>
@@ -67,8 +68,22 @@ export default function KarteikartenPage() {
             <main className="min-h-screen bg-white md:p-8">
                 <div className="w-full bg-white md:mx-auto md:max-w-7xl">
                     <Header variant={isLoggedIn ? 'welcome' : 'default'} />
-                    <div className="flex min-h-[calc(100vh-96px)] items-center justify-center">
-                        <p className="text-gray-500">Keine Fragen gefunden.</p>
+                    <div className="flex min-h-[calc(100vh-96px)] flex-col items-center justify-center gap-4">
+                        <p className="text-gray-500">Keine Fragen für diese Auswahl gefunden.</p>
+                        <AppButton onClick={function() { router.push('/dashboard') }}>Zurück zum Dashboard</AppButton>
+                    </div>
+                </div>
+            </main>
+        )
+    }
+
+    if (currentIndex >= questions.length) {
+        return (
+            <main className="min-h-screen bg-white md:p-8">
+                <div className="w-full bg-white md:mx-auto md:max-w-7xl">
+                    <Header variant={isLoggedIn ? 'welcome' : 'default'} />
+                    <div className="flex min-h-[calc(100vh-96px)] flex-col items-center justify-center text-center px-6">
+                        <AppButton onClick={function() { router.push('/dashboard') }}>Zurück zum Dashboard</AppButton>
                     </div>
                 </div>
             </main>
@@ -90,18 +105,22 @@ export default function KarteikartenPage() {
 
                     <div className="mb-8 h-2 rounded-full bg-gray-200">
                         <div
-                            className="h-2 rounded-full bg-[#008CEA] transition-all"
+                            className="h-2 rounded-full bg-[#008CEA] transition-all duration-300"
                             style={{ width: `${progress}%` }}
                         />
                     </div>
 
-                    <section className="flex min-h-[50vh] flex-col items-center justify-center rounded-3xl bg-[#d7efff] p-8 text-center md:min-h-[35vh] md:p-12">
-                        <p className="mb-8 text-sm font-bold text-[#008CEA] md:text-base">
+                    <section className="flex min-h-[40vh] flex-col items-center justify-center rounded-3xl bg-[#d7efff] p-8 text-center md:min-h-[35vh] md:p-12 shadow-sm">
+                        <p className="mb-6 text-xs font-extrabold uppercase tracking-widest text-[#008CEA]">
                             {showAnswer ? 'Antwort' : 'Frage'}
                         </p>
-                        <h1 className="text-xl font-bold leading-relaxed text-gray-700 md:text-2xl">
-                            {showAnswer ? card.answers.find(function (a) { return a.isCorrect })?.text : card.text}
-                        </h1>
+                        <h1 className="text-lg font-bold leading-relaxed text-gray-800 md:text-2xl">
+                            {showAnswer 
+                                ? (card.answers.find(function (a) { return a.isCorrect })?.text ?? 'Keine korrekte Antwort hinterlegt') 
+                                : card.text
+                            }
+                            </h1>
+
                     </section>
 
                     <div className="mt-8 md:mx-auto md:w-full md:max-w-md">
