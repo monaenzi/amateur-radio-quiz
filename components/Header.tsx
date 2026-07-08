@@ -167,8 +167,8 @@ export default function Header({ variant = 'home' }: HeaderProps) {
           <div className="flex-1 flex items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
               <Link href="/dashboard">Home</Link>
-              <Link href="/quiz">Lernen</Link>
-              <Link href="/exam_locked">Prüfung</Link>
+              {/* <Link href="/quiz">Lernen</Link>
+              <Link href="/exam_locked">Prüfung</Link> */}
               <Link href="/statistics">Statistik</Link>
             </nav>
             <Link href="/dashboard">
@@ -206,8 +206,8 @@ export default function Header({ variant = 'home' }: HeaderProps) {
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
               <Link href="/dashboard">Home</Link>
-              <Link href="/quiz">Lernen</Link>
-              <Link href="/examSimulation">Prüfung</Link>
+              {/* <Link href="/quiz">Lernen</Link>
+              <Link href="/examSimulation">Prüfung</Link> */}
               <Link href="/statistics">Statistik</Link>
               <LogoutButton />
             </nav>
