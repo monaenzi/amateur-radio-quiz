@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 
 export const questionRepository = {
-  findMany(filters: { search?: string; classFilter?: number; subjectFilter?: string }) {
+  findMany(filters: { search?: string; classFilter?: number; subjectFilter?: string[] }) { // <-- Hier string[] statt string
     const { search, classFilter, subjectFilter } = filters
 
     return prisma.question.findMany({
@@ -15,7 +15,9 @@ export const questionRepository = {
         }),
 
         ...(subjectFilter && {
-          subject: subjectFilter,
+          subject: {
+            in: subjectFilter,
+          },
         }),
 
         ...(search && {

@@ -4,16 +4,10 @@ import { NotFoundError } from '@/lib/errors'
 export const questionService = {
   async getAll(filters: {
     search?: string
-    classFilter?: string
-    subjectFilter?: string
+    classFilter?: number
+    subjectFilter?: string[]
   }) {
-    return questionRepository.findMany({
-      search: filters.search,
-      classFilter: filters.classFilter
-        ? parseInt(filters.classFilter)
-        : undefined,
-      subjectFilter: filters.subjectFilter,
-    })
+    return questionRepository.findMany(filters)
   },
 
   async getById(id: number) {
