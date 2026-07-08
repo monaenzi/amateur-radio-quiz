@@ -53,7 +53,13 @@ export default function Header({ variant = 'home' }: HeaderProps) {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex flex-1 items-center">{!hideBackButton && <BackButton />}</div>
+          <div className="flex-1 flex items-center">
+            {!hideBackButton && (
+              <div className="md:hidden">
+                <BackButton />
+              </div>
+            )}
+          </div>
 
           <div className="flex flex-col items-center">
             <h1 className="text-2xl font-bold text-white">Admin</h1>
