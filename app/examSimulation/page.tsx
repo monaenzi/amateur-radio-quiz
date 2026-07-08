@@ -1,51 +1,30 @@
 'use client'
 
-import { useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import FooterNav from '@/components/FooterNav'
 import AppButton from '@/components/AppButton'
-
-const ANSWERS = [
-  { id: 'A', text: 'Das Rundfunkgesetz (RFG) und die EU-Datenschutzverordnung', correct: false },
-  {
-    id: 'B',
-    text: 'Das Telekommunikationsgesetz (TKG) und die Amateurfunkverordnung (AFV)',
-    correct: true,
-  },
-  { id: 'C', text: 'Die Gewerbeordnung und das Elektrotechnikgesetz', correct: false },
-  {
-    id: 'D',
-    text: 'Ausschließlich internationale ITU-Regelungen ohne nationales Gesetz',
-    correct: false,
-  },
-]
-
-const EXPLANATION =
-  'Der Amateurfunk wird in Österreich durch das Telekommunikationsgesetz (TKG) sowie die Amateurfunkverordnung (AFV) geregelt, die die Details zu Bewilligungen, Rufzeichen und Betrieb festlegen.'
+import { useExamSimulation } from './useExamSimulation'
 
 export default function ExamPage() {
-  const [selected, setSelected] = useState<string[]>([])
-  const [submitted, setSubmitted] = useState(false)
-  const [showExplanation, setShowExplanation] = useState(false)
+  const {
+    questions,
+    currentQuestion,
+    currentIndex,
+    selected,
+    submitted,
+    showExplanation,
+    loading,
+    progressLabel,
+    toggleSelect,
+    handleSubmit,
+    handleNext,
+    setShowExplanation,
+    setCurrentIndex,
+  } = useExamSimulation()
 
-  const toggleSelect = (id: string) => {
-    if (submitted) return
-    setSelected((prev) => (prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id]))
-  }
-
-  const handleSubmit = () => {
-    setSubmitted(true)
-  }
-
-  const handleNext = () => {
-    setSelected([])
-    setSubmitted(false)
-    setShowExplanation(false)
-  }
-
-  const getButtonStyle = (answer: (typeof ANSWERS)[number]) => {
-    const isSelected = selected.includes(answer.id)
+  const getButtonStyle = (answer: { id: number; text: string; isCorrect: boolean }) => {
+    const isSelected = selected.includes(String(answer.id))
 
     if (!submitted) {
       return isSelected
@@ -53,7 +32,7 @@ export default function ExamPage() {
         : 'border-gray-700 text-[#808080]'
     }
 
-    if (answer.correct) {
+    if (answer.isCorrect) {
       return 'border-green-500 bg-green-50 text-green-700'
     }
     if (isSelected) {
@@ -62,11 +41,72 @@ export default function ExamPage() {
     return 'border-gray-300 text-gray-400'
   }
 
-  const getLetterStyle = (answer: (typeof ANSWERS)[number]) => {
+  const getLetterStyle = (answer: { id: number; text: string; isCorrect: boolean }) => {
+    const isSelected = selected.includes(String(answer.id))
+
     if (!submitted) return 'text-[#008CEA]'
-    if (answer.correct) return 'text-green-600'
-    if (selected.includes(answer.id)) return 'text-red-600'
+    if (answer.isCorrect) return 'text-green-600'
+    if (isSelected) return 'text-red-600'
     return 'text-gray-400'
+  }
+
+  if (loading) {
+    return (
+      <main className="h-screen overflow-x-hidden overflow-y-auto bg-white md:p-8">
+        <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl">
+          <Header variant="welcome" />
+          <section className="mx-auto flex flex-1 items-center justify-center px-6 py-6">
+            <p className="text-sm text-gray-500">Fragen werden geladen...</p>
+          </section>
+          <div className="md:hidden">
+            <FooterNav />
+          </div>
+          <div className="hidden md:block">
+            <Footer />
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  if (!loading && questions.length === 0) {
+    return (
+      <main className="h-screen overflow-x-hidden overflow-y-auto bg-white md:p-8">
+        <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl">
+          <Header variant="welcome" />
+          <section className="mx-auto flex flex-1 items-center justify-center px-6 py-6">
+            <p className="text-sm text-gray-500">Keine Fragen für diese Auswahl gefunden.</p>
+          </section>
+          <div className="md:hidden">
+            <FooterNav />
+          </div>
+          <div className="hidden md:block">
+            <Footer />
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  if (currentIndex >= questions.length) {
+    return (
+      <main className="h-screen overflow-x-hidden overflow-y-auto bg-white md:p-8">
+        <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl">
+          <Header variant="welcome" />
+          <section className="mx-auto flex flex-1 flex-col items-center justify-center px-6 py-6 text-center">
+            <h1 className="mb-3 text-2xl font-bold text-gray-800">Prüfung abgeschlossen</h1>
+            <p className="mb-6 text-sm text-gray-500">Du hast alle geladenen Fragen durchgearbeitet.</p>
+            <AppButton onClick={() => setCurrentIndex(0)}>Erneut starten</AppButton>
+          </section>
+          <div className="md:hidden">
+            <FooterNav />
+          </div>
+          <div className="hidden md:block">
+            <Footer />
+          </div>
+        </div>
+      </main>
+    )
   }
 
   return (
@@ -76,23 +116,21 @@ export default function ExamPage() {
 
         <section className="mx-auto w-full max-w-md flex-1 px-6 py-6 pb-32 md:max-w-5xl md:px-0 md:py-4 md:pb-8">
           <div className="md:flex md:gap-8">
-            {/* Linke Spalte (auf Mobile: die einzige Spalte) */}
             <div className="md:flex-1">
               <div className="mb-15 md:mb-4 flex items-center justify-between">
                 <h1 className="text-2xl font-bold text-gray-800 md:text-lg">Prüfungssimulation</h1>
-
-                <span className="text-gray-400 md:text-base">1/9</span>
+                <span className="text-gray-400 md:text-base">{progressLabel}</span>
               </div>
 
               <p className="mb-6 mt-4 text-left text-xl text-[#008CEA] md:text-base">
-                Welche gesetzlichen Bestimmungen sind für den Amateurfunk maßgeblich?
+                {currentQuestion.text}
               </p>
 
               <div className="flex flex-col gap-3">
-                {ANSWERS.map((answer) => (
+                {currentQuestion.answers.map((answer) => (
                   <button
                     key={answer.id}
-                    onClick={() => toggleSelect(answer.id)}
+                    onClick={() => toggleSelect(String(answer.id))}
                     disabled={submitted}
                     className={`w-full rounded-xl border p-4 text-center transition-colors md:p-2 md:text-xs ${getButtonStyle(answer)}`}
                   >
@@ -109,10 +147,10 @@ export default function ExamPage() {
                     Erklärung {showExplanation ? 'ausblenden' : 'einblenden'}
                   </button>
                 )}
-                {/* Erklärung unterhalb: NUR auf Mobile (Desktop kriegt die Seitenspalte unten) */}
+
                 {submitted && showExplanation && (
                   <div className="rounded-xl bg-gray-50 p-4 text-sm text-gray-600 md:hidden">
-                    {EXPLANATION}
+                    {currentQuestion.explanation ?? 'Keine Erklärung verfügbar.'}
                   </div>
                 )}
               </div>
@@ -126,12 +164,11 @@ export default function ExamPage() {
               </div>
             </div>
 
-            {/* Rechte Spalte: Erklärung NUR auf Desktop, neben den Antworten */}
             {submitted && showExplanation && (
               <div className="hidden md:block md:w-80 md:flex-shrink-0">
                 <div className="sticky top-4 rounded-xl bg-gray-50 p-4 text-sm text-gray-600">
                   <p className="mb-2 font-semibold text-gray-800">Erklärung</p>
-                  {EXPLANATION}
+                  {currentQuestion.explanation ?? 'Keine Erklärung verfügbar.'}
                 </div>
               </div>
             )}
