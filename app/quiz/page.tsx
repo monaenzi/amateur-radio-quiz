@@ -50,6 +50,13 @@ export default function KarteikartenPage() {
         setCurrentIndex(function (prev) { return prev + 1 })
     }
 
+    function handlePrev() {
+        if (currentIndex > 0) {
+            setShowAnswer(false)
+            setCurrentIndex(function (prev) { return prev - 1 })
+        }
+    }
+
     if (loading) {
         return (
             <main className="min-h-screen bg-white md:p-8">
@@ -119,39 +126,58 @@ export default function KarteikartenPage() {
                                 ? (card.answers.find(function (a) { return a.isCorrect })?.text ?? 'Keine korrekte Antwort hinterlegt') 
                                 : card.text
                             }
-                            </h1>
-
+                        </h1>
                     </section>
 
                     <div className="mt-8 md:mx-auto md:w-full md:max-w-md">
-                        {!showAnswer ? (
-                            <div>
-                                <AppButton onClick={function () { setShowAnswer(true) }}>
-                                    Antwort anzeigen
-                                </AppButton>
+                        <div className="flex items-center gap-4">
+                            
+                            <button
+                                onClick={handlePrev}
+                                disabled={currentIndex === 0}
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xl font-bold text-gray-600 transition hover:bg-gray-200 disabled:opacity-30 disabled:hover:bg-gray-100 cursor-pointer disabled:cursor-not-allowed"
+                            >
+                                ‹
+                            </button>
+
+                            <div className="flex-1">
+                                {!showAnswer ? (
+                                    <AppButton onClick={function () { setShowAnswer(true) }}>
+                                        Antwort anzeigen
+                                    </AppButton>
+                                ) : (
+                                    <div className="grid grid-cols-3 gap-3">
+                                        <button
+                                            onClick={handleNext}
+                                            className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                        >
+                                            ✓
+                                        </button>
+                                        <button
+                                            onClick={handleNext}
+                                            className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                        >
+                                            ~
+                                        </button>
+                                        <button
+                                            onClick={handleNext}
+                                            className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                )}
                             </div>
-                        ) : (
-                            <div className="grid grid-cols-3 gap-3">
-                                <button
-                                    onClick={handleNext}
-                                    className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
-                                >
-                                    ✓
-                                </button>
-                                <button
-                                    onClick={handleNext}
-                                    className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
-                                >
-                                    ~
-                                </button>
-                                <button
-                                    onClick={handleNext}
-                                    className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
-                                >
-                                    ✕
-                                </button>
-                            </div>
-                        )}
+
+                            <button
+                                onClick={handleNext}
+                                disabled={currentIndex === questions.length - 1}
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xl font-bold text-gray-600 transition hover:bg-gray-200 disabled:opacity-30 disabled:hover:bg-gray-100 cursor-pointer disabled:cursor-not-allowed"
+                            >
+                                ›
+                            </button>
+                            
+                        </div>
                     </div>
                 </section>
 
