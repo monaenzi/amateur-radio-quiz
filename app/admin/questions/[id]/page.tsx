@@ -31,12 +31,12 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
     <main className="min-h-screen bg-white">
       <Header variant="admin" />
 
-      <div className="p-6">
+      <div className="p-6 pt-8 max-w-2xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-700 mb-6">
           {isNew ? 'Neue Frage' : 'Frage bearbeiten'}
         </h1>
 
-        <div className="flex flex-col gap-4 max-w-2xl">
+        <div className="flex flex-col gap-4">
           <input
             type="text"
             placeholder="Code (z.B. R-047)"

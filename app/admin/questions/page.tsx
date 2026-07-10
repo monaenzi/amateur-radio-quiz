@@ -113,7 +113,7 @@ export default function QuestionList() {
         </div>
 
         {total > 0 && (
-          <div className="mt-4 flex flex-col gap-2 border-t border-gray-200 pt-4 text-sm text-gray-500 md:flex-row md:items-center md:justify-between">
+          <div className="mt-4 flex flex-col items-center gap-2 border-t border-gray-200 pt-4 text-sm text-gray-500 md:flex-row md:items-center md:justify-between">
             <p>
               Seite {page} von {totalPages} • {total} Fragen gesamt
             </p>
