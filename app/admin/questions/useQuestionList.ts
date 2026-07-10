@@ -30,8 +30,10 @@ export function useQuestionList() {
   const [totalPages, setTotalPages] = useState(1)
   const [total, setTotal] = useState(0)
   const pageSize = 10
+  const [isLoading, setIsLoading] = useState(true)
 
   async function fetchQuestions(nextPage = page) {
+    setIsLoading(true)
     const params = new URLSearchParams()
     if (search) params.set('search', search)
     if (classFilter) params.set('class', classFilter)
@@ -49,6 +51,7 @@ export function useQuestionList() {
       setTotal(data.length)
       setTotalPages(1)
       setPage(nextPage)
+      setIsLoading(false)
       return
     }
 
@@ -56,6 +59,7 @@ export function useQuestionList() {
     setTotal(data.total ?? 0)
     setTotalPages(data.totalPages ?? 1)
     setPage(data.page ?? nextPage)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -97,5 +101,6 @@ export function useQuestionList() {
     deleteId,
     setDeleteId,
     confirmDelete,
+    isLoading,
   }
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Trash2, Pen } from 'lucide-react'
 import Header from '@/components/Header'
 import ConfirmModal from '@/components/ConfirmModal'
+import QuestionSkeleton from '@/components/QuestionSkeleton'
 
 export default function QuestionList() {
   const router = useRouter()
@@ -24,6 +25,7 @@ export default function QuestionList() {
     deleteId,
     setDeleteId,
     confirmDelete,
+    isLoading,
   } = useQuestionList()
 
   return (
@@ -75,11 +77,16 @@ export default function QuestionList() {
         </div>
 
         <div className="mt-6 flex flex-col gap-3">
-          {questions.length === 0 && (
+          {isLoading ? (
+            <>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <QuestionSkeleton key={i} />
+              ))}
+            </>
+          ) : questions.length === 0 ? (
             <p className="text-center text-gray-400">Keine Fragen gefunden.</p>
-          )}
-
-          {questions.map((q) => (
+          ) : (
+            questions.map((q) => (
             <div
               key={q.id}
               className="flex items-center justify-between rounded-md border border-gray-200 px-4 py-3"
@@ -112,7 +119,8 @@ export default function QuestionList() {
                 </button>
               </div>
             </div>
-          ))}
+          ))
+          )}
         </div>
 
         {total > 0 && (
