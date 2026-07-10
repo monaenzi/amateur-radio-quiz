@@ -6,6 +6,7 @@ import { Trash2, Pen } from 'lucide-react'
 import Header from '@/components/Header'
 import ConfirmModal from '@/components/ConfirmModal'
 import QuestionSkeleton from '@/components/QuestionSkeleton'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default function QuestionList() {
   const router = useRouter()
@@ -31,6 +32,10 @@ export default function QuestionList() {
   return (
     <main className="min-h-screen bg-white">
       <Header variant="admin" />
+      <Breadcrumbs items={[
+        { label: 'Admin', href: '/admin' },
+        { label: 'Fragen' },
+      ]} />
 
       <div className="p-6">
         <div className="flex flex-col gap-3">

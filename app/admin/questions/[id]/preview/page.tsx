@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import AppButton from '@/components/AppButton'
 import { useQuestionPreview } from './useQuestionPreview'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 const LETTER_MAP = ['A', 'B', 'C', 'D', 'E', 'F']
 
@@ -71,7 +72,12 @@ export default function QuestionPreview({
           ← Zurück zum Editor
         </button>
       </div>
-
+      <Breadcrumbs items={[
+        { label: 'Admin', href: '/admin' },
+        { label: 'Fragen', href: '/admin/questions' },
+        { label: 'Frage bearbeiten', href: `/admin/questions/${id}` },
+        { label: 'Vorschau' },
+      ]} />
       <div className="flex gap-2 px-6 pt-4 max-w-2xl mx-auto">
         <button
           onClick={() => { setMode('karteikarte'); setShowAnswer(false) }}

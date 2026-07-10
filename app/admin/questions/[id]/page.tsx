@@ -8,6 +8,7 @@ import Header from '@/components/Header'
 import { useRouter } from 'next/navigation'
 import Toast from '@/components/Toast'
 import { useToast } from '@/lib/useToast'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default function QuestionEditor({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -33,6 +34,11 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
   return (
     <main className="min-h-screen bg-white">
       <Header variant="admin" />
+      <Breadcrumbs items={[
+        { label: 'Admin', href: '/admin' },
+        { label: 'Fragen', href: '/admin/questions' },
+        { label: isNew ? 'Neue Frage' : 'Frage bearbeiten' },
+      ]} />
 
       <div className="p-6 pt-8 max-w-2xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-700 mb-6">
