@@ -68,8 +68,12 @@ export function useQuestionList() {
     return () => clearTimeout(timeout)
   }, [search, classFilter, subjectFilter])
 
-  async function deleteQuestion(id: number) {
-    await fetch(`/api/admin/questions?id=${id}`, { method: 'DELETE' })
+  const [deleteId, setDeleteId] = useState<number | null>(null)
+
+  async function confirmDelete() {
+    if (!deleteId) return
+    await fetch(`/api/admin/questions?id=${deleteId}`, { method: 'DELETE' })
+    setDeleteId(null)
     await fetchQuestions(page)
   }
 
@@ -90,6 +94,8 @@ export function useQuestionList() {
       void fetchQuestions(nextPage)
     },
     fetchQuestions,
-    deleteQuestion,
+    deleteId,
+    setDeleteId,
+    confirmDelete,
   }
 }

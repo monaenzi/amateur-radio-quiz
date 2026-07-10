@@ -4,6 +4,7 @@ import { useQuestionList } from './useQuestionList'
 import { useRouter } from 'next/navigation'
 import { Trash2, Pen } from 'lucide-react'
 import Header from '@/components/Header'
+import ConfirmModal from '@/components/ConfirmModal'
 
 export default function QuestionList() {
   const router = useRouter()
@@ -20,7 +21,9 @@ export default function QuestionList() {
     total,
     goToPage,
     fetchQuestions,
-    deleteQuestion,
+    deleteId,
+    setDeleteId,
+    confirmDelete,
   } = useQuestionList()
 
   return (
@@ -102,7 +105,7 @@ export default function QuestionList() {
                   <Pen />
                 </button>
                 <button
-                  onClick={() => deleteQuestion(q.id)}
+                  onClick={() => setDeleteId(q.id)}
                   className="rounded-md border border-red-200 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
                 >
                   <Trash2 />
@@ -136,6 +139,14 @@ export default function QuestionList() {
           </div>
         )}
       </div>
+      {deleteId && (
+        <ConfirmModal
+          title="Frage löschen?"
+          message="Diese Aktion kann nicht rückgängig gemacht werden."
+          onConfirm={confirmDelete}
+          onCancel={() => setDeleteId(null)}
+        />
+      )}
     </main>
   )
 }
