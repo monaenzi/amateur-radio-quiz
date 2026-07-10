@@ -51,7 +51,7 @@ export default function Header({ variant = 'home' }: HeaderProps) {
 
   if (variant === 'admin') {
     return (
-      <header className="relative bg-[#008CEA] px-6 py-4">
+      <header className="relative md:relative sticky md:static top-0 z-50 bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex-1 flex items-center">
             {!hideBackButton && (
