@@ -36,7 +36,7 @@ const defaultForm: QuestionForm = {
   ],
 }
 
-export function useQuestionEditor(id: string) {
+export function useQuestionEditor(id: string, showToast?: (message: string, type: 'success' | 'error') => void) {
   const router = useRouter()
   const isNew = id === 'new'
   const [form, setForm] = useState<QuestionForm>(defaultForm)
@@ -133,6 +133,8 @@ export function useQuestionEditor(id: string) {
       return
     }
 
+    showToast?.('Frage gespeichert!', 'success')
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     router.push('/admin/questions')
   }
 

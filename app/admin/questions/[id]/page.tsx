@@ -6,10 +6,13 @@ import AppButton from '@/components/AppButton'
 import { Trash2 } from 'lucide-react'
 import Header from '@/components/Header'
 import { useRouter } from 'next/navigation'
+import Toast from '@/components/Toast'
+import { useToast } from '@/lib/useToast'
 
 export default function QuestionEditor({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const router = useRouter()
+  const { toast, showToast, hideToast } = useToast()
   const {
     form,
     setForm,
@@ -25,7 +28,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
     updateAttachment,
     handleSubmit,
     handleSubmitAndPreview,
-  } = useQuestionEditor(id)
+  } = useQuestionEditor(id, showToast)
 
   return (
     <main className="min-h-screen bg-white">
@@ -178,6 +181,13 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
           </button>
         </div>
       </div>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={hideToast}
+        />
+      )}
     </main>
   )
 }
