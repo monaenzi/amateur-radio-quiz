@@ -19,6 +19,36 @@ type Question = {
     answers: Answer[]
 }
 
+type PersistedQuizState = {
+    currentIndex: number
+    showAnswer: boolean
+}
+
+function getQuizStorageKey(classId: string, subject?: string) {
+    return `quiz-progress:${classId}:${subject ?? 'all'}`
+}
+
+function readPersistedQuizState(classId: string, subject?: string): PersistedQuizState {
+    if (typeof window === 'undefined') {
+        return { currentIndex: 0, showAnswer: false }
+    }
+
+    try {
+        const stored = sessionStorage.getItem(getQuizStorageKey(classId, subject))
+        if (!stored) {
+            return { currentIndex: 0, showAnswer: false }
+        }
+
+        const parsed = JSON.parse(stored) as Partial<PersistedQuizState>
+        return {
+            currentIndex: typeof parsed.currentIndex === 'number' ? parsed.currentIndex : 0,
+            showAnswer: Boolean(parsed.showAnswer),
+        }
+    } catch {
+        return { currentIndex: 0, showAnswer: false }
+    }
+}
+
 export default function KarteikartenPage() {
     const { data: session } = useSession()
     const isLoggedIn = !!session?.user
@@ -28,11 +58,19 @@ export default function KarteikartenPage() {
     const subject = searchParams.get('subject') ?? undefined
 
     const [questions, setQuestions] = useState<Question[]>([])
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [showAnswer, setShowAnswer] = useState(false)
+    const [currentIndex, setCurrentIndex] = useState(() => readPersistedQuizState(classId, subject).currentIndex)
+    const [showAnswer, setShowAnswer] = useState(() => readPersistedQuizState(classId, subject).showAnswer)
     const [loading, setLoading] = useState(true)
 
     useEffect(function () {
+        const restoredState = readPersistedQuizState(classId, subject)
+        setCurrentIndex(restoredState.currentIndex)
+        setShowAnswer(restoredState.showAnswer)
+    }, [classId, subject])
+
+    useEffect(function () {
+        if (typeof window === 'undefined') return
+
         const url = subject 
             ? `/api/questions?class=${classId}&subject=${subject}`
             : `/api/questions?class=${classId}`
@@ -44,6 +82,15 @@ export default function KarteikartenPage() {
                 setLoading(false)
             })
     }, [classId, subject])
+
+    useEffect(function () {
+        if (typeof window === 'undefined') return
+
+        sessionStorage.setItem(
+            getQuizStorageKey(classId, subject),
+            JSON.stringify({ currentIndex, showAnswer })
+        )
+    }, [classId, currentIndex, showAnswer, subject])
 
     function handleNext() {
         setShowAnswer(false)
