@@ -47,6 +47,12 @@ export default function KarteikartenPage() {
 
     function handleNext() {
         setShowAnswer(false)
+
+        if (currentIndex >= questions.length - 1) {
+            setCurrentIndex(questions.length)
+            return
+        }
+
         setCurrentIndex(function (prev) { return prev + 1 })
     }
 
@@ -90,6 +96,8 @@ export default function KarteikartenPage() {
                 <div className="w-full bg-white md:mx-auto md:max-w-7xl">
                     <Header variant={isLoggedIn ? 'welcome' : 'default'} />
                     <div className="flex min-h-[calc(100vh-96px)] flex-col items-center justify-center text-center px-6">
+                        <h1 className="mb-3 text-2xl font-bold text-gray-800">Du bist mit allen Fragen durch</h1>
+                        <p className="mb-6 text-sm text-gray-500">Gut gemacht! Du hast alle ausgewählten Fragen abgeschlossen.</p>
                         <AppButton onClick={function() { router.push('/dashboard') }}>Zurück zum Dashboard</AppButton>
                     </div>
                 </div>
@@ -99,6 +107,7 @@ export default function KarteikartenPage() {
 
     const card = questions[currentIndex]
     const progress = Math.round(((currentIndex + 1) / questions.length) * 100)
+    const isLastQuestion = currentIndex === questions.length - 1
 
     return (
         <main className="min-h-screen bg-white md:p-8">
@@ -145,6 +154,13 @@ export default function KarteikartenPage() {
                                     <AppButton onClick={function () { setShowAnswer(true) }}>
                                         Antwort anzeigen
                                     </AppButton>
+                                ) : isLastQuestion ? (
+                                    <button
+                                        onClick={handleNext}
+                                        className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                                    >
+                                        Fertig
+                                    </button>
                                 ) : (
                                     <div className="grid grid-cols-3 gap-3">
                                         <button

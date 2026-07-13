@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "npx playwright test"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
