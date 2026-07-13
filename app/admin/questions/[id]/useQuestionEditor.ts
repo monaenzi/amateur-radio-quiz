@@ -112,6 +112,14 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
     setForm({ ...form, attachments: updated })
   }
 
+  async function handleFileUpload(index: number, file: File) {
+  const formData = new FormData()
+  formData.append('file', file)
+  const res = await fetch('/api/upload', { method: 'POST', body: formData })
+  const data = await res.json()
+  if (data.url) updateAttachment(index, 'url', data.url)
+}
+
   async function handleSubmit() {
     setLoading(true)
     setError('')
@@ -179,5 +187,6 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
     updateAttachment,
     handleSubmit,
     handleSubmitAndPreview,
+    handleFileUpload,
   }
 }

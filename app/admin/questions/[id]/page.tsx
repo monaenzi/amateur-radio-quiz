@@ -29,6 +29,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
     updateAttachment,
     handleSubmit,
     handleSubmitAndPreview,
+    handleFileUpload,
   } = useQuestionEditor(id, showToast)
 
   return (
@@ -84,13 +85,42 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
                   <option value="image">Bild</option>
                 </select>
 
-                <input
-                  type="url"
-                  placeholder="URL"
-                  value={attachment.url}
-                  onChange={(e) => updateAttachment(index, 'url', e.target.value)}
-                  className="flex-1 rounded-md border border-gray-300 px-4 py-2 outline-none focus:border-[#008CEA] text-gray-600"
-                />
+                {attachment.type === 'image' ? (
+                  <>
+                    <input
+                      type="url"
+                      placeholder="Bild URL"
+                      value={attachment.url}
+                      onChange={(e) => updateAttachment(index, 'url', e.target.value)}
+                      className="flex-1 rounded-md border border-gray-300 px-4 py-2 outline-none focus:border-[#008CEA] text-gray-600"
+                    />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      id={`file-upload-${index}`}
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0]
+                        if (!file) return
+                        await handleFileUpload(index, file)
+                      }}
+                    />
+                    <label
+                      htmlFor={`file-upload-${index}`}
+                      className="cursor-pointer rounded-md border border-gray-300 px-3 py-2 text-gray-600 hover:bg-gray-50"
+                    >
+                      📷
+                    </label>
+                  </>
+                ) : (
+                  <input
+                    type="url"
+                    placeholder="URL"
+                    value={attachment.url}
+                    onChange={(e) => updateAttachment(index, 'url', e.target.value)}
+                    className="flex-1 rounded-md border border-gray-300 px-4 py-2 outline-none focus:border-[#008CEA] text-gray-600"
+                  />
+                )}
 
                 <button
                   onClick={() => removeAttachment(index)}
