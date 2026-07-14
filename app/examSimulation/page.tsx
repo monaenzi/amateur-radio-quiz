@@ -128,14 +128,16 @@ export default function ExamPage() {
 
               <div className="flex flex-col gap-3">
                 {currentQuestion.answers.length > 0 ? (
-                  currentQuestion.answers.map((answer) => (
+                  currentQuestion.answers.map((answer, index) => (
                     <button
                       key={answer.id}
                       onClick={() => toggleSelect(String(answer.id))}
                       disabled={submitted}
                       className={`w-full rounded-xl border p-4 text-center transition-colors md:p-2 md:text-xs ${getButtonStyle(answer)}`}
                     >
-                      <span className={`mr-3 font-bold ${getLetterStyle(answer)}`}>{answer.id}</span>
+                      <span className={`mr-3 font-bold ${getLetterStyle(answer)}`}>
+                        {String.fromCharCode(65 + index)}
+                      </span>
                       {answer.text}
                     </button>
                   ))
