@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import FooterNav from '@/components/FooterNav'
 import AppButton from '@/components/AppButton'
 import { useExamSimulation } from './useExamSimulation'
+import { useState } from 'react'
 
 export default function ExamPage() {
   const {
@@ -49,6 +50,8 @@ export default function ExamPage() {
     if (isSelected) return 'text-red-600'
     return 'text-gray-400'
   }
+
+  const [lightboxUrl, setLightboxUrl] = useState<string | null>(null)
 
   if (loading) {
     return (
@@ -126,6 +129,16 @@ export default function ExamPage() {
                 {currentQuestion.text}
               </p>
 
+              {currentQuestion.attachments?.filter((a) => a.type === 'image').map((a) => (
+                <img
+                  key={a.id}
+                  src={a.url}
+                  alt="Anhang"
+                  className="mb-4 max-h-48 rounded-lg object-contain mx-auto cursor-pointer hover:opacity-90"
+                  onClick={() => setLightboxUrl(a.url)}
+                />
+              ))}
+
               <div className="flex flex-col gap-3">
                 {currentQuestion.answers.length > 0 ? (
                   currentQuestion.answers.map((answer, index) => (
@@ -191,6 +204,19 @@ export default function ExamPage() {
           <Footer />
         </div>
       </div>
+
+      {lightboxUrl && (
+        <div
+          onClick={() => setLightboxUrl(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-pointer"
+        >
+          <img
+            src={lightboxUrl}
+            alt="Vollbild"
+            className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
+          />
+        </div>
+      )}
     </main>
   )
 }

@@ -15,6 +15,7 @@ export type ExamQuestion = {
   explanation?: string | null
   subject?: string
   answers: ExamAnswer[]
+  attachments: { id: number; url: string; type: string }[]
 }
 
 type ExamResult = {
