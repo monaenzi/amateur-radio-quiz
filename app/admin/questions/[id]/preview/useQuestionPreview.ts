@@ -16,6 +16,10 @@ type Question = {
   class: number
   subject: string
   answers: Answer[]
+  attachments: {
+    url: string
+    type: string
+  }[]
 }
 
 export function useQuestionPreview(id: string) {

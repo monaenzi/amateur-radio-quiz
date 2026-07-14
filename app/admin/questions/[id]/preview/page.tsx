@@ -22,6 +22,7 @@ export default function QuestionPreview({
   const [selected, setSelected] = useState<string[]>([])
   const [submitted, setSubmitted] = useState(false)
   const [showExplanation, setShowExplanation] = useState(false)
+  const [lightboxUrl, setLightboxUrl] = useState<string | null>(null)
 
   if (loading) return <p className="p-6 text-gray-400">Laden...</p>
   if (!question) return <p className="p-6 text-gray-400">Frage nicht gefunden.</p>
@@ -112,6 +113,16 @@ export default function QuestionPreview({
                 ? question.answers.filter((a) => a.isCorrect).map((a) => a.text).join(', ')
                 : question.text}
             </h1>
+
+            {!showAnswer && question.attachments?.filter((a) => a.type === 'image').map((a, i) => (
+              <img
+                key={i}
+                src={a.url}
+                alt="Anhang"
+                onClick={() => setLightboxUrl(a.url)}
+                className="mt-6 max-h-48 rounded-lg object-contain"
+              />
+            ))}
           </section>
 
           <div className="mt-8 md:mx-auto md:w-full md:max-w-md">
@@ -139,6 +150,16 @@ export default function QuestionPreview({
               <p className="mb-6 mt-4 text-left text-xl text-[#008CEA] md:text-base">
                 {question.text}
               </p>
+
+              {question.attachments?.filter((a) => a.type === 'image').map((a, i) => (
+                <img
+                  key={i}
+                  src={a.url}
+                  alt="Anhang"
+                  onClick={() => setLightboxUrl(a.url)}
+                  className="mb-4 max-h-48 rounded-lg object-contain mx-auto"
+                />
+              ))}
 
               <div className="flex flex-col gap-3">
                 {question.answers.map((answer, index) => (
@@ -190,6 +211,19 @@ export default function QuestionPreview({
             )}
           </div>
         </section>
+      )}
+
+      {lightboxUrl && (
+        <div
+          onClick={() => setLightboxUrl(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-pointer"
+        >
+          <img
+            src={lightboxUrl}
+            alt="Vollbild"
+            className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
+          />
+        </div>
       )}
     </main>
   )
