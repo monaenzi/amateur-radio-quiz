@@ -17,6 +17,11 @@ type Question = {
   id: number
   text: string
   answers: Answer[]
+  attachments: {
+    id: number
+    url: string
+    type: string
+  }[]
 }
 
 type PersistedQuizState = {
@@ -56,6 +61,7 @@ export default function KarteikartenPage() {
   const router = useRouter()
   const classId = searchParams.get('class') ?? '1'
   const subject = searchParams.get('subject') ?? undefined
+  const [lightboxUrl, setLightboxUrl] = useState<string | null>(null)
 
   const [questions, setQuestions] = useState<Question[]>([])
   //   const [currentIndex, setCurrentIndex] = useState(0)
@@ -229,6 +235,19 @@ export default function KarteikartenPage() {
                     })?.text ?? 'Keine korrekte Antwort hinterlegt')
                   : card.text}
               </h1>
+
+              {!showAnswer && card.attachments?.filter((a) => a.type === 'image').map((a) => (
+                <img
+                  key={a.id}
+                  src={a.url}
+                  alt="Anhang"
+                  className="mt-6 max-h-48 rounded-lg object-contain cursor-pointer hover:opacity-90"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setLightboxUrl(a.url)
+                  }}
+                />
+              ))}
             </section>
           </div>
 
@@ -295,6 +314,19 @@ export default function KarteikartenPage() {
 
         <FooterNav />
       </div>
+
+      {lightboxUrl && (
+        <div
+          onClick={() => setLightboxUrl(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-pointer"
+        >
+          <img
+            src={lightboxUrl}
+            alt="Vollbild"
+            className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
+          />
+        </div>
+      )}
     </main>
   )
 }
