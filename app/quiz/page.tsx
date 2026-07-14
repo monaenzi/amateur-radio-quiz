@@ -237,16 +237,24 @@ export default function KarteikartenPage() {
               </h1>
 
               {!showAnswer && card.attachments?.filter((a) => a.type === 'image').map((a) => (
-                <img
-                  key={a.id}
-                  src={a.url}
-                  alt="Anhang"
-                  className="mt-6 max-h-48 rounded-lg object-contain cursor-pointer hover:opacity-90"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setLightboxUrl(a.url)
-                  }}
-                />
+                <div key={a.id} className="relative">
+                    <img
+                      src={a.url}
+                      alt="Anhang"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none'
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden')
+                      }}
+                      className="mt-6 max-h-48 rounded-lg object-contain cursor-pointer hover:opacity-90"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setLightboxUrl(a.url)
+                      }}
+                    />
+                    <div className="hidden mt-6 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-400 text-center">
+                      Bild konnte nicht geladen werden
+                    </div>
+                  </div>
               ))}
             </section>
           </div>

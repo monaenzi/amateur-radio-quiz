@@ -115,13 +115,21 @@ export default function QuestionPreview({
             </h1>
 
             {!showAnswer && question.attachments?.filter((a) => a.type === 'image').map((a, i) => (
-              <img
-                key={i}
-                src={a.url}
-                alt="Anhang"
-                onClick={() => setLightboxUrl(a.url)}
-                className="mt-6 max-h-48 rounded-lg object-contain"
-              />
+              <div key={i} className="relative">
+                  <img
+                    src={a.url}
+                    alt="Anhang"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                      e.currentTarget.nextElementSibling?.classList.remove('hidden')
+                    }}
+                    onClick={() => setLightboxUrl(a.url)}
+                    className="mt-6 max-h-48 rounded-lg object-contain cursor-pointer hover:opacity-90"
+                  />
+                  <div className="hidden mt-6 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-400 text-center">
+                    Bild konnte nicht geladen werden
+                  </div>
+                </div>
             ))}
           </section>
 
@@ -152,13 +160,21 @@ export default function QuestionPreview({
               </p>
 
               {question.attachments?.filter((a) => a.type === 'image').map((a, i) => (
-                <img
-                  key={i}
-                  src={a.url}
-                  alt="Anhang"
-                  onClick={() => setLightboxUrl(a.url)}
-                  className="mb-4 max-h-48 rounded-lg object-contain mx-auto"
-                />
+                <div key={i} className="relative">
+                    <img
+                      src={a.url}
+                      alt="Anhang"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none'
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden')
+                      }}
+                      onClick={() => setLightboxUrl(a.url)}
+                      className="mb-4 max-h-48 rounded-lg object-contain mx-auto cursor-pointer hover:opacity-90"
+                    />
+                    <div className="hidden mb-4 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-400 text-center">
+                      Bild konnte nicht geladen werden
+                    </div>
+                  </div>
               ))}
 
               <div className="flex flex-col gap-3">
