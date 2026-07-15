@@ -13,6 +13,10 @@ export const userRepository = {
     })
   },
 
+  findByExternalId(externalId: string) {
+    return prisma.user.findUnique({ where: { externalId } })
+  },
+
   create(data: {
     email: string
     password: string
@@ -26,6 +30,30 @@ export const userRepository = {
         name: data.name,
         role: data.role ?? 'USER',
       },
+    })
+  },
+
+  createSSOUser(data: {
+    externalId: string
+    email: string | null
+    name: string | null
+    callSign: string | null
+  }) {
+    return prisma.user.create({
+      data: {
+        externalId: data.externalId,
+        email: data.email,
+        name: data.name,
+        callSign: data.callSign,
+        role: 'USER',
+      },
+    })
+  },
+
+  updateCallSign(id: number, callSign: string | null) {
+    return prisma.user.update({
+      where: { id },
+      data: { callSign },
     })
   },
 
