@@ -11,8 +11,9 @@ export function handleApiError(error: unknown) {
   }
 
   if (error instanceof ZodError) {
+    const firstMessage = error.issues[0]?.message ?? 'Ungültige Eingabe'
     return NextResponse.json(
-      { error: 'Ungültige Eingabe', details: error.flatten().fieldErrors },
+      { error: firstMessage, details: error.flatten().fieldErrors },
       { status: 400 }
     )
   }

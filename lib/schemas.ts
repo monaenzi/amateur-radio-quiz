@@ -25,7 +25,13 @@ export const createQuestionSchema = z.object({
   subject: z.enum(['Recht', 'Technik', 'Betrieb']),
   code: z.string().optional(),
 
-  answers: z.array(answerSchema).min(2, 'Mindestens 2 Antworten erforderlich'),
+  answers: z
+    .array(answerSchema)
+    .min(2, 'Mindestens 2 Antworten erforderlich')
+    .refine(
+      (answers) => answers.some((a) => a.isCorrect),
+      'Mindestens eine Antwort muss als richtig markiert sein'
+    ),
 
   attachments: z.array(attachmentSchema).default([]),
 })

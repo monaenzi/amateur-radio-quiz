@@ -42,13 +42,17 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
   const [form, setForm] = useState<QuestionForm>(defaultForm)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [isLoadingQuestion, setIsLoadingQuestion] = useState(!isNew)
+  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null)
 
   useEffect(() => {
     if (!isNew) {
       fetch(`/api/admin/questions/${id}`)
-        .then((res) => res.json())
+        .then(async (res) => {
+          if (!res.ok) throw new Error('Frage konnte nicht geladen werden')
+          return res.json()
+        })
         .then((data) => {
-          if (!data || data.error) return
           setForm({
             text: data.text,
             explanation: data.explanation ?? '',
@@ -62,6 +66,8 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
             })),
           })
         })
+        .catch((err) => setError(err.message))
+        .finally(() => setIsLoadingQuestion(false))
     }
   }, [id, isNew])
 
@@ -92,6 +98,15 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
     setForm({ ...form, answers: updated })
   }
 
+  function toggleClass(classId: number) {
+    setForm((prev) => ({
+      ...prev,
+      classes: prev.classes.includes(classId)
+        ? prev.classes.filter((c) => c !== classId)
+        : [...prev.classes, classId].sort((a, b) => a - b),
+    }))
+  }
+
   function addAttachment() {
     setForm({
       ...form,
@@ -113,14 +128,32 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
   }
 
   async function handleFileUpload(index: number, file: File) {
-  const formData = new FormData()
-  formData.append('file', file)
-  const res = await fetch('/api/upload', { method: 'POST', body: formData })
-  const data = await res.json()
-  if (data.url) updateAttachment(index, 'url', data.url)
-}
+    setUploadingIndex(index)
 
-  async function handleSubmit() {
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const res = await fetch('/api/upload', { method: 'POST', body: formData })
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null)
+        throw new Error(body?.error ?? 'Bild-Upload fehlgeschlagen')
+      }
+
+      const data = await res.json()
+
+      if (!data.url) throw new Error('Bild-Upload fehlgeschlagen')
+
+      updateAttachment(index, 'url', data.url)
+    } catch (err) {
+      showToast?.(err instanceof Error ? err.message : 'Bild-Upload fehlgeschlagen', 'error')
+    } finally {
+      setUploadingIndex(null)
+    }
+  }
+
+  async function submitQuestion() {
     setLoading(true)
     setError('')
 
@@ -136,10 +169,17 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
     setLoading(false)
 
     if (!res.ok) {
-      const data = await res.json()
-      setError(data.error ?? 'Fehler beim Speichern.')
-      return
+      const data = await res.json().catch(() => null)
+      setError(data?.error ?? 'Fehler beim Speichern.')
+      return null
     }
+
+    return res.json()
+  }
+
+  async function handleSubmit() {
+    const data = await submitQuestion()
+    if (!data) return
 
     showToast?.('Frage gespeichert!', 'success')
     await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -147,27 +187,9 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
   }
 
   async function handleSubmitAndPreview() {
-    setLoading(true)
-    setError('')
+    const data = await submitQuestion()
+    if (!data) return
 
-    const url = isNew ? '/api/admin/questions' : `/api/admin/questions/${id}`
-    const method = isNew ? 'POST' : 'PUT'
-
-    const res = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    })
-
-    setLoading(false)
-
-    if (!res.ok) {
-      const data = await res.json()
-      setError(data.error ?? 'Fehler beim Speichern.')
-      return
-    }
-
-    const data = await res.json()
     const questionId = isNew ? data.id : id
     router.push(`/admin/questions/${questionId}/preview`)
   }
@@ -175,9 +197,12 @@ export function useQuestionEditor(id: string, showToast?: (message: string, type
   return {
     form,
     setForm,
+    toggleClass,
     loading,
     error,
     isNew,
+    isLoadingQuestion,
+    uploadingIndex,
     updateAnswer,
     addAnswer,
     removeAnswer,

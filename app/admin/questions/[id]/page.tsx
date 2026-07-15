@@ -17,9 +17,12 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
   const {
     form,
     setForm,
+    toggleClass,
     loading,
     error,
     isNew,
+    isLoadingQuestion,
+    uploadingIndex,
     updateAnswer,
     addAnswer,
     removeAnswer,
@@ -49,6 +52,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
         <div className="flex flex-col gap-4">
           <input
             type="text"
+            aria-label="Code"
             placeholder="Code (z.B. R-047)"
             value={form.code}
             onChange={(e) => setForm({ ...form, code: e.target.value })}
@@ -56,6 +60,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
           />
 
           <textarea
+            aria-label="Fragetext"
             placeholder="Fragetext"
             value={form.text}
             onChange={(e) => setForm({ ...form, text: e.target.value })}
@@ -64,6 +69,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
           />
 
           <textarea
+            aria-label="Erklärung (optional)"
             placeholder="Erklärung (optional)"
             value={form.explanation}
             onChange={(e) => setForm({ ...form, explanation: e.target.value })}
@@ -78,6 +84,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
               <div key={index} className="flex items-center gap-2">
                 <select
                   value={attachment.type}
+                  aria-label="Anhang-Typ"
                   onChange={(e) => updateAttachment(index, 'type', e.target.value)}
                   className="rounded-md border border-gray-300 px-3 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
                 >
@@ -89,6 +96,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
                   <>
                     <input
                       type="url"
+                      aria-label="Bild URL"
                       placeholder="Bild URL"
                       value={attachment.url}
                       onChange={(e) => updateAttachment(index, 'url', e.target.value)}
@@ -107,14 +115,16 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
                     />
                     <label
                       htmlFor={`file-upload-${index}`}
+                      aria-label="Bild hochladen"
                       className="cursor-pointer rounded-md border border-gray-300 px-3 py-2 text-gray-600 hover:bg-gray-50"
                     >
-                      📷
+                      {uploadingIndex === index ? '…' : '📷'}
                     </label>
                   </>
                 ) : (
                   <input
                     type="url"
+                    aria-label="URL"
                     placeholder="URL"
                     value={attachment.url}
                     onChange={(e) => updateAttachment(index, 'url', e.target.value)}
@@ -124,6 +134,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
 
                 <button
                   onClick={() => removeAttachment(index)}
+                  aria-label="Anhang entfernen"
                   className="text-red-400 hover:text-red-600 px-2"
                 >
                   <Trash2 size={18} />
@@ -139,26 +150,30 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
             </button>
           </div>
 
-          <div className="flex gap-2">
-            <select
-              value={form.classes?.[0] ?? 1}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  classes: [parseInt(e.target.value)],
-                })
-              }
-              className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
-            >
-              <option value={1}>Klasse 1</option>
-              <option value={3}>Klasse 3</option>
-              <option value={4}>Klasse 4</option>
-            </select>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-bold text-gray-600">Prüfungskategorien</p>
+            <div className="flex gap-4">
+              {[1, 3, 4].map((classId) => (
+                <label key={classId} className="flex items-center gap-2 text-sm text-gray-600">
+                  <input
+                    type="checkbox"
+                    checked={form.classes.includes(classId)}
+                    onChange={() => toggleClass(classId)}
+                    className="accent-[#008CEA]"
+                  />
+                  Klasse {classId}
+                </label>
+              ))}
+            </div>
+          </div>
 
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-bold text-gray-600">Fachgebiet</p>
             <select
               value={form.subject}
+              aria-label="Fachgebiet"
               onChange={(e) => setForm({ ...form, subject: e.target.value })}
-              className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
+              className="rounded-md border border-gray-300 px-4 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
             >
               <option value="Recht">Recht</option>
               <option value="Technik">Technik</option>
@@ -172,12 +187,14 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
               <div key={index} className="flex items-center gap-2">
                 <input
                   type="checkbox"
+                  aria-label={`Antwort ${index + 1} als richtig markieren`}
                   checked={answer.isCorrect}
                   onChange={() => toggleCorrectAnswer(index)}
                   className="accent-[#008CEA]"
                 />
                 <input
                   type="text"
+                  aria-label={`Antwort ${index + 1}`}
                   placeholder={`Antwort ${index + 1}`}
                   value={answer.text}
                   onChange={(e) => updateAnswer(index, 'text', e.target.value)}
@@ -186,6 +203,7 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
                 {form.answers.length > 2 && (
                   <button
                     onClick={() => removeAnswer(index)}
+                    aria-label={`Antwort ${index + 1} entfernen`}
                     className="text-red-400 hover:text-red-600 px-2"
                   >
                     <Trash2 />
@@ -204,13 +222,13 @@ export default function QuestionEditor({ params }: { params: Promise<{ id: strin
 
           {error && <p className="text-sm text-red-500">{error}</p>}
 
-          <AppButton onClick={handleSubmit} disabled={loading}>
+          <AppButton onClick={handleSubmit} disabled={loading || isLoadingQuestion}>
             {loading ? 'Speichern...' : 'Speichern'}
           </AppButton>
 
           <button
             onClick={handleSubmitAndPreview}
-            disabled={loading}
+            disabled={loading || isLoadingQuestion}
             className="rounded-md border border-[#008CEA] px-6 py-3 font-bold text-[#008CEA] hover:bg-blue-50 disabled:opacity-50"
           >
             Speichern & Vorschau
