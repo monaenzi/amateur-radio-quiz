@@ -136,6 +136,20 @@ export default function KarteikartenPage() {
     }
   }
 
+  async function handleConfidence(confidence: 'KNOWN' | 'MEDIUM' | 'UNKNOWN') {
+  if (isLoggedIn) {
+    await fetch('/api/progress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        questionId: card.id,
+        confidence,
+      }),
+    })
+  }
+  handleNext()
+}
+
   if (loading) {
     return (
       <main className="min-h-screen bg-white md:p-8">
@@ -288,19 +302,19 @@ export default function KarteikartenPage() {
                 ) : (
                   <div className="grid grid-cols-3 gap-3">
                     <button
-                      onClick={handleNext}
+                      onClick={() => handleConfidence('KNOWN')}
                       className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
                     >
                       ✓
                     </button>
                     <button
-                      onClick={handleNext}
+                      onClick={() => handleConfidence('MEDIUM')}
                       className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
                     >
                       ~
                     </button>
                     <button
-                      onClick={handleNext}
+                      onClick={() => handleConfidence('UNKNOWN')}
                       className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
                     >
                       ✕
