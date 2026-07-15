@@ -18,6 +18,13 @@ export const statisticsRepository = {
     return prisma.question.count()
   },
 
+  getQuestionsCountBySubject() {
+    return prisma.question.groupBy({
+      by: ['subject'],
+      _count: { id: true },
+    })
+  },
+
   getProgressBySubject(userId: number) {
     return prisma.userQuestionProgress.groupBy({
       by: ['questionId'],
