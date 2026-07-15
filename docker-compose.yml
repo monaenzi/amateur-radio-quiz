@@ -1,0 +1,26 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: lilinda1
+      MYSQL_DATABASE: amateurfunk_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "mysql://root:lilinda1@db:3306/amateurfunk_db"
+      NEXTAUTH_SECRET: "MeinUltraGeheimerString"
+      NEXTAUTH_URL: "http://localhost:3000"
+    depends_on:
+      - db
+
+volumes:
+  db_data:

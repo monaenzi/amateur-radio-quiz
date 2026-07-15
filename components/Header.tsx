@@ -29,7 +29,7 @@ export default function Header({ variant = 'home' }: HeaderProps) {
 
             <Link href="/">
               <Image
-                src="/logoWhite.png"
+                src="/LogoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
                 width={30}
                 height={30}
@@ -64,7 +64,7 @@ export default function Header({ variant = 'home' }: HeaderProps) {
 
             <Link href="/">
               <Image
-                src="/logoWhite.png"
+                src="/LogoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
                 width={30}
                 height={30}
@@ -93,7 +93,7 @@ if (variant === 'auth') {
 
         <Link href="/">
           <Image
-            src="/logoWhite.png"
+            src="/LogoWhite.png"
             alt="ÖVSV Lernkurs Logo"
             width={30}
             height={30}
@@ -111,7 +111,7 @@ if (variant === 'auth') {
         <Link href="/">
           <div className="bg-gradient-to-l from-[#cfefff] via-white to-white">
             <Image
-              src="/logo.png"
+              src="/Logo.png"
               alt="ÖVSV Lernkurs Logo"
               width={800}
               height={240}
@@ -148,7 +148,7 @@ if (variant === 'auth') {
 
             <Link href="/dashboard">
               <Image
-                src="/logoWhite.png"
+                src="/LogoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
                 width={30}
                 height={30}
@@ -187,7 +187,7 @@ if (variant === 'auth') {
 
             <Link href="/">
               <Image
-                src="/logoWhite.png"
+                src="/LogoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
                 width={30}
                 height={30}
