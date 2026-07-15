@@ -13,13 +13,15 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String?
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
-  progress  UserQuestionProgress[]
+  id         Int      @id @default(autoincrement())
+  externalId String?  @unique  // UserID vom SSO
+  email      String?  @unique
+  name       String?
+  callSign   String?
+  password   String?           // nur für Admins
+  role       Role     @default(USER)
+  createdAt  DateTime @default(now())
+  progress   UserQuestionProgress[]
 
   @@map("users")
 }
