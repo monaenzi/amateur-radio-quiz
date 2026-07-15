@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { LogIn } from 'lucide-react'
 import BackButton from './BackButton'
 import LogoutButton from './LogoutButton'
@@ -13,6 +13,10 @@ type HeaderProps = {
 
 export default function Header({ variant = 'home' }: HeaderProps) {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const currentClass = searchParams.get('class')
+  const dashboardHref = currentClass ? `/dashboard?class=${currentClass}` : '/dashboard'
+  const statisticsHref = currentClass ? `/statistics?class=${currentClass}` : '/statistics'
 
   // Seiten wo der BackButton NICHT angezeigt werden soll
   const hideBackButton = pathname === '/dashboard' || pathname === '/'
@@ -166,10 +170,10 @@ export default function Header({ variant = 'home' }: HeaderProps) {
 
           <div className="flex-1 flex items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
-              <Link href="/dashboard">Home</Link>
+              <Link href={dashboardHref}>Home</Link>
               {/* <Link href="/quiz">Lernen</Link>
               <Link href="/exam_locked">Prüfung</Link> */}
-              <Link href="/statistics">Statistik</Link>
+              <Link href={statisticsHref}>Statistik</Link>
             </nav>
             <Link href="/dashboard">
               <Image
@@ -205,10 +209,10 @@ export default function Header({ variant = 'home' }: HeaderProps) {
 
           <div className="flex flex-1 items-center justify-end gap-6">
             <nav className="hidden md:flex items-center gap-6 text-white">
-              <Link href="/dashboard">Home</Link>
+              <Link href={dashboardHref}>Home</Link>
               {/* <Link href="/quiz">Lernen</Link>
               <Link href="/examSimulation">Prüfung</Link> */}
-              <Link href="/statistics">Statistik</Link>
+              <Link href={statisticsHref}>Statistik</Link>
               <LogoutButton />
             </nav>
             <Link href="/dashboard">
