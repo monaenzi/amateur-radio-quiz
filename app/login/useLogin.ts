@@ -37,5 +37,9 @@ export function useLogin() {
     }
   }
 
-  return { email, setEmail, password, setPassword, error, loading, handleLogin }
+  async function handleSSOLogin() {
+    await signIn('ovsv-sso', { callbackUrl: '/dashboard' })
+  }
+
+  return { email, setEmail, password, setPassword, error, loading, handleLogin, handleSSOLogin }
 }

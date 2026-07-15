@@ -6,7 +6,7 @@ import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 
 export default function LoginPage() {
-  const { email, setEmail, password, setPassword, error, loading, handleLogin } = useLogin()
+  const { email, setEmail, password, setPassword, error, loading, handleLogin, handleSSOLogin } = useLogin()
   const [showPassword, setShowPassword] = useState(false)
 
   return (
@@ -20,6 +20,21 @@ export default function LoginPage() {
         </div>
 
         <div className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-4 px-4">
+          {/* SSO Login */}
+          <AppButton onClick={handleSSOLogin}>
+            Als Mitglied anmelden
+          </AppButton>
+
+          {/* Divider */}
+          <div className="flex items-center gap-2">
+            <div className="h-px flex-1 bg-gray-200" />
+            <span className="text-xs text-gray-400">oder</span>
+            <div className="h-px flex-1 bg-gray-200" />
+          </div>
+
+          <p className="text-center text-sm text-gray-400">Admin Login</p>
+
+          {/* Admin Login */}
           <input
             type="email"
             placeholder="E-Mail"
