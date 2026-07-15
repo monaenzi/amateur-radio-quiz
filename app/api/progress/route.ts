@@ -1,29 +1,22 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/auth'
-import { handleApiError } from '@/lib/api-error-handler'
-import { progressService } from '@/services/progress.service'
-import { ValidationError } from '@/lib/errors'
+import { userRepository } from '@/repositories/user.repository'
 
 export async function POST(request: Request) {
   const session = await auth()
-  if (!session?.user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  
+  if (!session?.user?.id) {
+    return NextResponse.json({ message: 'Gastmodus: Fortschritt wird nicht gespeichert.' }, { status: 200 })
   }
 
-  try {
-    const body = await request.json()
-    const { questionId, confidence } = body
+  const userId = Number(session.user.id)
 
-    if (!questionId || !confidence) throw new ValidationError('questionId und confidence sind pflicht')
-    if (!['UNKNOWN', 'MEDIUM', 'KNOWN'].includes(confidence)) {
-      throw new ValidationError('Ungültiger confidence Wert')
-    }
-
-    const userId = parseInt(session.user.id as string)
-    await progressService.updateProgress(userId, questionId, confidence)
-
-    return NextResponse.json({ success: true })
-  } catch (error) {
-    return handleApiError(error)
+  if (isNaN(userId)) {
+    return NextResponse.json({ error: 'Ungültige User-ID' }, { status: 400 })
   }
+
+  const { questionId, confidence } = await request.json()
+
+  const progress = await userRepository.updateProgress(userId, questionId, confidence)
+  return NextResponse.json(progress)
 }
