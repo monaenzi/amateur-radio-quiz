@@ -77,13 +77,18 @@ test.describe('Gast-Modus Navigation', () => {
     await expect(page).toHaveURL('http://localhost:3000/login')
   })
 
-  test('Statistik-Link führt zur Statistik-Seite', async ({ page }) => {
+  test('Statistik-Link führt zur Statistik-Seite mit ausgewählter Klasse', async ({ page }) => {
     await page.goto('http://localhost:3000/dashboard')
     await page.waitForLoadState('networkidle')
 
+    const select = page.locator('select')
+    await select.selectOption('3')
+
+    await page.waitForURL('http://localhost:3000/dashboard?class=3')
+
     await page.getByRole('link', { name: 'Statistik' }).first().click()
 
-    await expect(page).toHaveURL('http://localhost:3000/statistics')
+    await expect(page).toHaveURL('http://localhost:3000/statistics?class=3')
   })
 
   test('Gast kann eine Prüfungsklasse auswählen', async ({ page }) => {
