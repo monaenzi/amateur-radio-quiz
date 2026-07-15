@@ -3,14 +3,14 @@ import { statisticsRepository } from '@/repositories/statistics.repository'
 const SUBJECTS = ['Recht', 'Technik', 'Betrieb'] as const
 
 export const statisticsService = {
-  async getUserStats(userId: number) {
+  async getUserStats(userId: number, classFilter?: number) {
     const [known, medium, unknown, total, subjectCounts, progress] = await Promise.all([
-      statisticsRepository.countByConfidence(userId, 'KNOWN'),
-      statisticsRepository.countByConfidence(userId, 'MEDIUM'),
-      statisticsRepository.countByConfidence(userId, 'UNKNOWN'),
-      statisticsRepository.getTotalQuestions(),
-      statisticsRepository.getQuestionsCountBySubject(),
-      statisticsRepository.getProgressByUser(userId),
+      statisticsRepository.countByConfidence(userId, 'KNOWN', classFilter),
+      statisticsRepository.countByConfidence(userId, 'MEDIUM', classFilter),
+      statisticsRepository.countByConfidence(userId, 'UNKNOWN', classFilter),
+      statisticsRepository.getTotalQuestions(classFilter),
+      statisticsRepository.getQuestionsCountBySubject(classFilter),
+      statisticsRepository.getProgressByUser(userId, classFilter),
     ])
 
     const answered = known + medium + unknown
@@ -41,7 +41,7 @@ export const statisticsService = {
     }
   },
 
-  async getProgressBySubject(userId: number) {
-    return statisticsRepository.getProgressByUser(userId)
+  async getProgressBySubject(userId: number, classFilter?: number) {
+    return statisticsRepository.getProgressByUser(userId, classFilter)
   },
 }
