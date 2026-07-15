@@ -1,7 +1,7 @@
 export class AppError extends Error {
   constructor(
     message: string,
-    public statusCode: number = 500
+    public statusCode: number = 500,
   ) {
     super(message)
     this.name = 'AppError'
@@ -26,5 +26,12 @@ export class ValidationError extends AppError {
   constructor(message: string = 'Ungültige Eingabe') {
     super(message, 400)
     this.name = 'ValidationError'
+  }
+}
+
+export class ConflictError extends AppError {
+  constructor(message: string = 'Konflikt mit bestehenden Daten') {
+    super(message, 409)
+    this.name = 'ConflictError'
   }
 }
