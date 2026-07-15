@@ -18,6 +18,7 @@ export type Question = {
     isCorrect: boolean
   }[]
 }
+
 export function useQuestionList() {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -31,9 +32,12 @@ export function useQuestionList() {
   const [total, setTotal] = useState(0)
   const pageSize = 10
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   async function fetchQuestions(nextPage = page) {
     setIsLoading(true)
+    setError(null)
+
     const params = new URLSearchParams()
     if (search) params.set('search', search)
     if (classFilter) params.set('class', classFilter)
@@ -43,23 +47,28 @@ export function useQuestionList() {
 
     router.replace(`/admin/questions?${params.toString()}`)
 
-    const res = await fetch(`/api/admin/questions?${params.toString()}`)
-    const data = await res.json()
+    try {
+      const res = await fetch(`/api/admin/questions?${params.toString()}`)
 
-    if (Array.isArray(data)) {
-      setQuestions(data)
-      setTotal(data.length)
+      if (!res.ok) {
+        const body = await res.json().catch(() => null)
+        throw new Error(body?.error ?? 'Fehler beim Laden der Fragen')
+      }
+
+      const data = await res.json()
+
+      setQuestions(data.items ?? [])
+      setTotal(data.total ?? 0)
+      setTotalPages(data.totalPages ?? 1)
+      setPage(data.page ?? nextPage)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Fehler beim Laden der Fragen')
+      setQuestions([])
+      setTotal(0)
       setTotalPages(1)
-      setPage(nextPage)
+    } finally {
       setIsLoading(false)
-      return
     }
-
-    setQuestions(data.items ?? [])
-    setTotal(data.total ?? 0)
-    setTotalPages(data.totalPages ?? 1)
-    setPage(data.page ?? nextPage)
-    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -76,9 +85,21 @@ export function useQuestionList() {
 
   async function confirmDelete() {
     if (!deleteId) return
-    await fetch(`/api/admin/questions?id=${deleteId}`, { method: 'DELETE' })
-    setDeleteId(null)
-    await fetchQuestions(page)
+
+    try {
+      const res = await fetch(`/api/admin/questions?id=${deleteId}`, { method: 'DELETE' })
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null)
+        throw new Error(body?.error ?? 'Fehler beim Löschen der Frage')
+      }
+
+      setDeleteId(null)
+      await fetchQuestions(page)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Fehler beim Löschen der Frage')
+      setDeleteId(null)
+    }
   }
 
   return {
@@ -102,5 +123,6 @@ export function useQuestionList() {
     setDeleteId,
     confirmDelete,
     isLoading,
+    error,
   }
 }

@@ -27,6 +27,7 @@ export default function QuestionList() {
     setDeleteId,
     confirmDelete,
     isLoading,
+    error,
   } = useQuestionList()
 
   return (
@@ -42,16 +43,18 @@ export default function QuestionList() {
           {/* Suche */}
           <input
             type="text"
+            aria-label="Frage suchen"
             placeholder="Frage suchen..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && fetchQuestions()}
+            onKeyDown={(e) => e.key === 'Enter' && goToPage(1)}
             className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA] text-gray-600"
           />
 
           <div className="flex gap-2">
             <select
               value={classFilter}
+              aria-label="Klasse filtern"
               onChange={(e) => setClassFilter(e.target.value)}
               className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
             >
@@ -63,6 +66,7 @@ export default function QuestionList() {
 
             <select
               value={subjectFilter}
+              aria-label="Fachgebiet filtern"
               onChange={(e) => setSubjectFilter(e.target.value)}
               className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
             >
@@ -81,6 +85,12 @@ export default function QuestionList() {
           </button>
         </div>
 
+        {error && (
+          <div className="mt-4 rounded-md bg-red-50 p-4 text-center text-sm text-red-600">
+            {error}
+          </div>
+        )}
+
         <div className="mt-6 flex flex-col gap-3">
           {isLoading ? (
             <>
@@ -89,7 +99,7 @@ export default function QuestionList() {
               ))}
             </>
           ) : questions.length === 0 ? (
-            <p className="text-center text-gray-400">Keine Fragen gefunden.</p>
+            <p className="text-center text-gray-500">Keine Fragen gefunden.</p>
           ) : (
             questions.map((q) => (
             <div
@@ -112,12 +122,14 @@ export default function QuestionList() {
               <div className="flex gap-2">
                 <button
                   onClick={() => router.push(`/admin/questions/${q.id}`)}
+                  aria-label="Frage bearbeiten"
                   className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50"
                 >
                   <Pen />
                 </button>
                 <button
                   onClick={() => setDeleteId(q.id)}
+                  aria-label="Frage löschen"
                   className="rounded-md border border-red-200 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
                 >
                   <Trash2 />

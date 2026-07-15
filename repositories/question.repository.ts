@@ -137,7 +137,7 @@ export const questionRepository = {
       },
     })
 
-    if (dbItems.length > 0) {
+    if (dbItems.length > 0 || (await prisma.question.count()) > 0) {
       const baseItems = options?.randomizeBySubject ? selectThreePerSubject(dbItems) : dbItems
 
       if (pagination) {
