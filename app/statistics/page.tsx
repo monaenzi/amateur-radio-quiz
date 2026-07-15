@@ -10,14 +10,20 @@ const subjectIcons: Record<string, React.ReactNode> = {
   Betrieb: <Radio size={22} className="text-[#008CEA]" />,
 }
 
-export default async function StatistikPage() {
+type Props = {
+  searchParams: Promise<{ class?: string }>
+}
+
+export default async function StatistikPage({ searchParams }: Props) {
   const session = await auth()
   const isLoggedIn = !!session?.user
   const userId = session?.user?.id ? Number(session.user.id) : undefined
   const hasValidUserId = typeof userId === 'number' && !Number.isNaN(userId)
+  const resolvedParams = await searchParams
+  const classFilter = resolvedParams.class ? Number(resolvedParams.class) : undefined
 
   const stats = hasValidUserId
-    ? await statisticsService.getUserStats(userId)
+    ? await statisticsService.getUserStats(userId, classFilter)
     : {
         total: 0,
         answered: 0,
