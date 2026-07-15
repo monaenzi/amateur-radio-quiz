@@ -4,6 +4,7 @@ import LogoutButton from '@/components/LogoutButton'
 import { auth } from '@/auth'
 import ClassSelector from '@/components/ClassSelector'
 import DashboardActionButtons from '@/components/DashboardActionButtons'
+import { statisticsService } from '@/services/statistics.service'
 
 type Props = {
   searchParams: Promise<{ class?: string }>
@@ -16,6 +17,13 @@ export default async function Home({ searchParams }: Props) {
 
   const resolvedParams = await searchParams
   const currentClass = resolvedParams.class
+
+  const stats = isLoggedIn && session.user.id
+    ? await statisticsService.getUserStats(
+        parseInt(session.user.id),
+        currentClass ? parseInt(currentClass) : undefined
+      )
+    : null
 
   return (
     <main className="min-h-screen bg-white md:p-8">
@@ -60,10 +68,15 @@ export default async function Home({ searchParams }: Props) {
             <h3 className="mb-3 font-semibold text-gray-700">GESAMTFORTSCHRITT</h3>
 
             <div className="rounded-xl bg-blue-100 p-4">
-              <p className="mb-2 text-3xl font-bold text-[#0A8BE8]">63%</p>
+              <p className="mb-2 text-3xl font-bold text-[#0A8BE8]">
+                {stats ? `${stats.percentage}%` : '0%'}
+              </p>
 
               <div className="h-2 w-full rounded-full bg-gray-300">
-                <div className="h-2 w-[63%] rounded-full bg-[#0A8BE8]" />
+                <div
+                  className="h-2 rounded-full bg-[#0A8BE8]"
+                  style={{ width: `${stats?.percentage ?? 0}%` }}
+                 />
               </div>
             </div>
           </div>
