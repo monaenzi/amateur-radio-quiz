@@ -11,17 +11,28 @@ export const examService = {
     }))
   },
 
-  async getLearningQuestions(userId: number, classFilter?: number) {
-    const questions = await examRepository.getQuestionsForLearning(userId, classFilter)
+  async getLearningQuestions(userId: number, classFilter?: number, subject?: string) {
+    const questions = await examRepository.getQuestionsForLearning(userId, classFilter, subject)
 
-    // Fragen nach Confidence gewichten
-    return questions.sort((a, b) => {
-      const confidenceA = a.progress[0]?.confidence ?? 'UNKNOWN'
-      const confidenceB = b.progress[0]?.confidence ?? 'UNKNOWN'
+    const weight = { UNKNOWN: 3, MEDIUM: 2, KNOWN: 1 }
 
-      const weight = { UNKNOWN: 3, MEDIUM: 2, KNOWN: 1 }
-      return weight[confidenceB] - weight[confidenceA]
-    })
+    const unknown = questions.filter(q => (q.progress[0]?.confidence ?? 'UNKNOWN') === 'UNKNOWN')
+      .sort(() => Math.random() - 0.5)
+    const medium = questions.filter(q => q.progress[0]?.confidence === 'MEDIUM')
+      .sort(() => Math.random() - 0.5)
+    const known = questions.filter(q => q.progress[0]?.confidence === 'KNOWN')
+      .sort(() => Math.random() - 0.5)
+
+    const result = []
+    let u = 0, m = 0, k = 0
+
+    while (u < unknown.length || m < medium.length || k < known.length) {
+      for (let i = 0; i < 3 && u < unknown.length; i++) result.push(unknown[u++])
+      for (let i = 0; i < 2 && m < medium.length; i++) result.push(medium[m++])
+      for (let i = 0; i < 1 && k < known.length; i++) result.push(known[k++])
+    }
+
+    return result
   },
 
   async getQuestionsBySubject(subject: string, classFilter?: number) {

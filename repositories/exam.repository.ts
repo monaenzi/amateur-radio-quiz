@@ -37,26 +37,19 @@ export const examRepository = {
     })
   },
 
-  getQuestionsForLearning(userId: number, classFilter?: number) {
-    return prisma.question.findMany({
-      where: {
-        ...(classFilter && {
-          classes: {
-            some: {
-              class: classFilter,
-            },
-          },
-        }),
+  getQuestionsForLearning(userId: number, classFilter?: number, subject?: string) {
+  return prisma.question.findMany({
+    where: {
+      ...(classFilter && { classes: { some: { class: classFilter } } }),
+      ...(subject && { subject }),
+    },
+    include: {
+      answers: true,
+      attachments: true,
+      progress: {
+        where: { userId },
       },
-      include: {
-        answers: true,
-        attachments: true,
-        progress: {
-          where: {
-            userId,
-          },
-        },
-      },
-    })
-  },
+    },
+  })
+},
 }

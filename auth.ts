@@ -25,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.role = (user as any).role
-        token.id = (user as any).id  // ← innerhalb des if
+        token.id = (user as any).id
       }
       return token
     },

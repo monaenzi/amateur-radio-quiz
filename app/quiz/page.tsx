@@ -22,6 +22,9 @@ type Question = {
     url: string
     type: string
   }[]
+  progress?: {
+    confidence: string
+  }[]
 }
 
 type PersistedQuizState = {
@@ -73,6 +76,7 @@ export default function KarteikartenPage() {
     () => readPersistedQuizState(classId, subject).showAnswer
   )
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
 
   useEffect(
     function () {
@@ -87,8 +91,8 @@ export default function KarteikartenPage() {
     function () {
       if (typeof window === 'undefined') return
       const url = subject
-        ? `/api/questions?class=${classId}&subject=${subject}`
-        : `/api/questions?class=${classId}`
+        ? `/api/questions/learning?class=${classId}&subject=${subject}`
+        : `/api/questions/learning?class=${classId}`
 
       fetch(url)
         .then(function (res) {
@@ -136,19 +140,25 @@ export default function KarteikartenPage() {
     }
   }
 
-  async function handleConfidence(confidence: 'KNOWN' | 'MEDIUM' | 'UNKNOWN') {
-  if (isLoggedIn) {
-    await fetch('/api/progress', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        questionId: card.id,
-        confidence,
-      }),
-    })
+  async function handleConfidence(confidence: 'KNOWN' | 'MEDIUM' | 'UNKNOWN', questionId: number) {
+    if (saving) return
+    setSaving(true)
+    
+    if (isLoggedIn) {
+      try{
+        await fetch('/api/progress', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ questionId, confidence }),
+        })
+      } catch {
+        // progress save failed silently, user still proceeds
+      }
+    }
+    
+    setSaving(false)
+    handleNext()
   }
-  handleNext()
-}
 
   if (loading) {
     return (
@@ -184,6 +194,8 @@ export default function KarteikartenPage() {
   }
 
   if (currentIndex >= questions.length) {
+    sessionStorage.removeItem(getQuizStorageKey(classId, subject))
+
     return (
       <main className="min-h-screen bg-white md:p-8">
         <div className="w-full bg-white md:mx-auto md:max-w-7xl">
@@ -210,7 +222,6 @@ export default function KarteikartenPage() {
 
   const card = questions[currentIndex]
   const progress = Math.round(((currentIndex + 1) / questions.length) * 100)
-  const isLastQuestion = currentIndex === questions.length - 1
 
   return (
     <main className="min-h-screen bg-white md:p-8">
@@ -292,30 +303,26 @@ export default function KarteikartenPage() {
                   >
                     Antwort anzeigen
                   </AppButton>
-                ) : isLastQuestion ? (
-                  <button
-                    onClick={handleNext}
-                    className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
-                  >
-                    Fertig
-                  </button>
                 ) : (
                   <div className="grid grid-cols-3 gap-3">
                     <button
-                      onClick={() => handleConfidence('KNOWN')}
-                      className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                      onClick={() => handleConfidence('KNOWN', card.id)}
+                      disabled={saving}
+                      className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       ✓
                     </button>
                     <button
-                      onClick={() => handleConfidence('MEDIUM')}
-                      className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                      onClick={() => handleConfidence('MEDIUM', card.id)}
+                      disabled={saving}
+                      className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       ~
                     </button>
                     <button
-                      onClick={() => handleConfidence('UNKNOWN')}
-                      className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90"
+                      onClick={() => handleConfidence('UNKNOWN', card.id)}
+                      disabled={saving}
+                      className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       ✕
                     </button>
