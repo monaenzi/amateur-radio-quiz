@@ -26,6 +26,8 @@ async function main() {
   const filePath = path.join(__dirname, fileName)
   const questions: SeedQuestion[] = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
 
+  await prisma.userQuestionProgress.deleteMany()
+  await prisma.attachment.deleteMany()
   await prisma.answer.deleteMany()
   await prisma.questionClass.deleteMany()
   await prisma.question.deleteMany()
