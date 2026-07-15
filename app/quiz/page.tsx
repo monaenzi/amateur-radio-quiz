@@ -6,6 +6,8 @@ import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
 import { useSession } from 'next-auth/react'
+import { offlineApi } from '@/lib/offline-api'
+import { useOfflineSupport } from '@/lib/useOfflineSupport'
 
 type Answer = {
   id: number
@@ -62,6 +64,7 @@ export default function KarteikartenPage() {
   const isLoggedIn = !!session?.user
   const searchParams = useSearchParams()
   const router = useRouter()
+  const { isOnline } = useOfflineSupport()
   const classId = searchParams.get('class') ?? '1'
   const subject = searchParams.get('subject') ?? undefined
   const [lightboxUrl, setLightboxUrl] = useState<string | null>(null)
@@ -146,11 +149,7 @@ export default function KarteikartenPage() {
     
     if (isLoggedIn) {
       try{
-        await fetch('/api/progress', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ questionId, confidence }),
-        })
+        await offlineApi.post('/api/progress', { questionId, confidence })
       } catch {
         // progress save failed silently, user still proceeds
       }
