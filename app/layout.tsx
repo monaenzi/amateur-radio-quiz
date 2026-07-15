@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ÖVSV Lernkurs",
   description: "Amateurfunk Prüfungsvorbereitung",
+  appleWebApp: {
+    title: "ÖVSV Quiz",
+  },
 };
 
 export default function RootLayout({
