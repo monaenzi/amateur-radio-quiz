@@ -20,14 +20,16 @@ export default function LearnPage() {
         handleSelect,
         handleSelectAll,
         handleStartLearning,
+        error,
+        retry,
     } = useLearn()
 
     return (
         <main className="min-h-screen bg-gray-100 md:p-8">
-            <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl md:min-h-[850px] md:rounded-2xl md:shadow-lg overflow-hidden">
+            <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl md:min-h-212.5 md:rounded-2xl md:shadow-lg overflow-hidden">
                 <Header variant="default" />
 
-                <div className="flex flex-1 flex-col px-6 pb-12 pt-17">
+                <div className="flex flex-1 flex-col px-6 pb-12 pt-16">
                     <div>
                         <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">
                             Was willst du lernen?
@@ -38,18 +40,28 @@ export default function LearnPage() {
                         </h2>
                     </div>
 
-                    <div className="rounded-xl border border-gray-200 bg-white min-h-[150px] flex flex-col justify-center">
+                    <div className="rounded-xl border border-gray-200 bg-white min-h-37.5 flex flex-col justify-center">
                         {loading ? (
                             <p className="text-center text-sm text-gray-500 py-8 animate-pulse">
                                 Fachgebiete werden geladen...
                             </p>
+                        ) : error ? (
+                            <div className="flex flex-col items-center gap-3 py-8">
+                                <p className="text-center text-sm text-red-500">{error}</p>
+                                <button
+                                    onClick={retry}
+                                    className="text-sm font-semibold text-[#008CEA] hover:underline cursor-pointer"
+                                >
+                                    Nochmal versuchen
+                                </button>
+                            </div>
                         ) : (
                             <>
                                 {stats.map(function (stat, index) {
                                     return (
                                         <div key={stat.subject}>
                                             {index > 0 && <div className="border-t border-gray-200" />}
-                                            <div className="flex items-center gap-3 p-4">
+                                            <label className="flex items-center gap-3 p-4 cursor-pointer">
                                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E6F4FD]">
                                                     {subjectIcons[stat.subject]}
                                                 </div>
@@ -63,14 +75,14 @@ export default function LearnPage() {
                                                     onChange={function () { handleSelect(stat.subject) }}
                                                     className="h-5 w-5 accent-[#008CEA] cursor-pointer"
                                                 />
-                                            </div>
+                                            </label>
                                         </div>
                                     )
                                 })}
 
                                 <div className="border-t border-gray-200" />
 
-                                <div className="flex items-center gap-3 p-4">
+                                <label className="flex items-center gap-3 p-4 cursor-pointer">
                                     <div className="flex-1 pl-1">
                                         <p className="text-sm text-gray-700 font-medium">Alle Fachgebiete gemischt</p>
                                     </div>
@@ -80,7 +92,7 @@ export default function LearnPage() {
                                         onChange={handleSelectAll}
                                         className="h-5 w-5 accent-[#008CEA] cursor-pointer"
                                     />
-                                </div>
+                                </label>
                             </>
                         )}
                     </div>
