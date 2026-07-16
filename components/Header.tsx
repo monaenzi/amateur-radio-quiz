@@ -54,11 +54,25 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
       </header>
     )
   }
-
   if (variant === 'admin') {
     return (
       <header className="relative md:relative sticky md:static top-0 z-50 bg-[#008CEA] px-6 py-4">
-        <div className="flex items-center justify-between">
+        {/* Mobile */}
+        <div className="flex md:hidden items-center justify-between">
+          <div className="w-8">{!hideBackButton && <BackButton />}</div>
+
+          <div className="flex flex-col items-center">
+            <h1 className="text-2xl font-bold text-white">Admin</h1>
+            <p className="text-sm text-white/80">ÖVSV Lernkurs</p>
+          </div>
+
+          <Link href="/">
+            <Image src="/LogoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
+          </Link>
+        </div>
+
+        {/* Desktop */}
+        <div className="hidden md:flex items-center justify-between">
           <div className="flex-1 flex items-center gap-3">
             <Link href="/">
               <Image
@@ -69,11 +83,6 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
                 priority
               />
             </Link>
-            {!hideBackButton && (
-              <div className="md:hidden">
-                <BackButton />
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col items-center">
@@ -82,7 +91,7 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
           </div>
 
           <div className="flex flex-1 items-center justify-end gap-6">
-            <nav className="hidden md:flex items-center gap-6 text-white">
+            <nav className="flex items-center gap-6 text-white">
               <Link href="/admin">Dashboard</Link>
               <Link href="/admin/questions">Fragen</Link>
               <LogoutButton />
@@ -96,7 +105,22 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
   if (variant === 'auth') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
-        <div className="flex items-center justify-between">
+        {/* Mobile: BackButton links, Logo rechts */}
+        <div className="flex md:hidden items-center justify-between">
+          <div className="w-8">{!hideBackButton && <BackButton />}</div>
+
+          <div className="flex flex-col items-center">
+            <h1 className="text-2xl font-bold text-white">Willkommen zurück</h1>
+            <p className="text-sm text-white/80">ÖVSV Lernkurs</p>
+          </div>
+
+          <Link href="/">
+            <Image src="/LogoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
+          </Link>
+        </div>
+
+        {/* Desktop: Logo links, wie bisher */}
+        <div className="hidden md:flex items-center justify-between">
           <div className="flex-1 flex items-center gap-3">
             <Link href="/">
               <Image
@@ -107,11 +131,6 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
                 priority
               />
             </Link>
-            {!hideBackButton && (
-              <div className="md:hidden">
-                <BackButton />
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col items-center">
@@ -124,7 +143,6 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
       </header>
     )
   }
-
   if (variant === 'home') {
     return (
       <header className="bg-[#008CEA]">
@@ -143,11 +161,39 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
       </header>
     )
   }
-
 if (variant === 'default') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
-        <div className="flex items-center justify-between">
+        {/* Mobile */}
+        <div className="flex md:hidden items-center justify-between">
+          <div className="w-8">
+            {pathname === '/dashboard' ? (
+              <Link href="/login" className="text-white">
+                <LogIn size={24} />
+              </Link>
+            ) : (
+              !hideBackButton && <BackButton />
+            )}
+          </div>
+
+          <div className="flex flex-col items-center">
+            <h1 className="text-2xl font-bold text-white">Lernkurs</h1>
+            <p className="text-sm text-white/80">ÖVSV Lernkurs</p>
+          </div>
+
+          <Link href="/dashboard">
+            <Image
+              src="/LogoWhite.png"
+              alt="ÖVSV Lernkurs Logo"
+              width={30}
+              height={30}
+              priority
+            />
+          </Link>
+        </div>
+
+        {/* Desktop */}
+        <div className="hidden md:flex items-center justify-between">
           <div className="flex-1 flex items-center gap-3">
             <Link href="/dashboard">
               <Image
@@ -158,11 +204,6 @@ if (variant === 'default') {
                 priority
               />
             </Link>
-            {!hideBackButton && (
-              <div className="md:hidden">
-                <BackButton />
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col items-center">
@@ -171,7 +212,7 @@ if (variant === 'default') {
           </div>
 
           <div className="flex-1 flex items-center justify-end gap-6">
-            <nav className="hidden md:flex items-center gap-6 text-white">
+            <nav className="flex items-center gap-6 text-white">
               <Link href={dashboardHref}>Home</Link>
               <Link href={statisticsHref}>Statistik</Link>
             </nav>
@@ -186,11 +227,33 @@ if (variant === 'default') {
       </header>
     )
   }
-
   if (variant === 'welcome') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
-        <div className="flex items-center justify-between">
+        {/* Mobile */}
+        <div className="flex md:hidden items-center justify-between">
+          <div className="w-8">
+            {!hideBackButton && <BackButton />}
+          </div>
+
+          <div className="flex flex-col items-center">
+            <h1 className="text-2xl font-bold text-white">Lernkurs</h1>
+            <p className="text-sm text-white/80">ÖVSV Lernkurs</p>
+          </div>
+
+          <Link href="/dashboard">
+            <Image
+              src="/LogoWhite.png"
+              alt="ÖVSV Lernkurs Logo"
+              width={30}
+              height={30}
+              priority
+            />
+          </Link>
+        </div>
+
+        {/* Desktop */}
+        <div className="hidden md:flex items-center justify-between">
           <div className="flex-1 flex items-center gap-3">
             <Link href="/dashboard">
               <Image
@@ -201,11 +264,6 @@ if (variant === 'default') {
                 priority
               />
             </Link>
-            {!hideBackButton && (
-              <div className="md:hidden">
-                <BackButton />
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col items-center">
@@ -214,7 +272,7 @@ if (variant === 'default') {
           </div>
 
           <div className="flex flex-1 items-center justify-end gap-6">
-            <nav className="hidden md:flex items-center gap-6 text-white">
+            <nav className="flex items-center gap-6 text-white">
               <Link href={dashboardHref}>Home</Link>
               <Link href={statisticsHref}>Statistik</Link>
               <LogoutButton />
