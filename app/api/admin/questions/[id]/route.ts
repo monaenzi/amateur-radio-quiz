@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { auth } from '@/auth'
+import { questionService } from '@/services/question.service'
+import { handleApiError } from '@/lib/api-error-handler'
+import { ValidationError } from '@/lib/errors'
+import { updateQuestionSchema } from '@/lib/schemas'
 
 export async function GET(
   request: Request,
@@ -11,23 +14,17 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { id: idParam } = await params
-  const id = parseInt(idParam)
+  try {
+    const { id: idParam } = await params
+    const id = parseInt(idParam)
 
-  if (isNaN(id)) {
-    return NextResponse.json({ error: 'Ungültige ID' }, { status: 400 })
+    if (isNaN(id)) throw new ValidationError('Ungültige ID')
+
+    const question = await questionService.getById(id)
+    return NextResponse.json(question)
+  } catch (error) {
+    return handleApiError(error)
   }
-
-  const question = await prisma.question.findUnique({
-    where: { id },
-    include: { answers: true, attachments: true },
-  })
-
-  if (!question) {
-    return NextResponse.json({ error: 'Nicht gefunden' }, { status: 404 })
-  }
-
-  return NextResponse.json(question)
 }
 
 export async function PUT(
@@ -39,28 +36,22 @@ export async function PUT(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { id: idParam } = await params
-  const id = parseInt(idParam)
-  const body = await request.json()
+  try {
+    const { id: idParam } = await params
+    const id = parseInt(idParam)
 
-  await prisma.question.update({
-    where: { id },
-    data: {
-      text: body.text,
-      explanation: body.explanation,
-      class: body.class,
-      subject: body.subject,
-      code: body.code,
-      answers: {
-        deleteMany: {},
-        create: body.answers,
-      },
-      attachments: {
-        deleteMany: {},
-        create: body.attachment ?? [],
-      },
-    },
-  })
+    if (isNaN(id)) throw new ValidationError('Ungültige ID')
 
-  return NextResponse.json({ success: true })
+    const body = await request.json()
+
+    const result = updateQuestionSchema.safeParse(body)
+    if (!result.success) {
+      throw new ValidationError(result.error.issues[0]?.message ?? 'Ungültige Eingabe')
+    }
+
+    await questionService.update(id, result.data)
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    return handleApiError(error)
+  }
 }

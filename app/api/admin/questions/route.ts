@@ -1,51 +1,63 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { auth } from '@/auth'
+import { questionService } from '@/services/question.service'
+import { handleApiError } from '@/lib/api-error-handler'
+import { ValidationError } from '@/lib/errors'
+import { createQuestionSchema } from '@/lib/schemas'
 
 export async function GET(request: Request) {
   const session = await auth()
-
   if (!session || session.user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { searchParams } = new URL(request.url)
-  const classFilter = searchParams.get('class')
-  const subjectFilter = searchParams.get('subject')
-  const search = searchParams.get('search')
+  try {
+    const { searchParams } = new URL(request.url)
+    
+    const classParam = searchParams.get('class')
+    const subjectParam = searchParams.get('subject')
+    const classFilter = classParam ? parseInt(classParam, 10) : undefined
 
-  const where = {
-    ...(classFilter && { class: parseInt(classFilter) }),
-    ...(subjectFilter && { subject: subjectFilter }),
-    ...(search && { text: { contains: search } }),
+    const pageParam = Number.parseInt(searchParams.get('page') ?? '1', 10)
+    const pageSizeParam = Number.parseInt(searchParams.get('pageSize') ?? '10', 10)
+    const page = Number.isNaN(pageParam) || pageParam < 1 ? 1 : pageParam
+    const pageSize = Number.isNaN(pageSizeParam) || pageSizeParam < 1 ? 10 : pageSizeParam
+
+    let subjectFilter: string[] | undefined = undefined
+    if (subjectParam && subjectParam !== 'all') {
+      subjectFilter = subjectParam.split(',')
+    }
+    const questions = await questionService.getAll(
+      {
+        search: searchParams.get('search') ?? undefined,
+        classFilter,
+        subjectFilter,
+      },
+      { page, pageSize }
+    )
+    return NextResponse.json(questions)
+  } catch (error) {
+    return handleApiError(error)
   }
-
-  const questions = await prisma.question.findMany({
-    where,
-    include: { answers: true, attachments: true },
-    orderBy: { createdAt: 'desc' },
-  })
-
-  return NextResponse.json(questions)
 }
 
 export async function DELETE(request: Request) {
   const session = await auth()
-
   if (!session || session.user.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { searchParams } = new URL(request.url)
-  const id = searchParams.get('id')
+  try {
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
 
-  if (!id) {
-    return NextResponse.json({ error: 'ID fehlt' }, { status: 400 })
+    if (!id) throw new ValidationError('ID fehlt')
+
+    await questionService.delete(parseInt(id))
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    return handleApiError(error)
   }
-
-  await prisma.question.delete({ where: { id: parseInt(id) } })
-
-  return NextResponse.json({ success: true })
 }
 
 export async function POST(request: Request) {
@@ -54,23 +66,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const body = await request.json()
+  try {
+    const body = await request.json()
 
-  const question = await prisma.question.create({
-    data: {
-      text: body.text,
-      explanation: body.explanation,
-      class: body.class,
-      subject: body.subject,
-      code: body.code,
-      answers: {
-        create: body.answers,
-      },
-      attachments: {
-        create: body.attachment ?? [],
-      },
-    },
-  })
+    const result = createQuestionSchema.safeParse(body)
 
-  return NextResponse.json(question)
+    if (!result.success) {
+      throw new ValidationError(
+        result.error.issues[0]?.message ?? 'Ungültige Eingabe'
+      )
+    }
+
+    const question = await questionService.create(result.data)
+
+    return NextResponse.json(question)
+  } catch (error) {
+    return handleApiError(error)
+  }
 }

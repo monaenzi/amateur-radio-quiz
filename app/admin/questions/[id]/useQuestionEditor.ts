@@ -16,7 +16,7 @@ export type Attachment = {
 export type QuestionForm = {
   text: string
   explanation: string
-  class: number
+  classes: number[]
   subject: string
   code: string
   attachments: Attachment[]
@@ -26,7 +26,7 @@ export type QuestionForm = {
 const defaultForm: QuestionForm = {
   text: '',
   explanation: '',
-  class: 1,
+  classes: [1],
   subject: 'Recht',
   code: '',
   attachments: [],
@@ -36,23 +36,27 @@ const defaultForm: QuestionForm = {
   ],
 }
 
-export function useQuestionEditor(id: string) {
+export function useQuestionEditor(id: string, showToast?: (message: string, type: 'success' | 'error') => void) {
   const router = useRouter()
   const isNew = id === 'new'
   const [form, setForm] = useState<QuestionForm>(defaultForm)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [isLoadingQuestion, setIsLoadingQuestion] = useState(!isNew)
+  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null)
 
   useEffect(() => {
     if (!isNew) {
       fetch(`/api/admin/questions/${id}`)
-        .then((res) => res.json())
+        .then(async (res) => {
+          if (!res.ok) throw new Error('Frage konnte nicht geladen werden')
+          return res.json()
+        })
         .then((data) => {
-          if (!data || data.error) return
           setForm({
             text: data.text,
             explanation: data.explanation ?? '',
-            class: data.class,
+            classes: data.classes.map((c: { class: number }) => c.class),
             subject: data.subject,
             code: data.code ?? '',
             attachments: data.attachments ?? [],
@@ -62,6 +66,8 @@ export function useQuestionEditor(id: string) {
             })),
           })
         })
+        .catch((err) => setError(err.message))
+        .finally(() => setIsLoadingQuestion(false))
     }
   }, [id, isNew])
 
@@ -92,6 +98,15 @@ export function useQuestionEditor(id: string) {
     setForm({ ...form, answers: updated })
   }
 
+  function toggleClass(classId: number) {
+    setForm((prev) => ({
+      ...prev,
+      classes: prev.classes.includes(classId)
+        ? prev.classes.filter((c) => c !== classId)
+        : [...prev.classes, classId].sort((a, b) => a - b),
+    }))
+  }
+
   function addAttachment() {
     setForm({
       ...form,
@@ -112,7 +127,33 @@ export function useQuestionEditor(id: string) {
     setForm({ ...form, attachments: updated })
   }
 
-  async function handleSubmit() {
+  async function handleFileUpload(index: number, file: File) {
+    setUploadingIndex(index)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const res = await fetch('/api/upload', { method: 'POST', body: formData })
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null)
+        throw new Error(body?.error ?? 'Bild-Upload fehlgeschlagen')
+      }
+
+      const data = await res.json()
+
+      if (!data.url) throw new Error('Bild-Upload fehlgeschlagen')
+
+      updateAttachment(index, 'url', data.url)
+    } catch (err) {
+      showToast?.(err instanceof Error ? err.message : 'Bild-Upload fehlgeschlagen', 'error')
+    } finally {
+      setUploadingIndex(null)
+    }
+  }
+
+  async function submitQuestion() {
     setLoading(true)
     setError('')
 
@@ -128,19 +169,40 @@ export function useQuestionEditor(id: string) {
     setLoading(false)
 
     if (!res.ok) {
-      setError('Fehler beim Speichern.')
-      return
+      const data = await res.json().catch(() => null)
+      setError(data?.error ?? 'Fehler beim Speichern.')
+      return null
     }
 
+    return res.json()
+  }
+
+  async function handleSubmit() {
+    const data = await submitQuestion()
+    if (!data) return
+
+    showToast?.('Frage gespeichert!', 'success')
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     router.push('/admin/questions')
+  }
+
+  async function handleSubmitAndPreview() {
+    const data = await submitQuestion()
+    if (!data) return
+
+    const questionId = isNew ? data.id : id
+    router.push(`/admin/questions/${questionId}/preview`)
   }
 
   return {
     form,
     setForm,
+    toggleClass,
     loading,
     error,
     isNew,
+    isLoadingQuestion,
+    uploadingIndex,
     updateAnswer,
     addAnswer,
     removeAnswer,
@@ -149,5 +211,7 @@ export function useQuestionEditor(id: string) {
     removeAttachment,
     updateAttachment,
     handleSubmit,
+    handleSubmitAndPreview,
+    handleFileUpload,
   }
 }
