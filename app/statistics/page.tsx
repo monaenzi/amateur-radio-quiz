@@ -22,21 +22,27 @@ export default async function StatistikPage({ searchParams }: Props) {
   const resolvedParams = await searchParams
   const classFilter = resolvedParams.class ? Number(resolvedParams.class) : undefined
 
-  const stats = hasValidUserId
-    ? await statisticsService.getUserStats(userId, classFilter)
-    : {
-        total: 0,
-        answered: 0,
-        known: 0,
-        medium: 0,
-        unknown: 0,
-        percentage: 0,
-        subjects: [
-          { subject: 'Recht', known: 0, total: 0, percentage: 0 },
-          { subject: 'Technik', known: 0, total: 0, percentage: 0 },
-          { subject: 'Betrieb', known: 0, total: 0, percentage: 0 },
-        ],
-      }
+  let stats = {
+    total: 0,
+    answered: 0,
+    known: 0,
+    medium: 0,
+    unknown: 0,
+    percentage: 0,
+    subjects: [
+      { subject: 'Recht', known: 0, total: 0, percentage: 0 },
+      { subject: 'Technik', known: 0, total: 0, percentage: 0 },
+      { subject: 'Betrieb', known: 0, total: 0, percentage: 0 },
+    ],
+  }
+
+  if (hasValidUserId) {
+    try {
+      stats = await statisticsService.getUserStats(userId, classFilter)
+    } catch {
+      // stats bleibt beim Fallback
+    }
+  }
 
   return (
     <main className="min-h-screen bg-white md:p-8">
@@ -50,7 +56,14 @@ export default async function StatistikPage({ searchParams }: Props) {
             <p className="mb-2 text-3xl font-bold text-[#008CEA]">{stats.percentage}%</p>
 
             <div className="h-2 w-full rounded-full bg-gray-300">
-              <div className="h-2 rounded-full bg-[#008CEA]" style={{ width: `${stats.percentage}%` }} />
+              <div
+                className="h-2 rounded-full bg-[#008CEA]"
+                style={{ width: `${stats.percentage}%` }}
+                role="progressbar"
+                aria-valuenow={stats.percentage}
+                aria-valuemin={0}
+                aria-valuemax={100}
+              />
             </div>
           </div>
 
@@ -95,7 +108,14 @@ export default async function StatistikPage({ searchParams }: Props) {
                     </p>
 
                     <div className="mt-2 h-2 w-full rounded-full bg-gray-200">
-                      <div className="h-2 rounded-full bg-[#008CEA]" style={{ width: `${subjectStat.percentage}%` }} />
+                      <div
+                        className="h-2 rounded-full bg-[#008CEA]"
+                        style={{ width: `${subjectStat.percentage}%` }}
+                        role="progressbar"
+                        aria-valuenow={subjectStat.percentage}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                      />
                     </div>
                   </div>
                 </div>
