@@ -30,6 +30,10 @@ type ExamResult = {
   }[]
 }
 
+export function getExamResultStorageKey(classId: string, subject?: string) {
+  return `examSimulationResult:${classId}:${subject ?? 'all'}`
+}
+
 export function useExamSimulation() {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -44,9 +48,12 @@ export function useExamSimulation() {
   const [loading, setLoading] = useState(true)
   const [correctAnswerCount, setCorrectAnswerCount] = useState(0)
   const [subjectStats, setSubjectStats] = useState<Record<string, { correct: number; total: number }>>({})
+  const [error, setError] = useState<string | null>(null)
+  const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
     setLoading(true)
+    setError(null)
     setQuestions([])
     setCurrentIndex(0)
     setSelected([])
@@ -56,16 +63,20 @@ export function useExamSimulation() {
     const url = `/api/questions?class=${classId}${subject ? `&subject=${subject}` : ''}&randomizeBySubject=true`
 
     fetch(url)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error('Fragen konnten nicht geladen werden')
+        return res.json()
+      })
       .then((data) => {
         setQuestions(Array.isArray(data) ? data : [])
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : 'Fragen konnten nicht geladen werden')
+      })
+      .finally(() => {
         setLoading(false)
       })
-      .catch(() => {
-        setQuestions([])
-        setLoading(false)
-      })
-  }, [classId, subject])
+  }, [classId, subject, retryCount])
 
   const toggleSelect = (id: string) => {
     if (submitted) return
@@ -129,8 +140,8 @@ export function useExamSimulation() {
         subjectStats: subjectStatsList,
       }
 
-      localStorage.setItem('examSimulationResult', JSON.stringify(result))
-      router.push(`/examResults?class=${classId}`)
+      localStorage.setItem(getExamResultStorageKey(classId, subject), JSON.stringify(result))
+      router.push(`/examResults?class=${classId}${subject ? `&subject=${subject}` : ''}`)
       return
     }
 
@@ -157,5 +168,8 @@ export function useExamSimulation() {
     handleNext,
     setShowExplanation,
     setCurrentIndex,
+    retry: () => setRetryCount((prev) => prev + 1),
+    error,
+    getExamResultStorageKey,
   }
 }

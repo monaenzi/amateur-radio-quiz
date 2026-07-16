@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 import FooterNav from '@/components/FooterNav'
 import AppButton from '@/components/AppButton'
 import { useExamSimulation } from './useExamSimulation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function ExamPage() {
   const {
@@ -22,6 +22,8 @@ export default function ExamPage() {
     handleNext,
     setShowExplanation,
     setCurrentIndex,
+    error,
+    retry,
   } = useExamSimulation()
 
   const getButtonStyle = (answer: { id: number; text: string; isCorrect: boolean }) => {
@@ -53,6 +55,17 @@ export default function ExamPage() {
 
   const [lightboxUrl, setLightboxUrl] = useState<string | null>(null)
 
+  useEffect(() => {
+    if (!lightboxUrl) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxUrl(null)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [lightboxUrl])
+
   if (loading) {
     return (
       <main className="h-screen overflow-x-hidden overflow-y-auto bg-white md:p-8">
@@ -60,6 +73,26 @@ export default function ExamPage() {
           <Header variant="welcome" />
           <section className="mx-auto flex flex-1 items-center justify-center px-6 py-6">
             <p className="text-sm text-gray-500">Fragen werden geladen...</p>
+          </section>
+          <div className="md:hidden">
+            <FooterNav />
+          </div>
+          <div className="hidden md:block">
+            <Footer />
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  if (error) {
+    return (
+      <main className="h-screen overflow-x-hidden overflow-y-auto bg-white md:p-8">
+        <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl">
+          <Header variant="welcome" />
+          <section className="mx-auto flex flex-1 flex-col items-center justify-center gap-4 px-6 py-6 text-center">
+            <p className="text-sm text-red-500">{error}</p>
+            <AppButton onClick={retry}>Nochmal versuchen</AppButton>
           </section>
           <div className="md:hidden">
             <FooterNav />
@@ -120,7 +153,7 @@ export default function ExamPage() {
         <section className="mx-auto w-full max-w-md flex-1 px-6 py-6 pb-32 md:max-w-5xl md:px-0 md:py-4 md:pb-8">
           <div className="md:flex md:gap-8">
             <div className="md:flex-1">
-              <div className="mb-15 md:mb-4 flex items-center justify-between">
+              <div className="mb-16 md:mb-4 flex items-center justify-between">
                 <h1 className="text-2xl font-bold text-gray-800 md:text-lg">Prüfungssimulation</h1>
                 <span className="text-gray-400 md:text-base">{progressLabel}</span>
               </div>
@@ -180,6 +213,25 @@ export default function ExamPage() {
                 {submitted && showExplanation && (
                   <div className="rounded-xl bg-gray-50 p-4 text-sm text-gray-600 md:hidden">
                     {currentQuestion.explanation ?? 'Keine Erklärung verfügbar.'}
+
+                    {(currentQuestion.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+                      <div className="mt-3 flex flex-col gap-1">
+                        <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
+                        {currentQuestion.attachments
+                          .filter((a) => a.type === 'link')
+                          .map((a) => (
+                            <a
+                              key={a.id}
+                              href={a.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="break-all text-sm font-medium text-[#008CEA] underline"
+                            >
+                              {a.url}
+                            </a>
+                          ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -194,10 +246,29 @@ export default function ExamPage() {
             </div>
 
             {submitted && showExplanation && (
-              <div className="hidden md:block md:w-80 md:flex-shrink-0">
+              <div className="hidden md:block md:w-80 md:shrink-0">
                 <div className="sticky top-4 rounded-xl bg-gray-50 p-4 text-sm text-gray-600">
                   <p className="mb-2 font-semibold text-gray-800">Erklärung</p>
                   {currentQuestion.explanation ?? 'Keine Erklärung verfügbar.'}
+
+                  {(currentQuestion.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+                    <div className="mt-3 flex flex-col gap-1">
+                      <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
+                      {currentQuestion.attachments
+                        .filter((a) => a.type === 'link')
+                        .map((a) => (
+                          <a
+                            key={a.id}
+                            href={a.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="break-all text-sm font-medium text-[#008CEA] underline"
+                          >
+                            {a.url}
+                          </a>
+                        ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -216,6 +287,9 @@ export default function ExamPage() {
       {lightboxUrl && (
         <div
           onClick={() => setLightboxUrl(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Bild in Vollansicht"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-pointer"
         >
           <img
