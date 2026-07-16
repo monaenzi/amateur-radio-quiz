@@ -144,7 +144,7 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
     )
   }
 
-  if (variant === 'default') {
+if (variant === 'default') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
@@ -163,14 +163,6 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
                 <BackButton />
               </div>
             )}
-            {pathname === '/dashboard' && (
-              <div className="ml-2">
-                <Link href="/login" className="flex flex-col items-center text-white">
-                  <LogIn size={24} />
-                  <span className="text-[10px] uppercase tracking-[0.15em]">Login</span>
-                </Link>
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col items-center">
@@ -183,6 +175,12 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
               <Link href={dashboardHref}>Home</Link>
               <Link href={statisticsHref}>Statistik</Link>
             </nav>
+            {pathname === '/dashboard' && (
+              <Link href="/login" className="flex flex-col items-center text-white">
+                <LogIn size={24} />
+                <span className="text-[10px] uppercase tracking-[0.15em]">Login</span>
+              </Link>
+            )}
           </div>
         </div>
       </header>
