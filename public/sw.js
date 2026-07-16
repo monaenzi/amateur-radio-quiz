@@ -30,6 +30,12 @@ self.addEventListener('activate', event => {
 })
 
 self.addEventListener('fetch', event => {
+  // Logout NIE aus dem Cache bedienen!
+  if (event.request.url.includes('/logout') || 
+      event.request.url.includes('/api/auth/signout')) {
+    event.respondWith(fetch(event.request))
+    return
+  }
   event.respondWith(
     caches.match(event.request)
       .then(cached => cached || fetch(event.request))
