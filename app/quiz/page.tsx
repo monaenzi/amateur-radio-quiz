@@ -1,7 +1,7 @@
 'use client'
 
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import AppButton from '@/components/AppButton'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
@@ -60,6 +60,14 @@ function readPersistedQuizState(classId: string, subject?: string): PersistedQui
 }
 
 export default function KarteikartenPage() {
+  return (
+    <Suspense fallback={null}>
+      <KarteikartenPageContent />
+    </Suspense>
+  )
+}
+
+function KarteikartenPageContent() {
   const { data: session } = useSession()
   const isLoggedIn = !!session?.user
   const searchParams = useSearchParams()
@@ -100,7 +108,8 @@ export default function KarteikartenPage() {
         ? `/api/questions/learning?class=${classId}&subject=${subject}`
         : `/api/questions/learning?class=${classId}`
 
-      offlineApi.get(url)
+      offlineApi
+        .get(url)
         .then(function (data) {
           setQuestions(data)
         })
@@ -159,15 +168,15 @@ export default function KarteikartenPage() {
   async function handleConfidence(confidence: 'KNOWN' | 'MEDIUM' | 'UNKNOWN', questionId: number) {
     if (saving) return
     setSaving(true)
-    
+
     if (isLoggedIn) {
-      try{
+      try {
         await offlineApi.post('/api/progress', { questionId, confidence })
       } catch {
         // progress save failed silently, user still proceeds
       }
     }
-    
+
     setSaving(false)
     handleNext()
   }
@@ -260,7 +269,6 @@ export default function KarteikartenPage() {
   const card = questions[currentIndex]
   const progress = Math.round(((currentIndex + 1) / questions.length) * 100)
 
-
   return (
     <main className="min-h-screen bg-white md:p-8">
       <div className="w-full bg-white md:mx-auto md:max-w-7xl">
@@ -299,46 +307,50 @@ export default function KarteikartenPage() {
                   : card.text}
               </h1>
 
-              {showAnswer && (card.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
-                <div className="mt-6 flex flex-col items-center gap-1">
-                  <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
-                  {card.attachments
-                    .filter((a) => a.type === 'link')
-                    .map((a) => (
-                      <a
-                        key={a.id}
-                        href={a.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="break-all text-sm font-medium text-[#008CEA] underline"
-                      >
-                        {a.url}
-                      </a>
-                    ))}
-                </div>
-              )}
-
-              {!showAnswer && card.attachments?.filter((a) => a.type === 'image').map((a) => (
-                <div key={a.id} className="relative">
-                    <img
-                      src={a.url}
-                      alt="Anhang"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none'
-                        e.currentTarget.nextElementSibling?.classList.remove('hidden')
-                      }}
-                      className="mt-6 max-h-48 rounded-lg object-contain cursor-pointer hover:opacity-90"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setLightboxUrl(a.url)
-                      }}
-                    />
-                    <div className="hidden mt-6 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-400 text-center">
-                      Bild konnte nicht geladen werden
-                    </div>
+              {showAnswer &&
+                (card.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+                  <div className="mt-6 flex flex-col items-center gap-1">
+                    <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
+                    {card.attachments
+                      .filter((a) => a.type === 'link')
+                      .map((a) => (
+                        <a
+                          key={a.id}
+                          href={a.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="break-all text-sm font-medium text-[#008CEA] underline"
+                        >
+                          {a.url}
+                        </a>
+                      ))}
                   </div>
-              ))}
+                )}
+
+              {!showAnswer &&
+                card.attachments
+                  ?.filter((a) => a.type === 'image')
+                  .map((a) => (
+                    <div key={a.id} className="relative">
+                      <img
+                        src={a.url}
+                        alt="Anhang"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none'
+                          e.currentTarget.nextElementSibling?.classList.remove('hidden')
+                        }}
+                        className="mt-6 max-h-48 rounded-lg object-contain cursor-pointer hover:opacity-90"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setLightboxUrl(a.url)
+                        }}
+                      />
+                      <div className="hidden mt-6 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-400 text-center">
+                        Bild konnte nicht geladen werden
+                      </div>
+                    </div>
+                  ))}
             </section>
           </div>
 

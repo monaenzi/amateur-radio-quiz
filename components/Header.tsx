@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -11,7 +12,15 @@ type HeaderProps = {
   variant?: 'home' | 'welcome' | 'default' | 'auth' | 'admin' | 'authAdmin'
 }
 
-export default function Header({ variant = 'home' }: HeaderProps) {
+export default function Header(props: HeaderProps) {
+  return (
+    <Suspense fallback={null}>
+      <HeaderContent {...props} />
+    </Suspense>
+  )
+}
+
+function HeaderContent({ variant = 'home' }: HeaderProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const currentClass = searchParams.get('class')
@@ -26,13 +35,7 @@ export default function Header({ variant = 'home' }: HeaderProps) {
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/">
-            <Image
-              src="/logoWhite.png"
-              alt="ÖVSV Lernkurs Logo"
-              width={30}
-              height={30}
-              priority
-            />
+            <Image src="/logoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
           </Link>
 
           <div className="flex flex-col items-center">

@@ -1,13 +1,21 @@
 'use client'
 
+import { Suspense, useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import FooterNav from '@/components/FooterNav'
 import AppButton from '@/components/AppButton'
 import { useExamSimulation } from './useExamSimulation'
-import { useEffect, useState } from 'react'
 
 export default function ExamPage() {
+  return (
+    <Suspense fallback={null}>
+      <ExamPageContent />
+    </Suspense>
+  )
+}
+
+function ExamPageContent() {
   const {
     questions,
     currentQuestion,
@@ -131,7 +139,9 @@ export default function ExamPage() {
           <Header variant="welcome" />
           <section className="mx-auto flex flex-1 flex-col items-center justify-center px-6 py-6 text-center">
             <h1 className="mb-3 text-2xl font-bold text-gray-800">Prüfung abgeschlossen</h1>
-            <p className="mb-6 text-sm text-gray-500">Du hast alle geladenen Fragen durchgearbeitet.</p>
+            <p className="mb-6 text-sm text-gray-500">
+              Du hast alle geladenen Fragen durchgearbeitet.
+            </p>
             <AppButton onClick={() => setCurrentIndex(0)}>Erneut starten</AppButton>
           </section>
           <div className="md:hidden">
@@ -162,8 +172,10 @@ export default function ExamPage() {
                 {currentQuestion.text}
               </p>
 
-              {currentQuestion.attachments?.filter((a) => a.type === 'image').map((a) => (
-                <div key={a.id} className="relative">
+              {currentQuestion.attachments
+                ?.filter((a) => a.type === 'image')
+                .map((a) => (
+                  <div key={a.id} className="relative">
                     <img
                       src={a.url}
                       alt="Anhang"
@@ -178,7 +190,7 @@ export default function ExamPage() {
                       Bild konnte nicht geladen werden
                     </div>
                   </div>
-              ))}
+                ))}
 
               <div className="flex flex-col gap-3">
                 {currentQuestion.answers.length > 0 ? (
@@ -214,7 +226,8 @@ export default function ExamPage() {
                   <div className="rounded-xl bg-gray-50 p-4 text-sm text-gray-600 md:hidden">
                     {currentQuestion.explanation ?? 'Keine Erklärung verfügbar.'}
 
-                    {(currentQuestion.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+                    {(currentQuestion.attachments?.filter((a) => a.type === 'link').length ?? 0) >
+                      0 && (
                       <div className="mt-3 flex flex-col gap-1">
                         <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
                         {currentQuestion.attachments
@@ -251,7 +264,8 @@ export default function ExamPage() {
                   <p className="mb-2 font-semibold text-gray-800">Erklärung</p>
                   {currentQuestion.explanation ?? 'Keine Erklärung verfügbar.'}
 
-                  {(currentQuestion.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+                  {(currentQuestion.attachments?.filter((a) => a.type === 'link').length ?? 0) >
+                    0 && (
                     <div className="mt-3 flex flex-col gap-1">
                       <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
                       {currentQuestion.attachments

@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useQuestionList } from './useQuestionList'
 import { useRouter } from 'next/navigation'
 import { Trash2, Pen } from 'lucide-react'
@@ -9,6 +10,14 @@ import QuestionSkeleton from '@/components/QuestionSkeleton'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default function QuestionList() {
+  return (
+    <Suspense fallback={null}>
+      <QuestionListContent />
+    </Suspense>
+  )
+}
+
+function QuestionListContent() {
   const router = useRouter()
   const {
     questions,
@@ -33,10 +42,7 @@ export default function QuestionList() {
   return (
     <main className="min-h-screen bg-white">
       <Header variant="admin" />
-      <Breadcrumbs items={[
-        { label: 'Admin', href: '/admin' },
-        { label: 'Fragen' },
-      ]} />
+      <Breadcrumbs items={[{ label: 'Admin', href: '/admin' }, { label: 'Fragen' }]} />
 
       <div className="p-6">
         <div className="flex flex-col gap-3">
@@ -102,41 +108,41 @@ export default function QuestionList() {
             <p className="text-center text-gray-500">Keine Fragen gefunden.</p>
           ) : (
             questions.map((q) => (
-            <div
-              key={q.id}
-              className="flex items-center justify-between rounded-md border border-gray-200 px-4 py-3"
-            >
-              <div className="flex flex-col gap-1">
-                {q.code && <span className="text-xs font-bold text-[#008CEA]">{q.code}</span>}
-                <p className="text-sm text-gray-600 line-clamp-2">{q.text}</p>
+              <div
+                key={q.id}
+                className="flex items-center justify-between rounded-md border border-gray-200 px-4 py-3"
+              >
+                <div className="flex flex-col gap-1">
+                  {q.code && <span className="text-xs font-bold text-[#008CEA]">{q.code}</span>}
+                  <p className="text-sm text-gray-600 line-clamp-2">{q.text}</p>
+                  <div className="flex gap-2">
+                    <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
+                      {q.subject}
+                    </span>
+                    <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
+                      Klasse {q.classes.map((c) => c.class).join(', ')}
+                    </span>
+                  </div>
+                </div>
+
                 <div className="flex gap-2">
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
-                    {q.subject}
-                  </span>
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
-                    Klasse {q.classes.map((c) => c.class).join(', ')}
-                  </span>
+                  <button
+                    onClick={() => router.push(`/admin/questions/${q.id}`)}
+                    aria-label="Frage bearbeiten"
+                    className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50"
+                  >
+                    <Pen />
+                  </button>
+                  <button
+                    onClick={() => setDeleteId(q.id)}
+                    aria-label="Frage löschen"
+                    className="rounded-md border border-red-200 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
+                  >
+                    <Trash2 />
+                  </button>
                 </div>
               </div>
-
-              <div className="flex gap-2">
-                <button
-                  onClick={() => router.push(`/admin/questions/${q.id}`)}
-                  aria-label="Frage bearbeiten"
-                  className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50"
-                >
-                  <Pen />
-                </button>
-                <button
-                  onClick={() => setDeleteId(q.id)}
-                  aria-label="Frage löschen"
-                  className="rounded-md border border-red-200 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
-                >
-                  <Trash2 />
-                </button>
-              </div>
-            </div>
-          ))
+            ))
           )}
         </div>
 

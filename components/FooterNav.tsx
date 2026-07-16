@@ -1,11 +1,20 @@
 'use client'
 
+import { Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { Home, BookOpen, ClipboardList, ChartColumn } from 'lucide-react'
 
 export default function FooterNav() {
+  return (
+    <Suspense fallback={null}>
+      <FooterNavContent />
+    </Suspense>
+  )
+}
+
+function FooterNavContent() {
   const { status } = useSession()
   const searchParams = useSearchParams()
   const examHref = status === 'authenticated' ? '/examSimulation' : '/exam_locked'
@@ -39,7 +48,10 @@ export default function FooterNav() {
           <span className="text-xs">Prüfung</span>
         </Link> */}
 
-        <Link href={statisticsHref} className="flex flex-col items-center gap-1 py-3 text-[#008CEA]">
+        <Link
+          href={statisticsHref}
+          className="flex flex-col items-center gap-1 py-3 text-[#008CEA]"
+        >
           <ChartColumn size={20} />
           <span className="text-xs">Statistik</span>
         </Link>

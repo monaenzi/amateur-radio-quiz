@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
@@ -21,6 +21,14 @@ type ExamResult = {
 }
 
 export default function PruefungErgebnis() {
+  return (
+    <Suspense fallback={null}>
+      <PruefungErgebnisContent />
+    </Suspense>
+  )
+}
+
+function PruefungErgebnisContent() {
   const [result, setResult] = useState<ExamResult | null>(null)
   const searchParams = useSearchParams()
   const classId = searchParams.get('class') ?? '1'
