@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useState } from 'react'
+import { use, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import AppButton from '@/components/AppButton'
@@ -16,7 +16,7 @@ export default function QuestionPreview({
 }) {
   const { id } = use(params)
   const router = useRouter()
-  const { question, loading } = useQuestionPreview(id)
+  const { question, loading, error } = useQuestionPreview(id)
   const [mode, setMode] = useState<'karteikarte' | 'pruefung'>('karteikarte')
   const [showAnswer, setShowAnswer] = useState(false)
   const [selected, setSelected] = useState<string[]>([])
@@ -24,8 +24,20 @@ export default function QuestionPreview({
   const [showExplanation, setShowExplanation] = useState(false)
   const [lightboxUrl, setLightboxUrl] = useState<string | null>(null)
 
-  if (loading) return <p className="p-6 text-gray-400">Laden...</p>
-  if (!question) return <p className="p-6 text-gray-400">Frage nicht gefunden.</p>
+  useEffect(() => {
+    if (!lightboxUrl) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxUrl(null)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [lightboxUrl])
+
+  if (loading) return <p className="p-6 text-gray-500">Laden...</p>
+  if (error) return <p className="p-6 text-red-500">{error}</p>
+  if (!question) return <p className="p-6 text-gray-500">Frage nicht gefunden.</p>
 
   const toggleSelect = (letter: string) => {
     if (submitted) return
@@ -82,6 +94,7 @@ export default function QuestionPreview({
       <div className="flex gap-2 px-6 pt-4 max-w-2xl mx-auto">
         <button
           onClick={() => { setMode('karteikarte'); setShowAnswer(false) }}
+          aria-pressed={mode === 'karteikarte'}
           className={`flex-1 rounded-md py-2 text-sm font-bold transition ${
             mode === 'karteikarte'
               ? 'bg-[#008CEA] text-white'
@@ -92,6 +105,7 @@ export default function QuestionPreview({
         </button>
         <button
           onClick={() => { setMode('pruefung'); resetPruefung() }}
+          aria-pressed={mode === 'pruefung'}
           className={`flex-1 rounded-md py-2 text-sm font-bold transition ${
             mode === 'pruefung'
               ? 'bg-[#008CEA] text-white'
@@ -110,9 +124,28 @@ export default function QuestionPreview({
             </p>
             <h1 className="text-xl font-bold leading-relaxed text-gray-700 md:text-2xl">
               {showAnswer
-                ? question.answers.filter((a) => a.isCorrect).map((a) => a.text).join(', ')
+                ? question.answers.filter((a) => a.isCorrect).map((a) => a.text).join(', ') || 'Keine Antwort hinterlegt'
                 : question.text}
             </h1>
+
+            {showAnswer && (question.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+              <div className="mt-6 flex flex-col items-center gap-1">
+                <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
+                {question.attachments
+                  .filter((a) => a.type === 'link')
+                  .map((a, i) => (
+                    <a
+                      key={i}
+                      href={a.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="break-all text-sm font-medium text-[#008CEA] underline"
+                    >
+                      {a.url}
+                    </a>
+                  ))}
+              </div>
+            )}
 
             {!showAnswer && question.attachments?.filter((a) => a.type === 'image').map((a, i) => (
               <div key={i} className="relative">
@@ -192,6 +225,12 @@ export default function QuestionPreview({
                   </button>
                 ))}
 
+                {submitted && !question.answers.some((a) => a.isCorrect) && (
+                  <div className="rounded-xl border border-yellow-300 bg-yellow-50 p-4 text-sm text-yellow-700">
+                    Achtung: Für diese Frage ist keine richtige Antwort hinterlegt.
+                  </div>
+                )}
+
                 {submitted && question.explanation && (
                   <button
                     onClick={() => setShowExplanation((prev) => !prev)}
@@ -204,6 +243,25 @@ export default function QuestionPreview({
                 {submitted && showExplanation && (
                   <div className="rounded-xl bg-gray-50 p-4 text-sm text-gray-600 md:hidden">
                     {question.explanation}
+
+                    {(question.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+                      <div className="mt-3 flex flex-col gap-1">
+                        <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
+                        {question.attachments
+                          .filter((a) => a.type === 'link')
+                          .map((a, i) => (
+                            <a
+                              key={i}
+                              href={a.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="break-all text-sm font-medium text-[#008CEA] underline"
+                            >
+                              {a.url}
+                            </a>
+                          ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -218,10 +276,29 @@ export default function QuestionPreview({
             </div>
 
             {submitted && showExplanation && question.explanation && (
-              <div className="hidden md:block md:w-80 md:flex-shrink-0">
+              <div className="hidden md:block md:w-80 md:shrink-0">
                 <div className="sticky top-4 rounded-xl bg-gray-50 p-4 text-sm text-gray-600">
                   <p className="mb-2 font-semibold text-gray-800">Erklärung</p>
                   {question.explanation}
+
+                  {(question.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+                    <div className="mt-3 flex flex-col gap-1">
+                      <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
+                      {question.attachments
+                        .filter((a) => a.type === 'link')
+                        .map((a, i) => (
+                          <a
+                            key={i}
+                            href={a.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="break-all text-sm font-medium text-[#008CEA] underline"
+                          >
+                            {a.url}
+                          </a>
+                        ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -232,6 +309,9 @@ export default function QuestionPreview({
       {lightboxUrl && (
         <div
           onClick={() => setLightboxUrl(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Bild in Vollansicht"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-pointer"
         >
           <img

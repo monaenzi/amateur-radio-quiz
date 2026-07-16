@@ -13,7 +13,7 @@ type Question = {
   text: string
   explanation: string | null
   code: string | null
-  class: number
+  classes: { class: number }[]
   subject: string
   answers: Answer[]
   attachments: {
@@ -25,16 +25,21 @@ type Question = {
 export function useQuestionPreview(id: string) {
   const [question, setQuestion] = useState<Question | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetch(`/api/admin/questions/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data || data.error) return
-        setQuestion(data)
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => null)
+          throw new Error(body?.error ?? 'Frage konnte nicht geladen werden')
+        }
+        return res.json()
       })
+      .then((data) => setQuestion(data))
+      .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
   }, [id])
 
-  return { question, loading }
+  return { question, loading, error }
 }
