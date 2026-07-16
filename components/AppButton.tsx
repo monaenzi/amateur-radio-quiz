@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { twMerge } from 'tailwind-merge'
 
 type AppButtonProps = {
   children: React.ReactNode
@@ -24,7 +25,7 @@ export default function AppButton({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${baseClass} ${className ?? ''}`}
+        className={twMerge(baseClass, className)}
       >
         {children}
       </a>
@@ -33,10 +34,7 @@ export default function AppButton({
 
   if (href) {
     return (
-      <Link
-        href={href}
-        className={`${baseClass} ${className ?? ''}`}
-      >
+      <Link href={href} className={twMerge(baseClass, className)}>
         {children}
       </Link>
     )
@@ -46,7 +44,7 @@ export default function AppButton({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${baseClass} ${className ?? ''} disabled:opacity-50`}
+      className={twMerge(baseClass, className, 'disabled:opacity-50')}
     >
       {children}
     </button>

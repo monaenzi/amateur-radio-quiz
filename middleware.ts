@@ -5,7 +5,9 @@ export default auth((req) => {
   const isAdminRoute = req.nextUrl.pathname.startsWith('/admin')
   const isLoginRoute = req.nextUrl.pathname === '/login'
   const isHomeRoute = req.nextUrl.pathname === '/'
-  const isExamRoute = req.nextUrl.pathname.startsWith('/examSimulation')
+  const isExamRoute =
+    req.nextUrl.pathname.startsWith('/examSimulation') ||
+    req.nextUrl.pathname.startsWith('/examResults')
   const isLoggedIn = !!req.auth
   const isAdmin = req.auth?.user?.role === 'ADMIN'
 
@@ -26,5 +28,5 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: ['/admin/:path*', '/login', '/', '/examSimulation/:path*'],
+  matcher: ['/admin/:path*', '/login', '/', '/examSimulation/:path*', '/examResults/:path*'],
 }

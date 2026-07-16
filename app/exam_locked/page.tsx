@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Lock } from "lucide-react";
 import Header from "@/components/Header";
 import FooterNav from "@/components/FooterNav";
@@ -10,7 +9,7 @@ export default function ExamGuestPage() {
             <div className="w-full bg-white md:mx-auto md:max-w-7xl">
                 <Header variant="default" />
  
-                <div className="flex flex-col items-center px-6 pb-24 pt-50 md:pt-16 text-center">
+                <div className="flex flex-col items-center px-6 pb-24 pt-52 md:pt-16 text-center">
                     <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#E6F4FD]">
                         <Lock size={32} className="text-[#008CEA]" />
                     </div>
@@ -31,12 +30,12 @@ export default function ExamGuestPage() {
                         Anmelden
                     </AppButton>
  
-                        <AppButton
-                            href="https://www.oevsv.at/mitgliedschaft/"
-                            className="rounded-full bg-[#008CEA] py-3 text-center font-semibold text-white"
+                    <AppButton
+                        href="https://www.oevsv.at/mitgliedschaft/"
+                        className="rounded-full border border-[#008CEA] bg-white py-3 text-center font-semibold text-[#008CEA]"
                         >
-                            Mitglied werden
-                        </AppButton>
+                        Mitglied werden
+                    </AppButton>
                     </div>
                 </div>
  
