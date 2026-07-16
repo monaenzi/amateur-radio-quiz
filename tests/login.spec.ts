@@ -181,28 +181,33 @@ test.describe('Gast-Modus Navigation', () => {
   })
 
 
-  // test('Statistik-Seite zeigt echte Fortschrittsdaten für Klasse 3 nach Login', async ({ page }) => {
-  //   await page.goto('http://localhost:3000/login')
-  //   await page.waitForLoadState('networkidle')
-  //   await page.fill('input[type="email"]', 'user@test.com') 
-  //   await page.fill('#password', 'password')            
-  //   await page.click('button:has-text("Einloggen")')
-  //   await expect(page).toHaveURL(/dashboard/)
+  test('Statistik-Seite zeigt echte Fortschrittsdaten für Klasse 3 nach Login', async ({ page }) => {
+    await page.goto('http://localhost:3000/login')
+    await page.waitForLoadState('networkidle')
+    await page.fill('input[type="email"]', 'user@test.com') 
+    await page.fill('#password', 'password')            
+    
+    await Promise.all([
+      page.waitForURL('http://localhost:3000/dashboard', { timeout: 10000 }),
+      page.click('button:has-text("Einloggen")')
+    ])
 
-  //   await page.goto('http://localhost:3000/statistics?class=3')
-  //   await page.waitForLoadState('networkidle')
+    await expect(page).toHaveURL('http://localhost:3000/dashboard')
 
-  //   await expect(page.locator('h2:has-text("GESAMTFORTSCHRITT")')).toBeVisible()
-  //   await expect(page.locator('h2:has-text("FRAGEN")')).toBeVisible()
-  //   await expect(page.locator('h2:has-text("FACHGEBIETE")')).toBeVisible()
+    await page.goto('http://localhost:3000/statistics?class=3')
+    await page.waitForLoadState('networkidle')
 
-  //   await expect(page.locator('role=progressbar').first()).toBeVisible()
-  //   await expect(page.locator('p:has-text("gelernt")')).toBeVisible()
-  //   await expect(page.locator('p:has-text("unsicher")')).toBeVisible()
-  //   await expect(page.locator('p:has-text("offen")')).toBeVisible()
+    await expect(page.locator('h2:has-text("GESAMTFORTSCHRITT")')).toBeVisible()
+    await expect(page.locator('h2:has-text("FRAGEN")')).toBeVisible()
+    await expect(page.locator('h2:has-text("FACHGEBIETE")')).toBeVisible()
 
-  //   await expect(page.locator('p:has-text("Recht")')).toBeVisible()
-  //   await expect(page.locator('p:has-text("Technik")')).toBeVisible()
-  //   await expect(page.locator('p:has-text("Betrieb")')).toBeVisible()
-  // })
+    await expect(page.locator('role=progressbar').first()).toBeVisible()
+    await expect(page.locator('p:has-text("gelernt")')).toBeVisible()
+    await expect(page.locator('p:has-text("unsicher")')).toBeVisible()
+    await expect(page.locator('p:has-text("offen")')).toBeVisible()
+
+    await expect(page.locator('p:has-text("Recht")')).toBeVisible()
+    await expect(page.locator('p:has-text("Technik")')).toBeVisible()
+    await expect(page.locator('p:has-text("Betrieb")')).toBeVisible()
+  })
 })
