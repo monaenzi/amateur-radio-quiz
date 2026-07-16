@@ -14,7 +14,7 @@ export default function LoginPage() {
       <div className="mx-auto h-full bg-white md:max-w-7xl">
         <Header variant="auth" />
 
-        <div className="md:mt-15 mt-70 text-center">
+        <div className="md:mt-16 mt-72 text-center">
           <h1 className="text-2xl font-bold text-gray-600">Anmelden</h1>
           <p className="mt-3 text-sm text-gray-400">Melde dich mit deinem Konto an.</p>
         </div>
@@ -37,6 +37,8 @@ export default function LoginPage() {
           {/* Admin Login */}
           <input
             type="email"
+            autoComplete="email"
+            aria-label="E-Mail"
             placeholder="E-Mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -49,6 +51,8 @@ export default function LoginPage() {
             <input
               id="password"
               type={showPassword ? 'text' : 'password'}
+              autoComplete="current-password"
+              aria-label="Passwort"
               placeholder="Passwort"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

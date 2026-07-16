@@ -21,11 +21,13 @@ export function useLogin() {
       redirect: false,
     })
 
-    setLoading(false)
-
     if (result?.error) {
+      setLoading(false)
       setError('E-Mail oder Passwort falsch.')
-    } else {
+      return
+    }
+
+    try {
       const sessionRes = await fetch('/api/auth/session')
       const session = await sessionRes.json()
 
@@ -34,6 +36,10 @@ export function useLogin() {
       } else {
         router.push('/dashboard')
       }
+    } catch {
+      router.push('/dashboard')
+    } finally {
+      setLoading(false)
     }
   }
 
