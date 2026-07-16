@@ -45,8 +45,8 @@ export default async function StatistikPage({ searchParams }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-white md:p-8">
-      <div className="w-full bg-white md:mx-auto md:max-w-7xl">
+    <main className="min-h-screen bg-white overflow-y-auto md:p-8">
+      <div className="w-full bg-white md:mx-auto md:max-w-7xl h-full flex flex-col justify-between">
         <Header variant={isLoggedIn ? 'welcome' : 'default'} />
 
         <div className="px-6 pb-24 pt-6">
@@ -88,7 +88,7 @@ export default async function StatistikPage({ searchParams }: Props) {
 
           <h2 className="mb-3 mt-8 text-sm font-bold tracking-wide text-gray-700">FACHGEBIETE</h2>
 
-          <div className="max-h-48 overflow-y-auto rounded-xl border border-gray-200 p-4 sm:max-h-72">
+          <div className="rounded-xl border border-gray-200 p-4">
             {stats.subjects.map((subjectStat, index) => (
               <div key={subjectStat.subject}>
                 {index > 0 && <div className="border-t border-gray-200" />}
