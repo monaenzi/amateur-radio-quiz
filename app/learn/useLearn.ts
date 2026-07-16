@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { offlineApi } from '@/lib/offline-api'
 
 export type SubjectStat = {
     subject: string
@@ -23,13 +24,16 @@ export function useLearn() {
         setLoading(true)
         setError(null)
 
-        fetch(`/api/questions/stats?class=${classId}`)
-            .then(function (res) {
-                if (!res.ok) throw new Error('Fachgebiete konnten nicht geladen werden')
-                return res.json()
-            })
+        offlineApi.get(`/api/questions/stats?class=${classId}`)
             .then(function (data) {
                 setStats(data.bySubject || [])
+                // Preload all quiz data for caching
+                if (navigator.onLine) {
+                  const allSubjects = (data.bySubject || []).map((s: SubjectStat) => s.subject)
+                  allSubjects.forEach((subject: string) => {
+                    offlineApi.get(`/api/questions/learning?class=${classId}&subject=${subject}`).catch(() => {})
+                  })
+                }
             })
             .catch(function (err) {
                 setError(err instanceof Error ? err.message : 'Fachgebiete konnten nicht geladen werden')
