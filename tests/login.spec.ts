@@ -32,9 +32,13 @@ test.describe('Login Funktionalität', () => {
   test('Benutzer kann sich erfolgreich anmelden', async ({ page }) => {
     await page.goto('http://localhost:3000/login')
     await page.waitForLoadState('networkidle')
-    await page.fill('input[type="email"]', 'user@test.com')
-    await page.fill('#password', 'password')
-    await page.click('button:has-text("Einloggen")')
+    await page.fill('input[type="email"]', 'user@test.com') 
+    await page.fill('#password', 'password')           
+    
+    await Promise.all([
+      page.waitForURL('**/dashboard**'),
+      page.click('button:has-text("Einloggen")')
+    ])
 
     await expect(page).toHaveURL(/dashboard/)
   })
