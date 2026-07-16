@@ -35,7 +35,7 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
       <header className="relative bg-[#008CEA] px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/">
-            <Image src="/logoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
+            <Image src="/LogoWhite.png" alt="ÖVSV Lernkurs Logo" width={30} height={30} priority />
           </Link>
 
           <div className="flex flex-col items-center">
@@ -62,7 +62,7 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
           <div className="flex-1 flex items-center gap-3">
             <Link href="/">
               <Image
-                src="/logoWhite.png"
+                src="/LogoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
                 width={30}
                 height={30}
@@ -100,7 +100,7 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
           <div className="flex-1 flex items-center gap-3">
             <Link href="/">
               <Image
-                src="/logoWhite.png"
+                src="/LogoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
                 width={30}
                 height={30}
@@ -131,7 +131,7 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
         <Link href="/">
           <div className="bg-gradient-to-l from-[#cfefff] via-white to-white">
             <Image
-              src="/logo.png"
+              src="/Logo.png"
               alt="ÖVSV Lernkurs Logo"
               width={800}
               height={240}
@@ -151,7 +151,7 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
           <div className="flex-1 flex items-center gap-3">
             <Link href="/dashboard">
               <Image
-                src="/logoWhite.png"
+                src="/LogoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
                 width={30}
                 height={30}
@@ -196,7 +196,7 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
           <div className="flex-1 flex items-center gap-3">
             <Link href="/dashboard">
               <Image
-                src="/logoWhite.png"
+                src="/LogoWhite.png"
                 alt="ÖVSV Lernkurs Logo"
                 width={30}
                 height={30}

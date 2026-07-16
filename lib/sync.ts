@@ -39,7 +39,9 @@ export const setupSyncListener = () => {
     navigator.serviceWorker.ready.then((registration) => {
       const syncReg = registration as any
       if (syncReg.sync) {
-        syncReg.sync.register('sync-queue')
+        syncReg.sync.register('sync-queue').catch((err: unknown) => {
+          console.warn('Background Sync nicht verfügbar, Fallback über online-Event greift trotzdem:', err)
+        })
       }
     })
   }

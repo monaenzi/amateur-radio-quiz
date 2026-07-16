@@ -1,7 +1,6 @@
 const CACHE_NAME = 'v1'
 
 const ASSETS = [
-  '/',
   '/Logo.png',
   '/LogoWhite.png',
   '/web-app-manifest-192x192.png',
