@@ -13,17 +13,22 @@ type Props = {
 export default async function Home({ searchParams }: Props) {
   const session = await auth()
   const isLoggedIn = !!session?.user
-  const name = session?.user?.name ?? session?.user?.email ?? 'Gast'
+  const name = session?.user?.name ?? session?.user?.email ?? 'Nutzer'
 
   const resolvedParams = await searchParams
   const currentClass = resolvedParams.class
 
-  const stats = isLoggedIn && session.user.id
-    ? await statisticsService.getUserStats(
-        parseInt(session.user.id),
-        currentClass ? parseInt(currentClass) : undefined
+  let stats = null
+  if (isLoggedIn && session.user.id) {
+    try {
+      stats = await statisticsService.getUserStats(
+        parseInt(session.user.id, 10),
+        currentClass ? parseInt(currentClass, 10) : undefined
       )
-    : null
+    } catch {
+      stats = null
+    }
+  }
 
   return (
     <main className="min-h-screen bg-white md:p-8">
@@ -76,12 +81,16 @@ export default async function Home({ searchParams }: Props) {
                 <div
                   className="h-2 rounded-full bg-[#0A8BE8]"
                   style={{ width: `${stats?.percentage ?? 0}%` }}
-                 />
+                  role="progressbar"
+                  aria-valuenow={stats?.percentage ?? 0}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                />
               </div>
             </div>
           </div>
 
-          <div className="mt-50 flex justify-center">
+          <div className="mt-28 flex justify-center">
             <DashboardActionButtons />
           </div>
         </div>
