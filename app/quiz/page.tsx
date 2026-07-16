@@ -67,8 +67,6 @@ export default function KarteikartenPage() {
   const [lightboxUrl, setLightboxUrl] = useState<string | null>(null)
 
   const [questions, setQuestions] = useState<Question[]>([])
-  //   const [currentIndex, setCurrentIndex] = useState(0)
-  //   const [showAnswer, setShowAnswer] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(
     () => readPersistedQuizState(classId, subject).currentIndex
   )
@@ -77,6 +75,8 @@ export default function KarteikartenPage() {
   )
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [retryCount, setRetryCount] = useState(0)
 
   useEffect(
     function () {
@@ -90,32 +90,49 @@ export default function KarteikartenPage() {
   useEffect(
     function () {
       if (typeof window === 'undefined') return
+      setLoading(true)
+      setError(null)
+
       const url = subject
         ? `/api/questions/learning?class=${classId}&subject=${subject}`
         : `/api/questions/learning?class=${classId}`
 
       fetch(url)
         .then(function (res) {
+          if (!res.ok) throw new Error('Fragen konnten nicht geladen werden')
           return res.json()
         })
         .then(function (data) {
           setQuestions(data)
+        })
+        .catch(function (err) {
+          setError(err instanceof Error ? err.message : 'Fragen konnten nicht geladen werden')
+        })
+        .finally(function () {
           setLoading(false)
         })
     },
-    [classId, subject]
+    [classId, subject, retryCount]
   )
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (currentIndex >= questions.length && questions.length > 0) {
+      sessionStorage.removeItem(getQuizStorageKey(classId, subject))
+    }
+  }, [currentIndex, questions.length, classId, subject])
 
   useEffect(
     function () {
       if (typeof window === 'undefined') return
+      if (currentIndex >= questions.length) return
 
       sessionStorage.setItem(
         getQuizStorageKey(classId, subject),
         JSON.stringify({ currentIndex, showAnswer })
       )
     },
-    [classId, currentIndex, showAnswer, subject]
+    [classId, currentIndex, showAnswer, subject, questions.length]
   )
 
   function handleNext() {
@@ -160,6 +177,17 @@ export default function KarteikartenPage() {
     handleNext()
   }
 
+  useEffect(() => {
+    if (!lightboxUrl) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxUrl(null)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [lightboxUrl])
+
   if (loading) {
     return (
       <main className="min-h-screen bg-white md:p-8">
@@ -167,6 +195,22 @@ export default function KarteikartenPage() {
           <Header variant={isLoggedIn ? 'welcome' : 'default'} />
           <div className="flex min-h-[calc(100vh-96px)] items-center justify-center">
             <p className="text-gray-500 animate-pulse">Fragen werden geladen...</p>
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-white md:p-8">
+        <div className="w-full bg-white md:mx-auto md:max-w-7xl">
+          <Header variant={isLoggedIn ? 'welcome' : 'default'} />
+          <div className="flex min-h-[calc(100vh-96px)] flex-col items-center justify-center gap-4 px-6 text-center">
+            <p className="text-red-500">{error}</p>
+            <AppButton onClick={() => setRetryCount((prev) => prev + 1)}>
+              Nochmal versuchen
+            </AppButton>
           </div>
         </div>
       </main>
@@ -194,8 +238,6 @@ export default function KarteikartenPage() {
   }
 
   if (currentIndex >= questions.length) {
-    sessionStorage.removeItem(getQuizStorageKey(classId, subject))
-
     return (
       <main className="min-h-screen bg-white md:p-8">
         <div className="w-full bg-white md:mx-auto md:max-w-7xl">
@@ -222,6 +264,7 @@ export default function KarteikartenPage() {
 
   const card = questions[currentIndex]
   const progress = Math.round(((currentIndex + 1) / questions.length) * 100)
+
 
   return (
     <main className="min-h-screen bg-white md:p-8">
@@ -261,6 +304,26 @@ export default function KarteikartenPage() {
                   : card.text}
               </h1>
 
+              {showAnswer && (card.attachments?.filter((a) => a.type === 'link').length ?? 0) > 0 && (
+                <div className="mt-6 flex flex-col items-center gap-1">
+                  <p className="text-xs font-bold text-gray-500">Weitere Quellen</p>
+                  {card.attachments
+                    .filter((a) => a.type === 'link')
+                    .map((a) => (
+                      <a
+                        key={a.id}
+                        href={a.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="break-all text-sm font-medium text-[#008CEA] underline"
+                      >
+                        {a.url}
+                      </a>
+                    ))}
+                </div>
+              )}
+
               {!showAnswer && card.attachments?.filter((a) => a.type === 'image').map((a) => (
                 <div key={a.id} className="relative">
                     <img
@@ -289,6 +352,7 @@ export default function KarteikartenPage() {
               <button
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
+                aria-label="Vorherige Karte"
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xl font-bold text-gray-600 transition hover:bg-gray-200 disabled:opacity-30 disabled:hover:bg-gray-100 cursor-pointer disabled:cursor-not-allowed"
               >
                 ‹
@@ -308,6 +372,7 @@ export default function KarteikartenPage() {
                     <button
                       onClick={() => handleConfidence('KNOWN', card.id)}
                       disabled={saving}
+                      aria-label="Antwort gewusst"
                       className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       ✓
@@ -315,6 +380,7 @@ export default function KarteikartenPage() {
                     <button
                       onClick={() => handleConfidence('MEDIUM', card.id)}
                       disabled={saving}
+                      aria-label="Antwort teilweise gewusst"
                       className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       ~
@@ -322,6 +388,7 @@ export default function KarteikartenPage() {
                     <button
                       onClick={() => handleConfidence('UNKNOWN', card.id)}
                       disabled={saving}
+                      aria-label="Antwort nicht gewusst"
                       className="h-10 w-full cursor-pointer rounded-full bg-[#008CEA] font-bold text-white transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       ✕
@@ -333,6 +400,7 @@ export default function KarteikartenPage() {
               <button
                 onClick={handleNext}
                 disabled={currentIndex === questions.length - 1}
+                aria-label="Nächste Karte"
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xl font-bold text-gray-600 transition hover:bg-gray-200 disabled:opacity-30 disabled:hover:bg-gray-100 cursor-pointer disabled:cursor-not-allowed"
               >
                 ›
@@ -347,6 +415,9 @@ export default function KarteikartenPage() {
       {lightboxUrl && (
         <div
           onClick={() => setLightboxUrl(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Bild in Vollansicht"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-pointer"
         >
           <img
