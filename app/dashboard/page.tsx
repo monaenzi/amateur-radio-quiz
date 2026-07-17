@@ -19,11 +19,11 @@ export default async function Home({ searchParams }: Props) {
   const currentClass = resolvedParams.class
 
   let stats = null
-  if (isLoggedIn && session.user.id) {
+  if (isLoggedIn && session.user.id && currentClass) {
     try {
       stats = await statisticsService.getUserStats(
         parseInt(session.user.id, 10),
-        currentClass ? parseInt(currentClass, 10) : undefined
+        parseInt(currentClass, 10)
       )
     } catch {
       stats = null
@@ -53,15 +53,11 @@ export default async function Home({ searchParams }: Props) {
 
           {/* HALLO ohne Logout Button - auf desktop */}
           {isLoggedIn && (
-            <h2 className="text-3xl font-bold text-[#0A8BE8] hidden md:block">
-              HALLO, {name}
-            </h2>
+            <h2 className="text-3xl font-bold text-[#0A8BE8] hidden md:block">HALLO, {name}</h2>
           )}
 
           {/* HALLO für Gast */}
-          {!isLoggedIn && (
-            <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, Gast</h2>
-          )}
+          {!isLoggedIn && <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, Gast</h2>}
 
           <div className="mt-6">
             <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKLASSE</label>
