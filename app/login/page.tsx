@@ -25,6 +25,18 @@ export default function LoginPage() {
             Als Mitglied anmelden
           </AppButton>
 
+          <p className="text-center text-sm text-gray-400">
+            Noch kein Mitglied?{' '}
+            <a
+              href="https://www.oevsv.at/mitgliedschaft/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#008CEA] hover:underline"
+            >
+              Jetzt Mitglied werden
+            </a>
+          </p>
+
           {/* Divider */}
           <div className="flex items-center gap-2">
             <div className="h-px flex-1 bg-gray-200" />
