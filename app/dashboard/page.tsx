@@ -60,7 +60,7 @@ export default async function Home({ searchParams }: Props) {
           {!isLoggedIn && <h2 className="text-3xl font-bold text-[#0A8BE8]">HALLO, Gast</h2>}
 
           <div className="mt-6">
-            <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKLASSE</label>
+            <label className="mb-2 block font-semibold text-gray-700">PRÜFUNGSKATEGORIE</label>
 
             <ClassSelector />
           </div>
