@@ -159,14 +159,20 @@ function ExamPageContent() {
     <main className="h-screen overflow-x-hidden overflow-y-auto bg-white md:p-8">
       <div className="flex min-h-screen w-full flex-col bg-white md:mx-auto md:max-w-7xl">
         <Header variant="welcome" />
-
         <section className="mx-auto w-full max-w-md flex-1 px-6 py-6 pb-32 md:max-w-5xl md:px-0 md:py-4 md:pb-8">
           <div className="md:flex md:gap-8">
             <div className="md:flex-1">
               <div className="mb-16 md:mb-4 flex items-center justify-between">
-                <h1 className="text-2xl font-bold text-gray-800 md:text-lg">Prüfungssimulation</h1>
+                <h1 className="text-2xl font-bold text-gray-800 md:text-lg">
+                  Prüfungssimulation
+                </h1>
                 <span className="text-gray-400 md:text-base">{progressLabel}</span>
               </div>
+
+              {/* Hinweis in Grau unter dem Header */}
+              <p className="mb-4 text-xs text-gray-400 md:text-[11px]">
+              Mehrere Antworten möglich!
+              </p>
 
               <p className="mb-6 mt-4 text-left text-xl text-[#008CEA] md:text-base">
                 {currentQuestion.text}
