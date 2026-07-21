@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,31 +8,43 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String?
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
-  progress  UserQuestionProgress[]
+  id         Int                    @id @default(autoincrement())
+  email      String?                @unique
+  password   String?
+  createdAt  DateTime               @default(now())
+  role       Role                   @default(USER)
+  name       String?
+  callSign   String?
+  externalId String?                @unique
+  progress   UserQuestionProgress[]
 
   @@map("users")
 }
 
 model Question {
-  id          Int      @id @default(autoincrement())
-  text        String   @db.Text
-  explanation String?  @db.Text
-  class       Int      // 1, 3, oder 4
-  subject     String   // z.B. "Recht", "Technik", "Betrieb"
-  code        String?  // z.B. "R-047"
-  attachments Attachment[]
+  id          Int                    @id @default(autoincrement())
+  text        String                 @db.Text
+  explanation String?                @db.Text
+  subject     String
+  code        String?
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
   answers     Answer[]
+  attachments Attachment[]
+  classes     QuestionClass[]
   progress    UserQuestionProgress[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 
   @@map("questions")
+}
+
+model QuestionClass {
+  id         Int      @id @default(autoincrement())
+  class      Int
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, class])
+  @@map("question_classes")
 }
 
 model Answer {
@@ -47,16 +54,18 @@ model Answer {
   questionId Int
   question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
+  @@index([questionId], map: "answers_questionId_fkey")
   @@map("answers")
 }
 
 model Attachment {
   id         Int      @id @default(autoincrement())
   url        String
-  type       String   // "image", "audio", "link"
+  type       String
   questionId Int
   question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
+  @@index([questionId], map: "attachments_questionId_fkey")
   @@map("attachments")
 }
 
@@ -66,10 +75,11 @@ model UserQuestionProgress {
   questionId Int
   confidence Confidence @default(UNKNOWN)
   updatedAt  DateTime   @updatedAt
-  user       User       @relation(fields: [userId], references: [id])
   question   Question   @relation(fields: [questionId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
 
   @@unique([userId, questionId])
+  @@index([questionId], map: "user_question_progress_questionId_fkey")
   @@map("user_question_progress")
 }
 

@@ -1,16 +1,18 @@
 # amateur-radio-quiz
 
-Eine einfache und moderne Web-App zur Vorbereitung auf die österreichische Amateurfunkprüfung (ÖVSV).
+Eine moderne Web-App zur Vorbereitung auf die österreichische Amateurfunkprüfung (ÖVSV).
 
 ---
 
 ## Features
 
-- Gastmodus zum Lernen ohne Registrierung (Fortschritt wird nur für die aktuelle Session gespeichert)
-- Lernmodus mit Prüfungsfragen nach Themenbereichen
-- Prüfungssimulation mit Zeitlimit und Auswertung (nur für angemeldete Nutzer)
-- Persistente Fortschrittsanzeige und Statistiken (nur für angemeldete Nutzer)
-- Inhalte speziell auf den österreichischen Prüfungsstoff zugeschnitten
+- **Gastmodus** — Lernen ohne Registrierung (Fortschritt nur für aktuelle Session)
+- **Lernmodus** — Karteikarten mit gewichtetem Spaced-Repetition-System
+- **Prüfungssimulation** — nur für angemeldete Nutzer
+- **Persistenter Fortschritt** — Statistiken und Lernstand werden gespeichert
+- **Admin-Panel** — Fragen verwalten, erstellen, bearbeiten und Vorschau anzeigen
+- **Bild-Anhänge** — Fragen können Bilder via Cloudinary enthalten
+- **PWA-fähig** — als App installierbar
 
 ---
 
@@ -18,14 +20,31 @@ Eine einfache und moderne Web-App zur Vorbereitung auf die österreichische Amat
 
 | Tool | Zweck |
 |------|-------|
-| **Next.js** | React-Framework für das Frontend |
-| **React** | Komponentenbasierte UI-Bibliothek |
-| **JavaScript/TypeScript** | Hauptprogrammiersprachen |
-| **Tailwind CSS** | Utility-first CSS-Framework für das Styling |
-| **Node.js** | Laufzeitumgebung |
+| **Next.js 15** | React-Framework (App Router) |
+| **React 19** | Komponentenbasierte UI-Bibliothek |
+| **TypeScript** | Typsichere Entwicklung |
+| **Tailwind CSS** | Utility-first Styling |
+| **Node.js** | Laufzeitumgebung für Next.js |
 | **Prisma** | ORM für Datenbankzugriff |
+| **MariaDB/MySQL** | Relationale Datenbank |
+| **NextAuth.js v5** | Authentifizierung & Session Management |
+| **Cloudinary** | Bild-Upload und -Speicherung |
+| **Zod** | Schema-Validierung |
 | **ESLint** | Linting und Code-Qualitätsprüfung |
 | **Prettier** | Code-Formatierung |
+
+---
+
+## Architektur
+
+Das Projekt verwendet das **Repository Pattern**:
+
+Client → API Route → Service → Repository → Prisma → DB
+
+- `repositories/` — Datenbankzugriffe
+- `services/` — Business Logik
+- `app/api/` — HTTP-Handling
+- `lib/` — Hilfsfunktionen, Schemas, Error-Handling
 
 ---
 
@@ -33,21 +52,36 @@ Eine einfache und moderne Web-App zur Vorbereitung auf die österreichische Amat
 
 ```
 amateur-radio-quiz/
-├── .github/              # PR-Templates und GitHub-Workflows
+├── .github/                  # PR-Templates und GitHub-Workflows
 ├── app/
-│   ├── page.tsx          # Startseite (Einstiegspunkt)
-│   ├── layout.tsx        # Gemeinsames Layout (Header, Footer, Metadaten)
-│   └── globals.css       # Globale Styles
-├── components/           # Wiederverwendbare UI-Komponenten
-├── public/               # Statische Assets (Bilder, Icons, etc.)
-├── .gitignore
-├── .prettierrc
-├── CONTRIBUTING.md
-├── eslint.config.mjs
-├── next.config.ts
-├── package.json
-├── postcss.config.mjs
-├── tsconfig.json
+│   ├── admin/                # Admin-Panel (Dashboard, Fragenverwaltung)
+│   ├── api/                  # API Routes
+│   │   ├── admin/            # Admin-spezifische Endpoints
+│   │   ├── progress/         # Lernfortschritt speichern
+│   │   ├── questions/        # Fragen abrufen
+│   │   └── upload/           # Bild-Upload (Cloudinary)
+│   ├── dashboard/            # User Dashboard
+│   ├── examSimulation/       # Prüfungssimulation
+│   ├── examResults/          # Prüfungsergebnisse
+│   ├── learn/                # Lernmodus Auswahl
+│   ├── login/                # Login-Seite
+│   ├── member/               # Member-Bereich
+│   ├── quiz/                 # Karteikarten
+│   ├── statistics/           # Statistiken
+│   ├── layout.tsx            # Root Layout
+│   ├── page.tsx              # Startseite
+│   └── globals.css           # Globale Styles
+├── components/               # Wiederverwendbare UI-Komponenten
+├── lib/                      # Hilfsfunktionen, Schemas, Error-Handling
+├── prisma/                   # Datenbankschema und Migrationen
+├── public/                   # Statische Assets
+├── repositories/             # Datenbankzugriffe (Repository Pattern)
+├── services/                 # Business Logik
+├── tests/                    # Tests
+├── types/                    # TypeScript Typen
+├── auth.ts                   # NextAuth Konfiguration
+├── middleware.ts              # Route-Schutz
+├── .env.example
 └── README.md
 ```
 
@@ -55,26 +89,45 @@ amateur-radio-quiz/
 
 ## Erste Schritte
 
-### 1. Repository klonen
+### 1. Repository klonen & Dependencies installieren
 
 ```bash
 git clone https://github.com/monaenzi/amateur-radio-quiz
 cd amateur-radio-quiz
-```
-
-### 2. Abhängigkeiten installieren
-
-```bash
 npm install
 ```
 
-### 3. Entwicklungsserver starten
+### 2. Umgebungsvariablen einrichten
+
+```bash
+cp .env.example .env
+```
+
+Dann `.env` befüllen:
+
+```env
+DATABASE_URL="mysql://root:PASSWORT@localhost:3306/amateurfunk_db"
+NEXTAUTH_SECRET="dein-secret"
+NEXTAUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="dein-cloud-name"
+CLOUDINARY_URL="cloudinary://api-key:api-secret@cloud-name"
+```
+
+### 3. Datenbank einrichten
+
+MariaDB starten und Datenbank `amateurfunk_db` anlegen, dann:
+
+```bash
+npx prisma migrate dev
+```
+
+### 4. Entwicklungsserver starten
 
 ```bash
 npm run dev
 ```
 
-Dann [http://localhost:3000](http://localhost:3000) im Browser öffnen.
+Dann [http://localhost:3000](http://localhost:3000) öffnen.
 
 ---
 
@@ -82,6 +135,21 @@ Dann [http://localhost:3000](http://localhost:3000) im Browser öffnen.
 
 - Node.js 18+
 - npm 9+ oder pnpm/yarn
+- MariaDB oder MySQL
+
+---
+
+## Offene Punkte
+
+### Externe User Authentifizierung
+Der ÖVSV hat eine bestehende Mitgliederdatenbank.
+Die Integration ist geplant aber noch nicht umsetzbar weil technische Details zum externen System fehlen
+
+Sobald die Info vorliegt:
+1. `externalId` Feld zum User Model hinzufügen
+2. Zweiten Auth Provider in `auth.ts` einbauen
+3. Login Page um "Als Mitglied anmelden" Button erweitern
+
 
 ---
 
@@ -98,10 +166,6 @@ Dann [http://localhost:3000](http://localhost:3000) im Browser öffnen.
 ### Kadyrova Linda
 - GitHub: [lindakadyrova](https://github.com/lindakadyrova)
 - linda.kadyrova@edu.fh-joanneum.at
-
-### Bloomfield Vincent
-- GitHub: [VinceChiv](https://github.com/VinceChiv)
-- vincent.bloomfield@edu.fh-joanneum.at
 
 ---
 

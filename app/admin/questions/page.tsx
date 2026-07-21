@@ -1,11 +1,23 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useQuestionList } from './useQuestionList'
 import { useRouter } from 'next/navigation'
-import { Trash2, Pen } from 'lucide-react';
-import Header from '@/components/Header';
+import { Trash2, Pen } from 'lucide-react'
+import Header from '@/components/Header'
+import ConfirmModal from '@/components/ConfirmModal'
+import QuestionSkeleton from '@/components/QuestionSkeleton'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default function QuestionList() {
+  return (
+    <Suspense fallback={null}>
+      <QuestionListContent />
+    </Suspense>
+  )
+}
+
+function QuestionListContent() {
   const router = useRouter()
   const {
     questions,
@@ -15,29 +27,40 @@ export default function QuestionList() {
     setClassFilter,
     subjectFilter,
     setSubjectFilter,
+    page,
+    totalPages,
+    total,
+    goToPage,
     fetchQuestions,
-    deleteQuestion,
+    deleteId,
+    setDeleteId,
+    confirmDelete,
+    isLoading,
+    error,
   } = useQuestionList()
 
   return (
     <main className="min-h-screen bg-white">
       <Header variant="admin" />
-      
+      <Breadcrumbs items={[{ label: 'Admin', href: '/admin' }, { label: 'Fragen' }]} />
+
       <div className="p-6">
         <div className="flex flex-col gap-3">
           {/* Suche */}
           <input
             type="text"
+            aria-label="Frage suchen"
             placeholder="Frage suchen..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && fetchQuestions()}
+            onKeyDown={(e) => e.key === 'Enter' && goToPage(1)}
             className="rounded-md border border-gray-300 px-4 py-3 outline-none focus:border-[#008CEA] text-gray-600"
           />
 
           <div className="flex gap-2">
             <select
               value={classFilter}
+              aria-label="Klasse filtern"
               onChange={(e) => setClassFilter(e.target.value)}
               className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
             >
@@ -49,6 +72,7 @@ export default function QuestionList() {
 
             <select
               value={subjectFilter}
+              aria-label="Fachgebiet filtern"
               onChange={(e) => setSubjectFilter(e.target.value)}
               className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-gray-600 outline-none focus:border-[#008CEA]"
             >
@@ -67,51 +91,93 @@ export default function QuestionList() {
           </button>
         </div>
 
-        <div className="mt-6 flex flex-col gap-3">
-          {questions.length === 0 && (
-            <p className="text-center text-gray-400">Keine Fragen gefunden.</p>
-          )}
+        {error && (
+          <div className="mt-4 rounded-md bg-red-50 p-4 text-center text-sm text-red-600">
+            {error}
+          </div>
+        )}
 
-          {questions.map((q) => (
-            <div
-              key={q.id}
-              className="flex items-center justify-between rounded-md border border-gray-200 px-4 py-3"
-            >
-              <div className="flex flex-col gap-1">
-                {q.code && (
-                  <span className="text-xs font-bold text-[#008CEA]">
-                    {q.code}
-                  </span>
-                )}
-                <p className="text-sm text-gray-600 line-clamp-2">{q.text}</p>
+        <div className="mt-6 flex flex-col gap-3">
+          {isLoading ? (
+            <>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <QuestionSkeleton key={i} />
+              ))}
+            </>
+          ) : questions.length === 0 ? (
+            <p className="text-center text-gray-500">Keine Fragen gefunden.</p>
+          ) : (
+            questions.map((q) => (
+              <div
+                key={q.id}
+                className="flex items-center justify-between rounded-md border border-gray-200 px-4 py-3"
+              >
+                <div className="flex flex-col gap-1">
+                  {q.code && <span className="text-xs font-bold text-[#008CEA]">{q.code}</span>}
+                  <p className="text-sm text-gray-600 line-clamp-2">{q.text}</p>
+                  <div className="flex gap-2">
+                    <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
+                      {q.subject}
+                    </span>
+                    <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
+                      Klasse {q.classes.map((c) => c.class).join(', ')}
+                    </span>
+                  </div>
+                </div>
+
                 <div className="flex gap-2">
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
-                    {q.subject}
-                  </span>
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
-                    Klasse {q.class}
-                  </span>
+                  <button
+                    onClick={() => router.push(`/admin/questions/${q.id}`)}
+                    aria-label="Frage bearbeiten"
+                    className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50"
+                  >
+                    <Pen />
+                  </button>
+                  <button
+                    onClick={() => setDeleteId(q.id)}
+                    aria-label="Frage löschen"
+                    className="rounded-md border border-red-200 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
+                  >
+                    <Trash2 />
+                  </button>
                 </div>
               </div>
-
-              <div className="flex gap-2">
-                <button
-                  onClick={() => router.push(`/admin/questions/${q.id}`)}
-                  className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50"
-                >
-                  <Pen />
-                </button>
-                <button
-                  onClick={() => deleteQuestion(q.id)}
-                  className="rounded-md border border-red-200 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
-                >
-                  <Trash2 />
-                </button>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
+
+        {total > 0 && (
+          <div className="mt-4 flex flex-col items-center gap-2 border-t border-gray-200 pt-4 text-sm text-gray-500 md:flex-row md:items-center md:justify-between">
+            <p>
+              Seite {page} von {totalPages} • {total} Fragen gesamt
+            </p>
+            <div className="flex gap-2">
+              <button
+                onClick={() => goToPage(page - 1)}
+                disabled={page <= 1}
+                className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Zurück
+              </button>
+              <button
+                onClick={() => goToPage(page + 1)}
+                disabled={page >= totalPages}
+                className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-600 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Weiter
+              </button>
+            </div>
+          </div>
+        )}
       </div>
+      {deleteId && (
+        <ConfirmModal
+          title="Frage löschen?"
+          message="Diese Aktion kann nicht rückgängig gemacht werden."
+          onConfirm={confirmDelete}
+          onCancel={() => setDeleteId(null)}
+        />
+      )}
     </main>
   )
 }
