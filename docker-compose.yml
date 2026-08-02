@@ -15,10 +15,15 @@ services:
     restart: always
     ports:
       - "3000:3000"
+      - "5555:5555"
     environment:
       DATABASE_URL: "mysql://root:lilinda1@db:3306/amateurfunk_db"
       NEXTAUTH_SECRET: "MeinUltraGeheimerString"
       NEXTAUTH_URL: "http://localhost:3000"
+      SSO_CLIENT_ID: "dein-client-id"
+      SSO_CLIENT_SECRET: "dein-client-secret"
+      SSO_ISSUER: "https://sso.övsv.at"
+      AUTH_TRUST_HOST: "true"
     depends_on:
       - db
 
