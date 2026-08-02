@@ -3,13 +3,13 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: lilinda1
-      MYSQL_DATABASE: amateurfunk_db
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-
+ 
   app:
     build: .
     restart: always
@@ -17,15 +17,15 @@ services:
       - "3000:3000"
       - "5555:5555"
     environment:
-      DATABASE_URL: "mysql://root:lilinda1@db:3306/amateurfunk_db"
-      NEXTAUTH_SECRET: "MeinUltraGeheimerString"
-      NEXTAUTH_URL: "http://localhost:3000"
-      SSO_CLIENT_ID: "dein-client-id"
-      SSO_CLIENT_SECRET: "dein-client-secret"
-      SSO_ISSUER: "https://sso.övsv.at"
-      AUTH_TRUST_HOST: "true"
+      DATABASE_URL: ${DATABASE_URL}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      SSO_CLIENT_ID: ${SSO_CLIENT_ID}
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+      SSO_ISSUER: ${SSO_ISSUER}
+      AUTH_TRUST_HOST: ${AUTH_TRUST_HOST}
     depends_on:
       - db
-
+ 
 volumes:
   db_data:
