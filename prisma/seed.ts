@@ -1,14 +1,15 @@
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
-
+import bcrypt from 'bcryptjs'
+ 
 const prisma = new PrismaClient()
-
+ 
 type SeedAnswer = {
   text: string
   isCorrect: boolean
 }
-
+ 
 type SeedQuestion = {
   id: string
   category: string
@@ -17,21 +18,49 @@ type SeedQuestion = {
   explanation?: string
   answers?: SeedAnswer[]
 }
-
+ 
 async function main() {
+// --- Test User ---
+const passwordHash = await bcrypt.hash('password', 10)
+ 
+await prisma.user.upsert({
+  where: { email: 'admin@test.com' },
+  update: {},
+  create: {
+    email: 'admin@test.com',
+    name: 'Admin User',
+    password: passwordHash,
+    role: 'ADMIN',
+  },
+})
+ 
+await prisma.user.upsert({
+  where: { email: 'user@test.com' },
+  update: {},
+  create: {
+    email: 'user@test.com',
+    name: 'Test User',
+    password: passwordHash,
+    role: 'USER',
+  },
+})
+ 
+console.log('Admin + Test-User erstellt')
+ 
+  // --- Fragen (unverändert) ---
   const fileName = fs.existsSync(path.join(__dirname, 'questions.merged.json'))
     ? 'questions.merged.json'
     : 'questions.json'
-
+ 
   const filePath = path.join(__dirname, fileName)
   const questions: SeedQuestion[] = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
-
+ 
   await prisma.userQuestionProgress.deleteMany()
   await prisma.attachment.deleteMany()
   await prisma.answer.deleteMany()
   await prisma.questionClass.deleteMany()
   await prisma.question.deleteMany()
-
+ 
   for (const q of questions) {
     await prisma.question.create({
       data: {
@@ -39,13 +68,13 @@ async function main() {
         subject: q.category,
         code: q.id,
         explanation: q.explanation ?? null,
-
+ 
         classes: {
           create: q.classes.map((c: number) => ({
             class: c,
           })),
         },
-
+ 
         // answers ist optional - nur Fragen, für die bereits
         // Antworten generiert wurden (aktuell: Recht), bekommen sie.
         ...(q.answers && q.answers.length > 0
@@ -61,13 +90,13 @@ async function main() {
       },
     })
   }
-
+ 
   console.log(`${questions.length} Fragen importiert`)
   console.log(
     `${questions.filter((q) => q.answers && q.answers.length > 0).length} davon mit Antworten`
   )
 }
-
+ 
 main()
   .then(() => {
     console.log('Seed fertig')
