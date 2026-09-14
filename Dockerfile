@@ -1,4 +1,4 @@
-FROM node:20-alpine AS base
+FROM node:20-alpine3.18 AS base
 RUN apk add --no-cache openssl openssl-dev libc6-compat
 
 # Dependencies

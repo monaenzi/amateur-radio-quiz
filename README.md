@@ -84,17 +84,36 @@ amateur-radio-quiz/
 ├── .env.example
 └── README.md
 ```
+---
+
+## Voraussetzungen
+
+- Docker
+- Docker Compose (in aktuellen Docker Desktop Versionen enthalten)
+
+---
+
+## Cloudinary-Account einrichten
+
+Bild-Uploads für Fragen-Anhänge laufen über [Cloudinary](https://cloudinary.com/). Vor dem ersten Start:
+
+1. Kostenlosen Account auf cloudinary.com anlegen
+2. Im Dashboard **Cloud Name**, **API Key** und **API Secret** kopieren
+3. In `.env` eintragen:
+```env
+   CLOUDINARY_URL="cloudinary://API_KEY:API_SECRET@CLOUD_NAME"
+   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="dein-cloud-name"
+```
 
 ---
 
 ## Erste Schritte
 
-### 1. Repository klonen & Dependencies installieren
+### 1. Repository klonen
 
 ```bash
 git clone https://github.com/monaenzi/amateur-radio-quiz
 cd amateur-radio-quiz
-npm install
 ```
 
 ### 2. Umgebungsvariablen einrichten
@@ -103,53 +122,42 @@ npm install
 cp .env.example .env
 ```
 
-Dann `.env` befüllen:
+Dann `.env` befüllen (Cloudinary-Zugangsdaten und `NEXTAUTH_SECRET` anpassen). Der `DATABASE_URL`-Host bleibt `db` — das ist der Container-Name aus `docker-compose.yml`, **nicht** auf `localhost` ändern.
 
-```env
-DATABASE_URL="mysql://root:PASSWORT@localhost:3306/amateurfunk_db"
-NEXTAUTH_SECRET="dein-secret"
-NEXTAUTH_URL="http://localhost:3000"
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="dein-cloud-name"
-CLOUDINARY_URL="cloudinary://api-key:api-secret@cloud-name"
-```
+> **SSO-Variablen:** `SSO_CLIENT_ID`, `SSO_CLIENT_SECRET` und `SSO_ISSUER` können vorerst auf `change_me` stehen bleiben — das blockiert den regulären Login über E-Mail/Passwort nicht. Der "Als Mitglied anmelden"-Button funktioniert damit natürlich noch nicht, das braucht echte ÖVSV-SSO-Zugangsdaten.
 
-### 3. Datenbank einrichten
-
-MariaDB starten und Datenbank `amateurfunk_db` anlegen, dann:
+### 3. Container starten
 
 ```bash
-npx prisma migrate dev
+docker compose up -d
 ```
 
-### 4. Entwicklungsserver starten
+Baut die Images (App + DB) und startet beide Container im Hintergrund.
+
+### 4. Datenbank-Migrationen ausführen
 
 ```bash
-npm run dev
+docker compose exec app npx prisma migrate deploy
 ```
 
-Dann [http://localhost:3000](http://localhost:3000) öffnen.
+### 5. Datenbank mit Demo-Daten befüllen
 
----
+```bash
+docker compose exec app npx prisma db seed
+```
 
-## Voraussetzungen
+### 6. App öffnen
 
-- Node.js 18+
-- npm 9+ oder pnpm/yarn
-- MariaDB oder MySQL
+[http://localhost:3000](http://localhost:3000)
 
----
+### Nützliche Befehle
 
-## Offene Punkte
-
-### Externe User Authentifizierung
-Der ÖVSV hat eine bestehende Mitgliederdatenbank.
-Die Integration ist geplant aber noch nicht umsetzbar weil technische Details zum externen System fehlen
-
-Sobald die Info vorliegt:
-1. `externalId` Feld zum User Model hinzufügen
-2. Zweiten Auth Provider in `auth.ts` einbauen
-3. Login Page um "Als Mitglied anmelden" Button erweitern
-
+```bash
+docker compose logs -f app     # Logs verfolgen
+docker compose down            # Container stoppen
+docker compose down -v         # Container stoppen + DB-Volume löschen (Reset)
+docker compose exec app npx prisma studio   # Prisma Studio öffnen (DB-GUI, Port 5555)
+```
 
 ---
 
