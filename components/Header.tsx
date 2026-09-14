@@ -49,11 +49,22 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
               <Link href="/admin/questions">Fragen</Link>
               <LogoutButton />
             </nav>
+            {/* NEU: Das Logo wurde hier hinzugefügt (aus HEAD) */}
+            <Link href="/">
+              <Image
+                src="/LogoWhite.png"
+                alt="ÖVSV Lernkurs Logo"
+                width={30}
+                height={30}
+                priority
+              />
+            </Link>
           </div>
         </div>
       </header>
     )
   }
+  
   if (variant === 'admin') {
     return (
       <header className="relative md:relative sticky md:static top-0 z-50 bg-[#008CEA] px-6 py-4">
@@ -138,11 +149,13 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
             <p className="text-sm text-white/80">ÖVSV Lernkurs</p>
           </div>
 
+          {/* NEU: Leeres div für Flex-Ausrichtung (aus HEAD) */}
           <div className="flex-1" />
         </div>
       </header>
     )
   }
+  
   if (variant === 'home') {
     return (
       <header className="bg-[#008CEA]">
@@ -161,7 +174,8 @@ function HeaderContent({ variant = 'home' }: HeaderProps) {
       </header>
     )
   }
-if (variant === 'default') {
+  
+  if (variant === 'default') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
         {/* Mobile */}
@@ -227,6 +241,7 @@ if (variant === 'default') {
       </header>
     )
   }
+  
   if (variant === 'welcome') {
     return (
       <header className="relative bg-[#008CEA] px-6 py-4">
