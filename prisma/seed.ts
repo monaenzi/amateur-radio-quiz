@@ -48,6 +48,13 @@ await prisma.user.upsert({
 console.log('Admin + Test-User erstellt')
  
   // --- Fragen (unverändert) ---
+
+  const existingCount = await prisma.question.count()
+  if (existingCount > 0) {
+    console.log('Fragen bereits vorhanden, Seed übersprungen')
+    return
+  }
+  
   const fileName = fs.existsSync(path.join(__dirname, 'questions.merged.json'))
     ? 'questions.merged.json'
     : 'questions.json'

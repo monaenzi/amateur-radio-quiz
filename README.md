@@ -132,21 +132,9 @@ Dann `.env` befüllen (Cloudinary-Zugangsdaten und `NEXTAUTH_SECRET` anpassen). 
 docker compose up -d
 ```
 
-Baut die Images (App + DB) und startet beide Container im Hintergrund.
+Baut die Images (App + DB) und startet beide Container im Hintergrund. Datenbank-Migrationen und das Einspielen der Demo-Daten (Admin-/Test-User, Fragenkatalog) laufen beim ersten Start automatisch.
 
-### 4. Datenbank-Migrationen ausführen
-
-```bash
-docker compose exec app npx prisma migrate deploy
-```
-
-### 5. Datenbank mit Demo-Daten befüllen
-
-```bash
-docker compose exec app npx prisma db seed
-```
-
-### 6. App öffnen
+### 4. App öffnen
 
 [http://localhost:3000](http://localhost:3000)
 
@@ -156,7 +144,8 @@ docker compose exec app npx prisma db seed
 docker compose logs -f app     # Logs verfolgen
 docker compose down            # Container stoppen
 docker compose down -v         # Container stoppen + DB-Volume löschen (Reset)
-docker compose exec app npx prisma studio   # Prisma Studio öffnen (DB-GUI, Port 5555)
+docker compose exec app npx prisma db seed   # Demo-Daten manuell neu einspielen (idempotent)
+docker compose exec app npx prisma studio    # Prisma Studio öffnen (DB-GUI, Port 5555)
 ```
 
 ---
