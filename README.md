@@ -148,6 +148,14 @@ docker compose exec app npx prisma db seed   # Demo-Daten manuell neu einspielen
 docker compose exec app npx prisma studio    # Prisma Studio öffnen (DB-GUI, Port 5555)
 ```
 
+## Weiteren Admin-User anlegen
+
+```bash
+docker compose exec app npx tsx scripts/create-admin.ts <email> <passwort>
+```
+
+Legt einen neuen Admin an oder setzt einen bestehenden User (bei bereits existierender E-Mail) auf die Rolle `ADMIN`.
+
 ---
 
 ## Autoren
