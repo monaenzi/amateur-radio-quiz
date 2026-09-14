@@ -10,7 +10,7 @@ export default function Home() {
       <div className="mx-auto h-full bg-white md:max-w-7xl">
         {/* <div className="bg-gradient-to-l from-[#cfefff] via-white to-white">
           <Image
-            src="/logo.png"
+            src="/Logo.png"
             alt="ÖVSV Lernkurs Logo"
             width={800}
             height={240}
