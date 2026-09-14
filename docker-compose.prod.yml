@@ -11,7 +11,7 @@ services:
       - db_data:/var/lib/mysql
  
   app:
-    image: ghcr.io/monaenzi/amateur-radio-quiz:1.0
+    image: ghcr.io/monaenzi/amateur-radio-quiz:1.1
     restart: always
     ports:
       - "3000:3000"
