@@ -20,7 +20,13 @@ export default function DashboardActionButtons() {
   return (
     <div className="mt-auto mb-24 flex w-full max-w-xs flex-col gap-3 md:mb-20 md:max-w-sm md:flex-row md:justify-center">
       <AppButton onClick={() => handleNavigate('/learn')}>Lernen</AppButton>
-      <AppButton onClick={() => handleNavigate('/examSimulation')}>Prüfung simulieren</AppButton>
+      <AppButton
+        onClick={() => {
+          window.location.href = `/examSimulation?class=${currentClass}`
+        }}
+      >
+        Prüfung simulieren
+      </AppButton>
     </div>
   )
 }
