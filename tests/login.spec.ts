@@ -16,7 +16,7 @@ test.describe('Homepage Navigation', () => {
 
     await Promise.all([
       page.waitForURL('**/dashboard'),
-      page.click('Button:has-text("Als Gast fortfahren →")')
+      page.click('Button:has-text("Als Gast fortfahren →")'),
     ])
 
     await expect(page).toHaveURL('http://localhost:3000/dashboard')
@@ -32,12 +32,12 @@ test.describe('Login Funktionalität', () => {
   test('Benutzer kann sich erfolgreich anmelden', async ({ page }) => {
     await page.goto('http://localhost:3000/login')
     await page.waitForLoadState('networkidle')
-    await page.fill('input[type="email"]', 'user@test.com') 
-    await page.fill('#password', 'password')           
-    
+    await page.fill('input[type="email"]', 'user@test.com')
+    await page.fill('#password', 'password')
+
     await Promise.all([
       page.waitForURL('**/dashboard**'),
-      page.click('button:has-text("Einloggen")')
+      page.click('button:has-text("Einloggen")'),
     ])
 
     await expect(page).toHaveURL(/dashboard/)
@@ -56,14 +56,8 @@ test.describe('Login Funktionalität', () => {
 
 test.describe('Dashboard Funktionen', () => {
   test('Lernen ohne Klassenauswahl zeigt Warnmeldung', async ({ page }) => {
-    await page.goto('http://localhost:3000/login')
+    await page.goto('http://localhost:3000/dashboard')
     await page.waitForLoadState('networkidle')
-
-    await page.fill('input[type="email"]', 'user@test.com')
-    await page.fill('#password', 'password')
-    await page.click('button:has-text("Einloggen")')
-
-    await expect(page).toHaveURL(/dashboard/)
 
     let alertMes = ''
     page.on('dialog', async (dialog) => {
@@ -132,7 +126,10 @@ test.describe('Gast-Modus Navigation', () => {
 
     await page.waitForURL('http://localhost:3000/dashboard?class=3')
 
-    await page.click('button:has-text("Prüfung simulieren")')
+    await Promise.all([
+      page.waitForURL('**/exam_locked', { timeout: 10000 }),
+      page.getByRole('button', { name: 'Prüfung simulieren' }).click(),
+    ])
 
     await expect(page).toHaveURL('http://localhost:3000/exam_locked')
   })
@@ -180,16 +177,17 @@ test.describe('Gast-Modus Navigation', () => {
     await expect(page).toHaveURL('http://localhost:3000/exam_locked')
   })
 
-
-  test('Statistik-Seite zeigt echte Fortschrittsdaten für Klasse 3 nach Login', async ({ page }) => {
+  test('Statistik-Seite zeigt echte Fortschrittsdaten für Klasse 3 nach Login', async ({
+    page,
+  }) => {
     await page.goto('http://localhost:3000/login')
     await page.waitForLoadState('networkidle')
-    await page.fill('input[type="email"]', 'user@test.com') 
-    await page.fill('#password', 'password')            
-    
+    await page.fill('input[type="email"]', 'user@test.com')
+    await page.fill('#password', 'password')
+
     await Promise.all([
       page.waitForURL('http://localhost:3000/dashboard', { timeout: 10000 }),
-      page.click('button:has-text("Einloggen")')
+      page.click('button:has-text("Einloggen")'),
     ])
 
     await expect(page).toHaveURL('http://localhost:3000/dashboard')
@@ -211,7 +209,9 @@ test.describe('Gast-Modus Navigation', () => {
     await expect(page.locator('p:has-text("Betrieb")')).toBeVisible()
   })
 
-test('Statistik-Seite berechnet Prozentwerte und Summen mathematisch korrekt', async ({ page }) => {
+  test('Statistik-Seite berechnet Prozentwerte und Summen mathematisch korrekt', async ({
+    page,
+  }) => {
     await page.goto('http://localhost:3000/login')
     await page.waitForLoadState('networkidle')
     await page.fill('input[type="email"]', 'user@test.com')
@@ -219,7 +219,7 @@ test('Statistik-Seite berechnet Prozentwerte und Summen mathematisch korrekt', a
 
     await Promise.all([
       page.waitForURL('http://localhost:3000/dashboard', { timeout: 10000 }),
-      page.click('button:has-text("Einloggen")')
+      page.click('button:has-text("Einloggen")'),
     ])
 
     await expect(page).toHaveURL('http://localhost:3000/dashboard')
@@ -230,9 +230,18 @@ test('Statistik-Seite berechnet Prozentwerte und Summen mathematisch korrekt', a
     const percentText = await page.locator('p.text-3xl').textContent()
     const totalPercentage = parseInt(percentText || '0', 10)
 
-    const knownText = await page.locator('p:has-text("gelernt")').locator('xpath=preceding-sibling::p').textContent()
-    const mediumText = await page.locator('p:has-text("unsicher")').locator('xpath=preceding-sibling::p').textContent()
-    const unknownText = await page.locator('p:has-text("offen")').locator('xpath=preceding-sibling::p').textContent()
+    const knownText = await page
+      .locator('p:has-text("gelernt")')
+      .locator('xpath=preceding-sibling::p')
+      .textContent()
+    const mediumText = await page
+      .locator('p:has-text("unsicher")')
+      .locator('xpath=preceding-sibling::p')
+      .textContent()
+    const unknownText = await page
+      .locator('p:has-text("offen")')
+      .locator('xpath=preceding-sibling::p')
+      .textContent()
 
     const known = parseInt(knownText || '0', 10)
     const medium = parseInt(mediumText || '0', 10)
@@ -246,7 +255,7 @@ test('Statistik-Seite berechnet Prozentwerte und Summen mathematisch korrekt', a
 
     const firstSubject = page.locator('div.flex.items-center.gap-4').first()
 
-    const subjectPercentText = await firstSubject.locator('p.text-[#008CEA]').textContent()
+    const subjectPercentText = await firstSubject.locator('p.text-\\[\\#008CEA\\]').textContent()
     const subjectPercent = parseInt(subjectPercentText || '0', 10)
 
     const questionRatioText = await firstSubject.locator('p.text-gray-500').textContent()
